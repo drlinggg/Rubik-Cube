@@ -1,0 +1,9 @@
+"C:\Program Files (x86)\mingw327\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2023.2.2/bin/ninja/win/x64/ninja.exe" -G Ninja -S "C:\Users\User\Desktop\ucheba\c++ 2023-24\lrcube" -B "C:\Users\User\Desktop\ucheba\c++ 2023-24\lrcube\cmake-build-debug"
+GLVND not supported. Try find OpenGL legacy
+-- Could NOT find Doxygen (missing: DOXYGEN_EXECUTABLE) 
+-- Including Win32 support
+-- GLM: Version 1.0.0
+-- GLM: Build with C++ features auto detection
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: C:/Users/User/Desktop/ucheba/c++ 2023-24/lrcube/cmake-build-debug
