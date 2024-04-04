@@ -9,11 +9,10 @@
 class Cube {                                                        //куб 3х3
 private:
     smallCube bricks[3][3][3];
-    float nSize;
-    float nX;
-    float nY;
-    float nZ;
-    float nDelta;
+    float X;
+    float Y;
+    float Z;
+
 public:
     void turn(int idCubeFace, int mode); // mode -90 90 180 id 1-6
     void SetX(float x);
@@ -27,7 +26,7 @@ public:
     float GetSize();
     float GetDelta();
 
-    void Draw();
+    void Draw(GLfloat g_vertex_buffer_data[]);
     void Init();
 
     void al1(); // нижний крест

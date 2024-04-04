@@ -1,5 +1,5 @@
 //
-// Created by User on 04.04.2024.
+// Created by Andrei Banakh on 04.04.2024.
 //
 #include "cubeDLG.h"
 using namespace glm;
@@ -21,8 +21,7 @@ int CubeDlg::init() {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // Мы не хотим старый OpenGL
 
-    //создать окно
-    window = glfwCreateWindow( 1200, 800, "Rubic Cube", NULL, NULL);
+    window = glfwCreateWindow( 1000, 1000, "Rubic Cube", NULL, NULL);  //создать окно
     if( window == NULL ){
         std::cout << "error window create";
         glfwTerminate();
@@ -30,8 +29,10 @@ int CubeDlg::init() {
     }
     glfwMakeContextCurrent(window);
 
-    //инициализация GLEW
-    glewExperimental=true;                              // Флаг необходим в Core-режиме OpenGL
+    br.Init();
+
+
+    glewExperimental=true;                              // инициализация GLEW, Флаг необходим в Core-режиме OpenGL
     if (glewInit() != GLEW_OK) {
         std::cout << "no glew init";
         return -1;
@@ -41,11 +42,6 @@ int CubeDlg::init() {
 }
 
 void CubeDlg::drawScene() {
-    glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glLoadIdentity();
 
-    glFinish();
-    br.Draw();
     glfwSwapBuffers(window);
 }

@@ -1,13 +1,16 @@
 #include "cubeDLG.h"
-//GLFWwindow* window;
 
 int main() {
-    CubeDlg smh;
-    smh.init();
+    CubeDlg Screen;
+    Screen.init();
     do {
-        smh.drawScene();
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glLoadIdentity();
+        glFinish();
+        Screen.drawScene();
         glfwPollEvents();
     }
-    while( glfwGetKey(smh.window, GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
-                 glfwWindowShouldClose(smh.window) == 0 );
+    while( glfwGetKey(Screen.window, GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
+                 glfwWindowShouldClose(Screen.window) == 0 );
 }
