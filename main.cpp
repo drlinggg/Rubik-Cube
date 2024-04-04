@@ -1,7 +1,10 @@
-#include "cube.cpp"
+#include "cubeDLG.cpp"
+#include <iostream>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 
 int main() {
-
     //инициализация glfw
     if( !glfwInit() ){
         std::cout << "no glfw init";
@@ -19,19 +22,15 @@ int main() {
     glfwMakeContextCurrent(window);
 
     //инициализация GLEW
-    glewExperimental=true; // Флаг необходим в Core-режиме OpenGL
+    glewExperimental=true;                              // Флаг необходим в Core-режиме OpenGL
     if (glewInit() != GLEW_OK) {
         std::cout << "no glew init";
         return -1;
     }
-
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
     //цикл действия программы
     do{
-        // Пока что ничего не выводим. Это будет в уроке 2.
-
-        // Сбрасываем буферы
         glfwSwapBuffers(window);
         glfwPollEvents();
 

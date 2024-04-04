@@ -6,7 +6,7 @@
 9	1380	7338842118669439	lib/glfw/src/CMakeFiles/glfw.dir/init.c.obj	af7a044059fce898
 12	1438	7338842119254507	lib/glfw/src/CMakeFiles/glfw.dir/window.c.obj	90c1eada35a336c6
 1380	2574	7338842130623852	lib/glfw/src/CMakeFiles/glfw.dir/null_joystick.c.obj	662c2b6db50f3ceb
-1	196	7339216764643078	build.ninja	c737ef8eb263fe53
+1	196	7339323699603287	build.ninja	c737ef8eb263fe53
 10	1382	7338842118675957	lib/glfw/src/CMakeFiles/glfw.dir/monitor.c.obj	72ea759beed722c3
 13	1369	7338842118561852	lib/glfw/src/CMakeFiles/glfw.dir/null_window.c.obj	1fe8323eb15978c8
 11	979	7338842300203319	lib/glfw/src/CMakeFiles/glfw.dir/wgl_context.c.obj	be8fb9cbd23ddd1f
@@ -27,9 +27,6 @@
 1060	1102	7338842301433248	lib/glfw/src/libglfw3.a	5249aa39e8daf47d
 14	3200	7338842322265005	lib/glm/glm/CMakeFiles/glm.dir/detail/glm.cpp.obj	f8a95327f848536b
 5	3145	7338844581664485	lib/glm/glm/libglm.a	1a23c92ea38a5da7
-4	641	7338858831710374	CMakeFiles/lrcube.dir/main.cpp.obj	a97171e9ab07a3d
-4	118	7339192675566631	lrcube.exe	d2cc354fcf17a735
-6	705	7339224236014408	CMakeFiles/lrcube.dir/cube.cpp.obj	4097187076ea18d8
-4	707	7339224236034373	CMakeFiles/lrcube.dir/main.cpp.obj	a97171e9ab07a3d
-707	824	7339224237110682	lrcube.exe	720ba654d8290efd
-4	126	7339224241475279	lrcube.exe	720ba654d8290efd
+6	740	7339304738127194	CMakeFiles/lrcube.dir/main.cpp.obj	a97171e9ab07a3d
+740	860	7339304739279820	lrcube.exe	720ba654d8290efd
+4	732	7339304738037223	CMakeFiles/lrcube.dir/cube.cpp.obj	4097187076ea18d8
