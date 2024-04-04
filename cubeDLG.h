@@ -17,6 +17,7 @@ public:
     //void intermix();
     //void load();
     //void save();
+    void render(std::vector<float>& grani);
     void drawScene();
     Cube br;                              //экземпляр куба
 };

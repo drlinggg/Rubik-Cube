@@ -8,12 +8,12 @@
 
 class Cube {                                                        //куб 3х3
 private:
-    smallCube bricks[3][3][3];
-    float X;
-    float Y;
-    float Z;
+    float X = 0;
+    float Z = 0;
+    float Y = 0;
 
 public:
+    smallCube bricks[3][3][3];
     void turn(int idCubeFace, int mode); // mode -90 90 180 id 1-6
     void SetX(float x);
     void SetY(float y);

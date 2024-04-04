@@ -12,14 +12,19 @@ private:
     float X;
     float Y;
     float Z;
-    float nXangle;
-    float nYangle;
-    float nZangle;
 
-    //cColor vertexs[3];
 public:
+    float faceLeftBottom[3];
+    float faceRightBottom[3];
+    float faceLeftUp[3];
+    float faceRightUp[3];
+    float backLeftBottom[3];
+    float backRightBottom[3];
+    float backLeftUp[3];
+    float backRightUp[3];
+    int color[6];
     void Draw(GLfloat g_vertex_buffer_data[]);
-    void Init(float x, float y, float z);
+    void Init();
     float GetX();
     float GetY();
     float GetZ();
