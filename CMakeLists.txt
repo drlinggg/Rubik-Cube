@@ -6,10 +6,10 @@ set(CMAKE_CXX_STANDARD 17)
 add_subdirectory(lib)
 add_executable(${PROJECT_NAME} main.cpp
         cube.h
-        cube.cpp
         smallCube.h
         color.h
         cubeDLG.h
+        cube.cpp
         color.cpp
         smallCube.cpp
         CubeDLG.cpp
