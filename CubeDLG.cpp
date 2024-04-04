@@ -44,7 +44,7 @@ int CubeDlg::init() {
     }
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
 
-    Shader* shader = load_shader("main.glslv", "main.glslf");
+    Shader* shader = load_shader("../main.glslv", "../main.glslf");
     if (shader == nullptr) {
         std::cout << "shadererror";
         return -1;
