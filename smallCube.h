@@ -22,7 +22,8 @@ public:
     float backRightBottom[3];
     float backLeftUp[3];
     float backRightUp[3];
-    int color[6];
+    std::vector<float> colorSide; // face back left right bottom up
+
     void Draw(GLfloat g_vertex_buffer_data[]);
     void Init();
     float GetX();
