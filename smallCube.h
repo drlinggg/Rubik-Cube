@@ -2,7 +2,10 @@
 // Created by Andrei Banakh on 04.04.2024.
 //
 
-#include "color.h"
+#include <iostream>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 
 #ifndef LRCUBE_SMALLCUBE_H
 #define LRCUBE_SMALLCUBE_H
