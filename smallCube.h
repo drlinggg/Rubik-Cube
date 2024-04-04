@@ -7,9 +7,10 @@
 #ifndef LRCUBE_SMALLCUBE_H
 #define LRCUBE_SMALLCUBE_H
 
-//class smallCube{                               //кубик 1x1
-//private:
-//public:
-//};
+class smallCube{                               //кубик 1x1
+private:
+public:
+    void Draw();
+};
 
 #endif //LRCUBE_SMALLCUBE_H

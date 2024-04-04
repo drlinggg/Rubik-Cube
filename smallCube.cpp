@@ -3,3 +3,6 @@
 //
 
 #include "smallCube.h"
+void smallCube::Draw() {
+    return;
+}

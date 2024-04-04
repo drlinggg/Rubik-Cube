@@ -7,9 +7,9 @@
 #define LRCUBE_COLOR_H
 
 
-//class cColor {                             //цвет кубика 1x1
-//private:
-//public:
-//};
+class cColor {                             //цвет кубика 1x1
+private:
+public:
+};
 
 #endif //LRCUBE_COLOR_H

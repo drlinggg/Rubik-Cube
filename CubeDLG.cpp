@@ -22,7 +22,7 @@ int CubeDlg::init() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // Мы не хотим старый OpenGL
 
     //создать окно
-    window = glfwCreateWindow( 1024, 768, "Rubic Cube", NULL, NULL);
+    window = glfwCreateWindow( 1200, 800, "Rubic Cube", NULL, NULL);
     if( window == NULL ){
         std::cout << "error window create";
         glfwTerminate();
@@ -41,8 +41,11 @@ int CubeDlg::init() {
 }
 
 void CubeDlg::drawScene() {
-    glClearColor(1.0f, 0.5f, 0.3f, 1.0f);
+    glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
+
+    glFinish();
     br.Draw();
+    glfwSwapBuffers(window);
 }
