@@ -2,7 +2,7 @@
 // Created by Andrei Banakh on 04.04.2024.
 //
 #include "cubeDLG.h"
-#include <glm/glm.hpp>
+#include "Shader.h"
 using namespace glm;
 
 void CubeDlg::render(std::vector<float>& grani) {
@@ -43,6 +43,12 @@ int CubeDlg::init() {
         return -1;
     }
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
+
+    Shader* shader = load_shader("main.glslv", "main.glslf");
+    if (shader == nullptr) {
+        std::cout << "shadererror";
+        return -1;
+    }
     return 0;
 }
 
@@ -71,7 +77,7 @@ void CubeDlg::drawScene() {
                 grani.push_back(br.bricks[i][j][z].faceRightUp[1]);
                 grani.push_back(br.bricks[i][j][z].faceRightUp[2]);
                 for (int side = 0; side < 18; side++) {
-                    cGrani.push_back(br.bricks[i][j][z].colorSide[0]);
+                    //cGrani.push_back(br.bricks[i][j][z].colorSide[0]);
                 }
                 grani.push_back(br.bricks[i][j][z].backLeftUp[0]);
                 grani.push_back(br.bricks[i][j][z].backLeftUp[1]);
@@ -92,7 +98,7 @@ void CubeDlg::drawScene() {
                 grani.push_back(br.bricks[i][j][z].backRightUp[1]);
                 grani.push_back(br.bricks[i][j][z].backRightUp[2]);
                 for (int side = 0; side < 18; side++) {
-                    cGrani.push_back(br.bricks[i][j][z].colorSide[1]);
+                   // cGrani.push_back(br.bricks[i][j][z].colorSide[1]);
                 }
                 grani.push_back(br.bricks[i][j][z].faceLeftBottom[0]);
                 grani.push_back(br.bricks[i][j][z].faceLeftBottom[1]);
@@ -113,7 +119,7 @@ void CubeDlg::drawScene() {
                 grani.push_back(br.bricks[i][j][z].backLeftBottom[1]);
                 grani.push_back(br.bricks[i][j][z].backLeftBottom[2]);
                 for (int side = 0; side < 18; side++) {
-                    cGrani.push_back(br.bricks[i][j][z].colorSide[4]);
+                  //  cGrani.push_back(br.bricks[i][j][z].colorSide[4]);
                 }
                 grani.push_back(br.bricks[i][j][z].faceLeftUp[0]);
                 grani.push_back(br.bricks[i][j][z].faceLeftUp[1]);
@@ -134,7 +140,7 @@ void CubeDlg::drawScene() {
                 grani.push_back(br.bricks[i][j][z].backLeftUp[1]);
                 grani.push_back(br.bricks[i][j][z].backLeftUp[2]);
                 for (int side = 0; side < 18; side++) {
-                    cGrani.push_back(br.bricks[i][j][z].colorSide[5]);
+                   // cGrani.push_back(br.bricks[i][j][z].colorSide[5]);
                 }
                 grani.push_back(br.bricks[i][j][z].faceRightBottom[0]);
                 grani.push_back(br.bricks[i][j][z].faceRightBottom[1]);
@@ -155,7 +161,7 @@ void CubeDlg::drawScene() {
                 grani.push_back(br.bricks[i][j][z].faceRightUp[1]);
                 grani.push_back(br.bricks[i][j][z].faceRightUp[2]);
                 for (int side = 0; side < 18; side++) {
-                    cGrani.push_back(br.bricks[i][j][z].colorSide[2]);
+                   // cGrani.push_back(br.bricks[i][j][z].colorSide[2]);
                 }
                 grani.push_back(br.bricks[i][j][z].faceLeftBottom[0]);
                 grani.push_back(br.bricks[i][j][z].faceLeftBottom[1]);
@@ -176,7 +182,7 @@ void CubeDlg::drawScene() {
                 grani.push_back(br.bricks[i][j][z].faceLeftUp[1]);
                 grani.push_back(br.bricks[i][j][z].faceLeftUp[2]);
                 for (int side = 0; side < 18; side++) {
-                    cGrani.push_back(br.bricks[i][j][z].colorSide[1]);
+                  //  cGrani.push_back(br.bricks[i][j][z].colorSide[1]);
                 }
             }
         }

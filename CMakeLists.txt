@@ -11,6 +11,8 @@ add_executable(${PROJECT_NAME} main.cpp
         cube.cpp
         smallCube.cpp
         CubeDLG.cpp
+        Shader.h
+        Shader.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}

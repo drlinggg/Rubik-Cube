@@ -81,9 +81,9 @@ build CMakeFiles/lrcube.dir/CubeDLG.cpp.obj: CXX_COMPILER__lrcube_unscanned_Debu
   OBJECT_DIR = CMakeFiles\lrcube.dir
   OBJECT_FILE_DIR = CMakeFiles\lrcube.dir
 
-build CMakeFiles/lrcube.dir/loadShader.cpp.obj: CXX_COMPILER__lrcube_unscanned_Debug C$:/Users/User/Desktop/ucheba/c++$ 2023-24/lrcube/loadShader.cpp || cmake_object_order_depends_target_lrcube
+build CMakeFiles/lrcube.dir/Shader.cpp.obj: CXX_COMPILER__lrcube_unscanned_Debug C$:/Users/User/Desktop/ucheba/c++$ 2023-24/lrcube/Shader.cpp || cmake_object_order_depends_target_lrcube
   DEFINES = -DGLEW_NO_GLU -DGLEW_STATIC -DVC_EXTRALEAN -DWIN32_MEAN_AND_LEAN -D_CRT_SECURE_NO_WARNINGS
-  DEP_FILE = CMakeFiles\lrcube.dir\loadShader.cpp.obj.d
+  DEP_FILE = CMakeFiles\lrcube.dir\Shader.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I"C:/Users/User/Desktop/ucheba/c++ 2023-24/lrcube/lib/glfw/include" -I"C:/Users/User/Desktop/ucheba/c++ 2023-24/lrcube/lib/glew-cmake/include" -I"C:/Users/User/Desktop/ucheba/c++ 2023-24/lrcube/lib/glm"
   OBJECT_DIR = CMakeFiles\lrcube.dir
@@ -97,7 +97,7 @@ build CMakeFiles/lrcube.dir/loadShader.cpp.obj: CXX_COMPILER__lrcube_unscanned_D
 #############################################
 # Link the executable lrcube.exe
 
-build lrcube.exe: CXX_EXECUTABLE_LINKER__lrcube_Debug CMakeFiles/lrcube.dir/main.cpp.obj CMakeFiles/lrcube.dir/cube.cpp.obj CMakeFiles/lrcube.dir/smallCube.cpp.obj CMakeFiles/lrcube.dir/CubeDLG.cpp.obj CMakeFiles/lrcube.dir/loadShader.cpp.obj | lib/glfw/src/libglfw3.a lib/glew-cmake/lib/libglewd.a lib/glm/glm/libglm.a || lib/glew-cmake/lib/libglewd.a lib/glfw/src/libglfw3.a lib/glm/glm/libglm.a
+build lrcube.exe: CXX_EXECUTABLE_LINKER__lrcube_Debug CMakeFiles/lrcube.dir/main.cpp.obj CMakeFiles/lrcube.dir/cube.cpp.obj CMakeFiles/lrcube.dir/smallCube.cpp.obj CMakeFiles/lrcube.dir/CubeDLG.cpp.obj CMakeFiles/lrcube.dir/Shader.cpp.obj | lib/glfw/src/libglfw3.a lib/glew-cmake/lib/libglewd.a lib/glm/glm/libglm.a || lib/glew-cmake/lib/libglewd.a lib/glfw/src/libglfw3.a lib/glm/glm/libglm.a
   DEP_FILE = CMakeFiles\lrcube.dir\link.d
   FLAGS = -g
   LINK_FLAGS = -Wl,--dependency-file,CMakeFiles\lrcube.dir\link.d
