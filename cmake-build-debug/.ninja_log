@@ -86,3 +86,8 @@
 8	781	7339609811616818	CMakeFiles/lrcube.dir/smallCube.cpp.obj	4ac4745527f85f42
 7	800	7339609811810672	CMakeFiles/lrcube.dir/CubeDLG.cpp.obj	68b31bb30462ffb6
 800	921	7339609812970604	lrcube.exe	9c87f59442ecdb4a
+4	722	7339610376212705	CMakeFiles/lrcube.dir/cube.cpp.obj	4097187076ea18d8
+6	728	7339610376272736	CMakeFiles/lrcube.dir/smallCube.cpp.obj	4ac4745527f85f42
+728	845	7339610377411155	lrcube.exe	9c87f59442ecdb4a
+3	667	7339610728075909	CMakeFiles/lrcube.dir/smallCube.cpp.obj	4ac4745527f85f42
+668	786	7339610729224085	lrcube.exe	9c87f59442ecdb4a

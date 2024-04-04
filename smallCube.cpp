@@ -7,14 +7,14 @@ void smallCube::Draw(GLfloat g_vertex_buffer_data[]) {
 }
 
 void smallCube::Init() {
-    faceLeftBottom[0] = GetX()-0.1; faceLeftBottom[1] = GetY()-0.1, faceLeftBottom[2] = GetZ()-0.1;
-    faceRightBottom[0] = GetX()+0.1, faceRightBottom[1] = GetY()-0.1, faceRightBottom[2] = GetZ()-0.1;
-    faceRightUp[0] = GetX() + 0.1, faceRightUp[1] = GetY()+0.1, faceRightUp[2] = GetZ()-0.1;
-    faceLeftUp[0] = GetX() - 0.1, faceLeftUp[1] = GetY()+0.1, faceLeftUp[2] = GetZ()-0.1;
-    backLeftBottom[0] = GetX()-0.1, backLeftBottom[1] = GetY()-0.1, backLeftBottom[2] = GetZ()+0.1;
-    backRightBottom[0] =  GetX()+0.1, backRightBottom[1] = GetY()-0.1, backRightBottom[2] = GetZ()+0.1;
-    backLeftUp[0] = GetX()-0.1, backLeftUp[1] = GetY()+0.1, backLeftUp[2] = GetZ()+0.1;
-    backRightUp[0] = GetX() + 0.1, backRightUp[1] = GetY()+0.1, backRightUp[2] = GetZ()+0.1;
+    faceLeftBottom[0] = GetX()-0.09; faceLeftBottom[1] = GetY()-0.09, faceLeftBottom[2] = GetZ()-0.09;
+    faceRightBottom[0] = GetX()+0.09, faceRightBottom[1] = GetY()-0.09, faceRightBottom[2] = GetZ()-0.09;
+    faceRightUp[0] = GetX() + 0.09, faceRightUp[1] = GetY()+0.09, faceRightUp[2] = GetZ()-0.09;
+    faceLeftUp[0] = GetX() - 0.09, faceLeftUp[1] = GetY()+0.09, faceLeftUp[2] = GetZ()-0.09;
+    backLeftBottom[0] = GetX()-0.09, backLeftBottom[1] = GetY()-0.09, backLeftBottom[2] = GetZ()+0.09;
+    backRightBottom[0] =  GetX()+0.09, backRightBottom[1] = GetY()-0.09, backRightBottom[2] = GetZ()+0.09;
+    backLeftUp[0] = GetX()-0.09, backLeftUp[1] = GetY()+0.09, backLeftUp[2] = GetZ()+0.09;
+    backRightUp[0] = GetX() + 0.09, backRightUp[1] = GetY()+0.09, backRightUp[2] = GetZ()+0.09;
 }
 
 float smallCube::GetX() {
