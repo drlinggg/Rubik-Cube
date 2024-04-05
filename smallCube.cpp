@@ -152,7 +152,7 @@ void smallCube::Draw(std::vector<Shader*>shaders) {
 
 void smallCube::Init() {
 
-    //test 0.09 game 0.09
+    //test 0.05 game 0.09
     faceLeftBottom[0] = GetX()-0.09; faceLeftBottom[1] = GetY()-0.09, faceLeftBottom[2] = GetZ()-0.09;
     faceRightBottom[0] = GetX()+0.09, faceRightBottom[1] = GetY()-0.09, faceRightBottom[2] = GetZ()-0.09;
     faceRightUp[0] = GetX() + 0.09, faceRightUp[1] = GetY()+0.09, faceRightUp[2] = GetZ()-0.09;
