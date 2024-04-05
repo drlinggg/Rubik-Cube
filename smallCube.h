@@ -2,6 +2,7 @@
 // Created by Andrei Banakh on 04.04.2024.
 //
 
+#include "Shader.h"
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -15,8 +16,6 @@ private:
     float X;
     float Y;
     float Z;
-
-public:
     float faceLeftBottom[3];
     float faceRightBottom[3];
     float faceLeftUp[3];
@@ -25,9 +24,11 @@ public:
     float backRightBottom[3];
     float backLeftUp[3];
     float backRightUp[3];
-    //std::vector<char> colorSide; // face back left right bottom up
+    char sides[6] = {0,1,2,3,4,5};
 
-    void Draw(GLfloat g_vertex_buffer_data[]);
+public:
+
+    void Draw(std::vector<Shader*> shaders);
     void Init();
     float GetX();
     float GetY();

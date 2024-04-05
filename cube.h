@@ -26,7 +26,7 @@ public:
     float GetSize();
     float GetDelta();
 
-    void Draw(GLfloat g_vertex_buffer_data[]);
+    void Draw(std::vector<Shader*> shaders);
     void Init();
 
     void al1(); // нижний крест

@@ -13,6 +13,7 @@ private:
     GLfloat nZangle;
 public:
     GLFWwindow* window;
+    std::vector<Shader*> shaders;
     int init();
     //void intermix();
     //void load();

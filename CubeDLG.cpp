@@ -2,7 +2,6 @@
 // Created by Andrei Banakh on 04.04.2024.
 //
 #include "cubeDLG.h"
-#include "Shader.h"
 using namespace glm;
 
 void CubeDlg::render(std::vector<float>& grani) {
@@ -42,178 +41,23 @@ int CubeDlg::init() {
         std::cout << "no glew init";
         return -1;
     }
-    glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
 
-    Shader* shader = load_shader("../main.glslv", "../main.glslf");
-    if (shader == nullptr) {
-        std::cout << "shadererror";
-        return -1;
-    }
+    shaders.resize(6);
+        shaders[0] = load_shader("../main.glslv", "../main.glslf");
+        shaders[1] = load_shader("../back.glslv", "../back.glslf");
+        shaders[2] = load_shader("../left.glslv", "../left.glslf");
+        shaders[3] = load_shader("../right.glslv", "../right.glslf");
+        shaders[4] = load_shader("../up.glslv", "../up.glslf");
+        shaders[5] = load_shader("../bottom.glslv", "../bottom.glslf");
+
+    glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
     return 0;
 }
 
 void CubeDlg::drawScene() {
     std::vector<float> grani;
-    std::vector<float> cGrani;
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            for (int z = 0; z < 3; z++) {
-                grani.push_back(br.bricks[i][j][z].faceLeftUp[0]);
-                grani.push_back(br.bricks[i][j][z].faceLeftUp[1]);
-                grani.push_back(br.bricks[i][j][z].faceLeftUp[2]);
-                grani.push_back(br.bricks[i][j][z].faceLeftBottom[0]);
-                grani.push_back(br.bricks[i][j][z].faceLeftBottom[1]);
-                grani.push_back(br.bricks[i][j][z].faceLeftBottom[2]);
-                grani.push_back(br.bricks[i][j][z].faceRightBottom[0]);
-                grani.push_back(br.bricks[i][j][z].faceRightBottom[1]);
-                grani.push_back(br.bricks[i][j][z].faceRightBottom[2]);
-                grani.push_back(br.bricks[i][j][z].faceLeftUp[0]);
-                grani.push_back(br.bricks[i][j][z].faceLeftUp[1]);
-                grani.push_back(br.bricks[i][j][z].faceLeftUp[2]);
-                grani.push_back(br.bricks[i][j][z].faceRightBottom[0]);
-                grani.push_back(br.bricks[i][j][z].faceRightBottom[1]);
-                grani.push_back(br.bricks[i][j][z].faceRightBottom[2]);
-                grani.push_back(br.bricks[i][j][z].faceRightUp[0]);
-                grani.push_back(br.bricks[i][j][z].faceRightUp[1]);
-                grani.push_back(br.bricks[i][j][z].faceRightUp[2]);
-                for (int side = 0; side < 18; side++) {
-                    //cGrani.push_back(br.bricks[i][j][z].colorSide[0]);
-                }
-                grani.push_back(br.bricks[i][j][z].backLeftUp[0]);
-                grani.push_back(br.bricks[i][j][z].backLeftUp[1]);
-                grani.push_back(br.bricks[i][j][z].backLeftUp[2]);
-                grani.push_back(br.bricks[i][j][z].backLeftBottom[0]);
-                grani.push_back(br.bricks[i][j][z].backLeftBottom[1]);
-                grani.push_back(br.bricks[i][j][z].backLeftBottom[2]);
-                grani.push_back(br.bricks[i][j][z].backRightBottom[0]);
-                grani.push_back(br.bricks[i][j][z].backRightBottom[1]);
-                grani.push_back(br.bricks[i][j][z].backRightBottom[2]);
-                grani.push_back(br.bricks[i][j][z].backLeftUp[0]);
-                grani.push_back(br.bricks[i][j][z].backLeftUp[1]);
-                grani.push_back(br.bricks[i][j][z].backLeftUp[2]);
-                grani.push_back(br.bricks[i][j][z].backLeftBottom[0]);
-                grani.push_back(br.bricks[i][j][z].backLeftBottom[1]);
-                grani.push_back(br.bricks[i][j][z].backLeftBottom[2]);
-                grani.push_back(br.bricks[i][j][z].backRightUp[0]);
-                grani.push_back(br.bricks[i][j][z].backRightUp[1]);
-                grani.push_back(br.bricks[i][j][z].backRightUp[2]);
-                for (int side = 0; side < 18; side++) {
-                   // cGrani.push_back(br.bricks[i][j][z].colorSide[1]);
-                }
-                grani.push_back(br.bricks[i][j][z].faceLeftBottom[0]);
-                grani.push_back(br.bricks[i][j][z].faceLeftBottom[1]);
-                grani.push_back(br.bricks[i][j][z].faceLeftBottom[2]);
-                grani.push_back(br.bricks[i][j][z].faceRightBottom[0]);
-                grani.push_back(br.bricks[i][j][z].faceRightBottom[1]);
-                grani.push_back(br.bricks[i][j][z].faceRightBottom[2]);
-                grani.push_back(br.bricks[i][j][z].backRightBottom[0]);
-                grani.push_back(br.bricks[i][j][z].backRightBottom[1]);
-                grani.push_back(br.bricks[i][j][z].backRightBottom[2]);
-                grani.push_back(br.bricks[i][j][z].faceLeftBottom[0]);
-                grani.push_back(br.bricks[i][j][z].faceLeftBottom[1]);
-                grani.push_back(br.bricks[i][j][z].faceLeftBottom[2]);
-                grani.push_back(br.bricks[i][j][z].faceRightBottom[0]);
-                grani.push_back(br.bricks[i][j][z].faceRightBottom[1]);
-                grani.push_back(br.bricks[i][j][z].faceRightBottom[2]);
-                grani.push_back(br.bricks[i][j][z].backLeftBottom[0]);
-                grani.push_back(br.bricks[i][j][z].backLeftBottom[1]);
-                grani.push_back(br.bricks[i][j][z].backLeftBottom[2]);
-                for (int side = 0; side < 18; side++) {
-                  //  cGrani.push_back(br.bricks[i][j][z].colorSide[4]);
-                }
-                grani.push_back(br.bricks[i][j][z].faceLeftUp[0]);
-                grani.push_back(br.bricks[i][j][z].faceLeftUp[1]);
-                grani.push_back(br.bricks[i][j][z].faceLeftUp[2]);
-                grani.push_back(br.bricks[i][j][z].faceRightUp[0]);
-                grani.push_back(br.bricks[i][j][z].faceRightUp[1]);
-                grani.push_back(br.bricks[i][j][z].faceRightUp[2]);
-                grani.push_back(br.bricks[i][j][z].backRightUp[0]);
-                grani.push_back(br.bricks[i][j][z].backRightUp[1]);
-                grani.push_back(br.bricks[i][j][z].backRightUp[2]);
-                grani.push_back(br.bricks[i][j][z].faceLeftUp[0]);
-                grani.push_back(br.bricks[i][j][z].faceLeftUp[1]);
-                grani.push_back(br.bricks[i][j][z].faceLeftUp[2]);
-                grani.push_back(br.bricks[i][j][z].faceRightUp[0]);
-                grani.push_back(br.bricks[i][j][z].faceRightUp[1]);
-                grani.push_back(br.bricks[i][j][z].faceRightUp[2]);
-                grani.push_back(br.bricks[i][j][z].backLeftUp[0]);
-                grani.push_back(br.bricks[i][j][z].backLeftUp[1]);
-                grani.push_back(br.bricks[i][j][z].backLeftUp[2]);
-                for (int side = 0; side < 18; side++) {
-                   // cGrani.push_back(br.bricks[i][j][z].colorSide[5]);
-                }
-                grani.push_back(br.bricks[i][j][z].faceRightBottom[0]);
-                grani.push_back(br.bricks[i][j][z].faceRightBottom[1]);
-                grani.push_back(br.bricks[i][j][z].faceRightBottom[2]);
-                grani.push_back(br.bricks[i][j][z].backRightUp[0]);
-                grani.push_back(br.bricks[i][j][z].backRightUp[1]);
-                grani.push_back(br.bricks[i][j][z].backRightUp[2]);
-                grani.push_back(br.bricks[i][j][z].backRightBottom[0]);
-                grani.push_back(br.bricks[i][j][z].backRightBottom[1]);
-                grani.push_back(br.bricks[i][j][z].backRightBottom[2]);
-                grani.push_back(br.bricks[i][j][z].faceRightBottom[0]);
-                grani.push_back(br.bricks[i][j][z].faceRightBottom[1]);
-                grani.push_back(br.bricks[i][j][z].faceRightBottom[2]);
-                grani.push_back(br.bricks[i][j][z].backRightUp[0]);
-                grani.push_back(br.bricks[i][j][z].backRightUp[1]);
-                grani.push_back(br.bricks[i][j][z].backRightUp[2]);
-                grani.push_back(br.bricks[i][j][z].faceRightUp[0]);
-                grani.push_back(br.bricks[i][j][z].faceRightUp[1]);
-                grani.push_back(br.bricks[i][j][z].faceRightUp[2]);
-                for (int side = 0; side < 18; side++) {
-                   // cGrani.push_back(br.bricks[i][j][z].colorSide[2]);
-                }
-                grani.push_back(br.bricks[i][j][z].faceLeftBottom[0]);
-                grani.push_back(br.bricks[i][j][z].faceLeftBottom[1]);
-                grani.push_back(br.bricks[i][j][z].faceLeftBottom[2]);
-                grani.push_back(br.bricks[i][j][z].backLeftUp[0]);
-                grani.push_back(br.bricks[i][j][z].backLeftUp[1]);
-                grani.push_back(br.bricks[i][j][z].backLeftUp[2]);
-                grani.push_back(br.bricks[i][j][z].backLeftBottom[0]);
-                grani.push_back(br.bricks[i][j][z].backLeftBottom[1]);
-                grani.push_back(br.bricks[i][j][z].backLeftBottom[2]);
-                grani.push_back(br.bricks[i][j][z].faceLeftBottom[0]);
-                grani.push_back(br.bricks[i][j][z].faceLeftBottom[1]);
-                grani.push_back(br.bricks[i][j][z].faceLeftBottom[2]);
-                grani.push_back(br.bricks[i][j][z].backLeftUp[0]);
-                grani.push_back(br.bricks[i][j][z].backLeftUp[1]);
-                grani.push_back(br.bricks[i][j][z].backLeftUp[2]);
-                grani.push_back(br.bricks[i][j][z].faceLeftUp[0]);
-                grani.push_back(br.bricks[i][j][z].faceLeftUp[1]);
-                grani.push_back(br.bricks[i][j][z].faceLeftUp[2]);
-                for (int side = 0; side < 18; side++) {
-                  //  cGrani.push_back(br.bricks[i][j][z].colorSide[1]);
-                }
-            }
-        }
-    }
+    br.Draw(shaders);
 
-    GLuint VertexArrayID;
-    glGenVertexArrays(1, &VertexArrayID);
-    glBindVertexArray(VertexArrayID);
-    GLfloat g_vertex_buffer_data[grani.size()];
-    GLfloat g_color_buffer_data[cGrani.size()];
-    for (int i = 0; i < grani.size(); i++) {
-        g_vertex_buffer_data[i] = grani[i];
-    }
-    for (int i = 0; i < cGrani.size(); i++) {
-        g_color_buffer_data[i] = cGrani[i];
-    }
-    GLuint vertexbuffer;                                                                                                // Это будет идентификатором нашего буфера вершин
-    glGenBuffers(1, &vertexbuffer);                                                                                     // Создадим 1 буфер и поместим в переменную vertexbuffer его идентификатор
-    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);                                                                        // Сделаем только что созданный буфер текущим
-    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);                  // Передадим информацию о вершинах в OpenGL
-    glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-    glVertexAttribPointer(
-            0,                  // Атрибут 0. Подробнее об этом будет рассказано в части, посвященной шейдерам.
-            3,                  // Размер
-            GL_FLOAT,           // Тип
-            GL_FALSE,           // Указывает, что значения не нормализованы
-            0,                  // Шаг
-            (void*)0            // Смещение массива в буфере
-    );
-    glDrawArrays(GL_TRIANGLES, 0, grani.size());
     glDisableVertexAttribArray(0);
     glfwSwapBuffers(window);
 }
