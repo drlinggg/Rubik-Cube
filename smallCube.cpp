@@ -58,10 +58,10 @@ void smallCube::Draw(std::vector<Shader*>shaders) {
         grani.push_back(faceLeftBottom[i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(faceRightBottom[i]);
+        grani.push_back(backLeftBottom[i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(backLeftBottom[i]);
+        grani.push_back(backRightBottom[i]);
     }
     //up
     for (int i = 0; i < 3; i++) {
@@ -71,10 +71,10 @@ void smallCube::Draw(std::vector<Shader*>shaders) {
         grani.push_back(faceRightUp[i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(backRightUp[i]);
+        grani.push_back(backLeftUp[i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(faceLeftUp[i]);
+        grani.push_back(backRightUp[i]);
     }
     for (int i = 0; i < 3; i++) {
         grani.push_back(faceRightUp[i]);
@@ -146,12 +146,13 @@ void smallCube::Draw(std::vector<Shader*>shaders) {
     );
     for (int i = 0; i < 6; i++) {
         shaders[sides[i]]->use();
-        glDrawArrays(GL_TRIANGLES, i*18, 18);
+        glDrawArrays(GL_TRIANGLES, i*6, 6);
     }
 }
 
 void smallCube::Init() {
 
+    //test 0.09 game 0.09
     faceLeftBottom[0] = GetX()-0.09; faceLeftBottom[1] = GetY()-0.09, faceLeftBottom[2] = GetZ()-0.09;
     faceRightBottom[0] = GetX()+0.09, faceRightBottom[1] = GetY()-0.09, faceRightBottom[2] = GetZ()-0.09;
     faceRightUp[0] = GetX() + 0.09, faceRightUp[1] = GetY()+0.09, faceRightUp[2] = GetZ()-0.09;
