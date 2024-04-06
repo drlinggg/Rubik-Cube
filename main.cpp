@@ -31,7 +31,22 @@ int main() {
         }
         if (glfwGetKey(Screen.window, GLFW_KEY_9)) {
             if (!glfwGetKey(Screen.window, GLFW_KEY_9)) {
-                //test
+                Screen.br.turnHor(1,-1);
+            }
+        }
+        if (glfwGetKey(Screen.window, GLFW_KEY_0)) {
+            if (!glfwGetKey(Screen.window, GLFW_KEY_0)) {
+                Screen.br.turnVer(1,-1);
+            }
+        }
+        if (glfwGetKey(Screen.window, GLFW_KEY_O)) {
+            if (!glfwGetKey(Screen.window, GLFW_KEY_O)) {
+                Screen.br.turnHor(1,1);
+            }
+        }
+        if (glfwGetKey(Screen.window, GLFW_KEY_P)) {
+            if (!glfwGetKey(Screen.window, GLFW_KEY_P)) {
+                Screen.br.turnVer(1,1);
             }
         }
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);

@@ -15,7 +15,8 @@ private:
 
 public:
     smallCube bricks[3][3][3];
-    void turn(int idCubeFace, int mode); // mode -90 90 180 id 1-6??????
+    void turnHor(int hor, int mode);
+    void turnVer(int ver, int mode);
     void SetSize(float size);
     float GetSize();
     void SetDelta(float d);
