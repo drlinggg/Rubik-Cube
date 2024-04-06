@@ -4,11 +4,11 @@
 
 #include "cube.h"
 
-void Cube::Draw(std::vector<Shader*> shaders) {
+void Cube::Draw(std::vector<Shader*> shaders, glm::mat4 MVP) {
     for (int x = 0; x < 3; x++) {
         for (int y = 0; y < 3; y++) {
             for (int z = 0; z < 3; z++) {
-                bricks[x][y][z].Draw(shaders);
+                bricks[x][y][z].Draw(shaders, MVP);
             }
         }
     }

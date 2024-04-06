@@ -4,7 +4,7 @@
 
 #include "smallCube.h"
 
-void smallCube::Draw(std::vector<Shader*>shaders) {
+void smallCube::Draw(std::vector<Shader*>shaders, glm::mat4 MVP) {
     std::vector<float> grani;
     //front
     for (int i = 0; i < 3; i++) {
@@ -120,6 +120,7 @@ void smallCube::Draw(std::vector<Shader*>shaders) {
     for (int i = 0; i < 3; i++) {
         grani.push_back(faceLeftUp[i]);
     }
+
     GLuint VertexArrayID;
     glGenVertexArrays(1, &VertexArrayID);
     glBindVertexArray(VertexArrayID);
@@ -128,12 +129,9 @@ void smallCube::Draw(std::vector<Shader*>shaders) {
         g_vertex_buffer_data[gran] = grani[gran];
     }
     GLuint vertexbuffer;// Это будет идентификатором нашего буфера вершин
-    glGenBuffers(1,
-                 &vertexbuffer);                                                                                     // Создадим 1 буфер и поместим в переменную vertexbuffer его идентификатор
-    glBindBuffer(GL_ARRAY_BUFFER,
-                 vertexbuffer);                                                                        // Сделаем только что созданный буфер текущим
-    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data,
-                 GL_STATIC_DRAW);                  // Передадим информацию о вершинах в OpenGL
+    glGenBuffers(1,&vertexbuffer);                                                                                     // Создадим 1 буфер и поместим в переменную vertexbuffer его идентификатор
+    glBindBuffer(GL_ARRAY_BUFFER,vertexbuffer);                                                                        // Сделаем только что созданный буфер текущим
+    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data,GL_STATIC_DRAW);                  // Передадим информацию о вершинах в OpenGL
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
     glVertexAttribPointer(
@@ -145,6 +143,10 @@ void smallCube::Draw(std::vector<Shader*>shaders) {
             (void *) 0            // Смещение массива в буфере
     );
     for (int i = 0; i < 6; i++) {
+        GLuint MatrixID = glGetUniformLocation(shaders[sides[i]]->id, "MVP");
+        // Передать наши трансформации в текущий шейдер
+        // Это делается в основном цикле, поскольку каждая модель будет иметь другую MVP-матрицу (как минимум часть M)
+        glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
         shaders[sides[i]]->use();
         glDrawArrays(GL_TRIANGLES, i*6, 6);
     }

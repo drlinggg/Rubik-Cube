@@ -14,7 +14,7 @@ private:
 
 public:
     smallCube bricks[3][3][3];
-    void turn(int idCubeFace, int mode); // mode -90 90 180 id 1-6
+    void turn(int idCubeFace, int mode); // mode -90 90 180 id 1-6??????
     void SetX(float x);
     void SetY(float y);
     void SetZ(float z);
@@ -26,7 +26,7 @@ public:
     float GetSize();
     float GetDelta();
 
-    void Draw(std::vector<Shader*> shaders);
+    void Draw(std::vector<Shader*> shaders, glm::mat4 MVP);
     void Init();
 
     void al1(); // нижний крест

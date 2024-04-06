@@ -19,7 +19,7 @@ public:
     //void load();
     //void save();
     void render(std::vector<float>& grani);
-    void drawScene();
+    void drawScene(float x, float y, float z);
     Cube br;                              //экземпляр куба
 };
 

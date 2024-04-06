@@ -7,6 +7,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #ifndef LRCUBE_SMALLCUBE_H
 #define LRCUBE_SMALLCUBE_H
@@ -24,11 +26,11 @@ private:
     float backRightBottom[3];
     float backLeftUp[3];
     float backRightUp[3];
-    char sides[6] = {0,1,2,3,4,5};
 
 public:
 
-    void Draw(std::vector<Shader*> shaders);
+    char sides[6] = {0,1,2,3,4,5}; //front back bottom up right left
+    void Draw(std::vector<Shader*> shaders, glm::mat4 MVP);
     void Init();
     float GetX();
     float GetY();
