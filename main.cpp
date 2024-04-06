@@ -29,6 +29,11 @@ int main() {
         if (glfwGetKey(Screen.window, GLFW_KEY_8)) {
             x = -1, y = -1, z = 1;
         }
+        if (glfwGetKey(Screen.window, GLFW_KEY_9)) {
+            if (!glfwGetKey(Screen.window, GLFW_KEY_9)) {
+                //test
+            }
+        }
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glLoadIdentity();

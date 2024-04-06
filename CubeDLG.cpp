@@ -39,11 +39,11 @@ int CubeDlg::init() {
 
     shaders.resize(6); //грузим шейдеры сторон
         shaders[0] = load_shader("../main.glslv", "../main.glslf");
-        shaders[1] = load_shader("../main.glslv", "../back.glslf");
-        shaders[2] = load_shader("../main.glslv", "../bottom.glslf");
-        shaders[3] = load_shader("../main.glslv", "../up.glslf");
-        shaders[4] = load_shader("../main.glslv", "../right.glslf");
-        shaders[5] = load_shader("../main.glslv", "../left.glslf");
+        shaders[1] = load_shader("../main.glslv", "../left.glslf");
+        shaders[2] = load_shader("../main.glslv", "../back.glslf");
+        shaders[3] = load_shader("../main.glslv", "../right.glslf");
+        shaders[4] = load_shader("../main.glslv", "../bottom.glslf");
+        shaders[5] = load_shader("../main.glslv", "../up.glslf");
 
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
     return 0;

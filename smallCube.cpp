@@ -25,6 +25,25 @@ void smallCube::Draw(std::vector<Shader*>shaders, glm::mat4 MVP) {
     for (int i = 0; i < 3; i++) {
         grani.push_back(faceRightUp[i]);
     }
+    //left
+    for (int i = 0; i < 3; i++) {
+        grani.push_back(faceLeftBottom[i]);
+    }
+    for (int i = 0; i < 3; i++) {
+        grani.push_back(backLeftUp[i]);
+    }
+    for (int i = 0; i < 3; i++) {
+        grani.push_back(backLeftBottom[i]);
+    }
+    for (int i = 0; i < 3; i++) {
+        grani.push_back(faceLeftBottom[i]);
+    }
+    for (int i = 0; i < 3; i++) {
+        grani.push_back(backLeftUp[i]);
+    }
+    for (int i = 0; i < 3; i++) {
+        grani.push_back(faceLeftUp[i]);
+    }
     //back
     for (int i = 0; i < 3; i++) {
         grani.push_back(backLeftUp[i]);
@@ -43,6 +62,25 @@ void smallCube::Draw(std::vector<Shader*>shaders, glm::mat4 MVP) {
     }
     for (int i = 0; i < 3; i++) {
         grani.push_back(backRightUp[i]);
+    }
+    //right
+    for (int i = 0; i < 3; i++) {
+        grani.push_back(faceRightBottom[i]);
+    }
+    for (int i = 0; i < 3; i++) {
+        grani.push_back(backRightUp[i]);
+    }
+    for (int i = 0; i < 3; i++) {
+        grani.push_back(backRightBottom[i]);
+    }
+    for (int i = 0; i < 3; i++) {
+        grani.push_back(faceRightBottom[i]);
+    }
+    for (int i = 0; i < 3; i++) {
+        grani.push_back(backRightUp[i]);
+    }
+    for (int i = 0; i < 3; i++) {
+        grani.push_back(faceRightUp[i]);
     }
     //bottom
     for (int i = 0; i < 3; i++) {
@@ -81,44 +119,6 @@ void smallCube::Draw(std::vector<Shader*>shaders, glm::mat4 MVP) {
     }
     for (int i = 0; i < 3; i++) {
         grani.push_back(backLeftUp[i]);
-    }
-    //right
-    for (int i = 0; i < 3; i++) {
-        grani.push_back(faceRightBottom[i]);
-    }
-    for (int i = 0; i < 3; i++) {
-        grani.push_back(backRightUp[i]);
-    }
-    for (int i = 0; i < 3; i++) {
-        grani.push_back(backRightBottom[i]);
-    }
-    for (int i = 0; i < 3; i++) {
-        grani.push_back(faceRightBottom[i]);
-    }
-    for (int i = 0; i < 3; i++) {
-        grani.push_back(backRightUp[i]);
-    }
-    for (int i = 0; i < 3; i++) {
-        grani.push_back(faceRightUp[i]);
-    }
-    //left
-    for (int i = 0; i < 3; i++) {
-        grani.push_back(faceLeftBottom[i]);
-    }
-    for (int i = 0; i < 3; i++) {
-        grani.push_back(backLeftUp[i]);
-    }
-    for (int i = 0; i < 3; i++) {
-        grani.push_back(backLeftBottom[i]);
-    }
-    for (int i = 0; i < 3; i++) {
-        grani.push_back(faceLeftBottom[i]);
-    }
-    for (int i = 0; i < 3; i++) {
-        grani.push_back(backLeftUp[i]);
-    }
-    for (int i = 0; i < 3; i++) {
-        grani.push_back(faceLeftUp[i]);
     }
 
     GLuint VertexArrayID;
@@ -165,6 +165,55 @@ void smallCube::Init() {
     backLeftUp[0] = GetX()-0.09, backLeftUp[1] = GetY()+0.09, backLeftUp[2] = GetZ()+0.09;
     backRightUp[0] = GetX() + 0.09, backRightUp[1] = GetY()+0.09, backRightUp[2] = GetZ()+0.09;
 
+}
+
+void smallCube::turnleft(){ // 0->1 1->2 2->3 3->0
+    char newsides[6];
+    for (int i = 1; i < 4; i++) {
+        newsides[i] = sides[i-1];
+    }
+    newsides[0] = sides[3];
+    newsides[4] = sides[4];
+    newsides[5] = sides[5];
+    for (int i = 0; i < 6; i++) {
+        sides[i] = newsides[i];
+    }
+}
+void smallCube::turnright(){ // 0->3 3->2 1->0 2->1
+    char newsides[6];
+    for (int i = 0; i < 3; i++) {
+        newsides[i] = sides[i+1];
+    }
+    newsides[3] = sides[0];
+    newsides[4] = sides[4];
+    newsides[5] = sides[5];
+    for (int i = 0; i < 6; i++) {
+        sides[i] = newsides[i];
+    }
+}
+void smallCube::turnup(){ // 0->5 5->2 2->4 4->0
+    char newsides[6];
+    newsides[0] = sides[4];
+    newsides[1] = sides[1];
+    newsides[2] = sides[5];
+    newsides[3] = sides[3];
+    newsides[4] = sides[2];
+    newsides[5] = sides[0];
+    for (int i = 0; i < 6; i++) {
+        sides[i] = newsides[i];
+    }
+}
+void smallCube::turndown(){ // 0->4 4->2 2->5 5->0 //front left back right bottom up
+    char newsides[6];
+    newsides[0] = sides[5];
+    newsides[1] = sides[1];
+    newsides[2] = sides[4];
+    newsides[3] = sides[3];
+    newsides[4] = sides[0];
+    newsides[5] = sides[2];
+    for (int i = 0; i < 6; i++) {
+        sides[i] = newsides[i];
+    }
 }
 
 float smallCube::GetX() {

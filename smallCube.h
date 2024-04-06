@@ -29,7 +29,7 @@ private:
 
 public:
 
-    char sides[6] = {0,1,2,3,4,5}; //front back bottom up right left
+    char sides[6] = {0,1,2,3,4,5}; //front left back right bottom up
     void Draw(std::vector<Shader*> shaders, glm::mat4 MVP);
     void Init();
     float GetX();
@@ -38,6 +38,11 @@ public:
     void SetX(float x);
     void SetY(float y);
     void SetZ(float z);
+
+    void turnleft(); // 0->1 1->2 2->3 3->0
+    void turnright(); // 0->3 1->0 2->1 3->2
+    void turnup(); // 0->5 5->2 2->4 4->0
+    void turndown(); // 0->4 4->2 2->5 5->0
 };
 
 #endif //LRCUBE_SMALLCUBE_H
