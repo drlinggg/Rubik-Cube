@@ -191,26 +191,26 @@ void smallCube::turnright(){ // 0->3 3->2 1->0 2->1
         sides[i] = newsides[i];
     }
 }
-void smallCube::turnup(){ // 0->5 5->2 2->4 4->0
+void smallCube::turnup(){ // front left back right bottom up
     char newsides[6];
     newsides[0] = sides[5];
-    newsides[1] = sides[1];
+    newsides[5] = sides[2];
     newsides[2] = sides[4];
+    newsides[1] = sides[1];
     newsides[3] = sides[3];
     newsides[4] = sides[0];
-    newsides[5] = sides[2];
     for (int i = 0; i < 6; i++) {
         sides[i] = newsides[i];
     }
 }
 void smallCube::turndown(){ //front left back right bottom up
     char newsides[6];
-    newsides[0] = sides[5];
-    newsides[5] = sides[2];
-    newsides[2] = sides[4];
+    newsides[0] = sides[4];
     newsides[1] = sides[1];
+    newsides[2] = sides[5];
     newsides[3] = sides[3];
-    newsides[4] = sides[0];
+    newsides[4] = sides[2];
+    newsides[5] = sides[0];
     for (int i = 0; i < 6; i++) {
         sides[i] = newsides[i];
     }

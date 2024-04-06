@@ -59,18 +59,18 @@ void Cube::turnVer(int ver, int mode) {
     smallCube fouth = bricks[ver][2][0];
     if (mode == -1) {
         for (int i = 0; i < 6; i++) {
-            bricks[ver][0][2].sides[i] = start.sides[i];
-            bricks[ver][2][2].sides[i] = second.sides[i];
-            bricks[ver][2][0].sides[i] = third.sides[i];
-            bricks[ver][0][0].sides[i] = fouth.sides[i];
-        }
-    }
-    else {
-        for (int i = 0; i < 6; i++) {
             bricks[ver][2][0].sides[i] = start.sides[i];
             bricks[ver][2][2].sides[i] = fouth.sides[i];
             bricks[ver][0][0].sides[i] = second.sides[i];
             bricks[ver][0][2].sides[i] = third.sides[i];
+        }
+    }
+    else {
+        for (int i = 0; i < 6; i++) {
+            bricks[ver][2][0].sides[i] = third.sides[i];
+            bricks[ver][0][2].sides[i] = start.sides[i];
+            bricks[ver][2][2].sides[i] = second.sides[i];
+            bricks[ver][0][0].sides[i] = fouth.sides[i];
         }
     }
     start = bricks[ver][1][0];
