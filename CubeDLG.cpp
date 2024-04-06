@@ -37,7 +37,7 @@ int CubeDlg::init() {
 
     glEnable(GL_DEPTH_TEST);
 
-    shaders.resize(6);
+    shaders.resize(6); //грузим шейдеры сторон
         shaders[0] = load_shader("../main.glslv", "../main.glslf");
         shaders[1] = load_shader("../main.glslv", "../back.glslf");
         shaders[2] = load_shader("../main.glslv", "../bottom.glslf");
@@ -50,6 +50,7 @@ int CubeDlg::init() {
 }
 
 void CubeDlg::drawScene(float x, float y, float z) {
+    //получаем матрицу для преображения точек относительно камеры
     glm::mat4 Projection = glm::perspective(glm::radians(degres), 1.0f, 0.1f, 100.0f);
     glm::mat4 View = glm::lookAt(
             glm::vec3(x,y,z), // Камера находится в мировых координатах (4,3,3)
@@ -58,6 +59,7 @@ void CubeDlg::drawScene(float x, float y, float z) {
     );
     glm::mat4 Model = glm::mat4(1.0f);  // Индивидуально для каждой модели
     glm::mat4 MVP = Projection * View * Model;
+    //рисуем куб с помощью шейдеров и матрицы
     br.Draw(shaders, MVP);
     glfwSwapBuffers(window);
 }

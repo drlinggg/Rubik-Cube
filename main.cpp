@@ -38,4 +38,5 @@ int main() {
     }
     while( glfwGetKey(Screen.window, GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
                  glfwWindowShouldClose(Screen.window) == 0 );
+    glfwTerminate();
 }

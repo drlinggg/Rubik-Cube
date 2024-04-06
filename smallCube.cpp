@@ -128,6 +128,7 @@ void smallCube::Draw(std::vector<Shader*>shaders, glm::mat4 MVP) {
     for (int gran = 0; gran < grani.size(); gran++) {
         g_vertex_buffer_data[gran] = grani[gran];
     }
+    grani.clear();
     GLuint vertexbuffer;
     glGenBuffers(1,&vertexbuffer);                                                                                     // Создадим 1 буфер и поместим в переменную vertexbuffer его идентификатор
     glBindBuffer(GL_ARRAY_BUFFER,vertexbuffer);                                                                        // Сделаем только что созданный буфер текущим
@@ -142,18 +143,20 @@ void smallCube::Draw(std::vector<Shader*>shaders, glm::mat4 MVP) {
             0,                  // Шаг
             (void *) 0            // Смещение массива в буфере
     );
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 6; i++) { //рисую по 6 граней с 6 разными цветами
         GLuint MatrixID = glGetUniformLocation(shaders[sides[i]]->id, "MVP");
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
         shaders[sides[i]]->use();
         glDrawArrays(GL_TRIANGLES, i*6, 6);
     }
+    glDeleteVertexArrays(1, &VertexArrayID); //в идеале бы 1 раз создавать буфферы но я создаю их кучу раз и кучу раз очищаю
+    glDeleteBuffers(1, &vertexbuffer);
 }
 
 void smallCube::Init() {
 
     //test 0.05 game 0.09
-    faceLeftBottom[0] = GetX()-0.09; faceLeftBottom[1] = GetY()-0.09, faceLeftBottom[2] = GetZ()-0.09;
+    faceLeftBottom[0] = GetX()-0.09; faceLeftBottom[1] = GetY()-0.09, faceLeftBottom[2] = GetZ()-0.09; //прорезы между кубами
     faceRightBottom[0] = GetX()+0.09, faceRightBottom[1] = GetY()-0.09, faceRightBottom[2] = GetZ()-0.09;
     faceRightUp[0] = GetX() + 0.09, faceRightUp[1] = GetY()+0.09, faceRightUp[2] = GetZ()-0.09;
     faceLeftUp[0] = GetX() - 0.09, faceLeftUp[1] = GetY()+0.09, faceLeftUp[2] = GetZ()-0.09;

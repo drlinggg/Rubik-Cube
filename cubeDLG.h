@@ -11,7 +11,7 @@ private:
     GLfloat x = 1;
     GLfloat y = 1;
     GLfloat z = 1;
-    GLfloat degres = 60;
+    GLfloat degres = 90; //угол, причем не работает
 public:
     GLFWwindow* window;
     std::vector<Shader*> shaders;
