@@ -1,5 +1,5 @@
 //
-// Created by User on 04.04.2024.
+// Created by Andrei Banakh on 04.04.2024.
 //
 
 #ifndef LRCUBE_SHADER_H
