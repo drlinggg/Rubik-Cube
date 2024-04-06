@@ -11,7 +11,7 @@ private:
     float X = 0;
     float Z = 0;
     float Y = 0;
-    float size = 0.6f;
+    float size = 1.0f;
 
 public:
     smallCube bricks[3][3][3];

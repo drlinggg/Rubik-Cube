@@ -31,7 +31,7 @@ public:
 
     char sides[6] = {0,1,2,3,4,5}; //front left back right bottom up
     void Draw(std::vector<Shader*> shaders, glm::mat4 MVP);
-    void Init();
+    void Init(float size);
     float GetX();
     float GetY();
     float GetZ();

@@ -59,6 +59,7 @@ void CubeDlg::drawScene(float x, float y, float z) {
     );
     glm::mat4 Model = glm::mat4(1.0f);  // Индивидуально для каждой модели
     glm::mat4 MVP = Projection * View * Model;
+
     //рисуем куб с помощью шейдеров и матрицы
     br.Draw(shaders, MVP);
     glfwSwapBuffers(window);

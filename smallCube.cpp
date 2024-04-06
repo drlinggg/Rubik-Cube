@@ -153,21 +153,21 @@ void smallCube::Draw(std::vector<Shader*>shaders, glm::mat4 MVP) {
     glDeleteBuffers(1, &vertexbuffer);
 }
 
-void smallCube::Init() {
-
-    //test 0.05 game 0.095
-    faceLeftBottom[0] = GetX()-0.095; faceLeftBottom[1] = GetY()-0.095, faceLeftBottom[2] = GetZ()-0.095; //прорезы между кубами
-    faceRightBottom[0] = GetX()+0.095, faceRightBottom[1] = GetY()-0.095, faceRightBottom[2] = GetZ()-0.095;
-    faceRightUp[0] = GetX() + 0.095, faceRightUp[1] = GetY()+0.095, faceRightUp[2] = GetZ()-0.095;
-    faceLeftUp[0] = GetX() - 0.095, faceLeftUp[1] = GetY()+0.095, faceLeftUp[2] = GetZ()-0.095;
-    backLeftBottom[0] = GetX()-0.095, backLeftBottom[1] = GetY()-0.095, backLeftBottom[2] = GetZ()+0.095;
-    backRightBottom[0] =  GetX()+0.095, backRightBottom[1] = GetY()-0.095, backRightBottom[2] = GetZ()+0.095;
-    backLeftUp[0] = GetX()-0.095, backLeftUp[1] = GetY()+0.095, backLeftUp[2] = GetZ()+0.095;
-    backRightUp[0] = GetX() + 0.095, backRightUp[1] = GetY()+0.095, backRightUp[2] = GetZ()+0.095;
+void smallCube::Init(float size) {
+    const float a = 0.16f;
+    //test 0.05 game (a * size)
+    faceLeftBottom[0] = GetX()-(a * size); faceLeftBottom[1] = GetY()-(a * size), faceLeftBottom[2] = GetZ()-(a * size); //прорезы между кубами
+    faceRightBottom[0] = GetX()+(a * size), faceRightBottom[1] = GetY()-(a * size), faceRightBottom[2] = GetZ()-(a * size);
+    faceRightUp[0] = GetX() + (a * size), faceRightUp[1] = GetY()+(a * size), faceRightUp[2] = GetZ()-(a * size);
+    faceLeftUp[0] = GetX() - (a * size), faceLeftUp[1] = GetY()+(a * size), faceLeftUp[2] = GetZ()-(a * size);
+    backLeftBottom[0] = GetX()-(a * size), backLeftBottom[1] = GetY()-(a * size), backLeftBottom[2] = GetZ()+(a * size);
+    backRightBottom[0] =  GetX()+(a * size), backRightBottom[1] = GetY()-(a * size), backRightBottom[2] = GetZ()+(a * size);
+    backLeftUp[0] = GetX()-(a * size), backLeftUp[1] = GetY()+(a * size), backLeftUp[2] = GetZ()+(a * size);
+    backRightUp[0] = GetX() + (a * size), backRightUp[1] = GetY()+(a * size), backRightUp[2] = GetZ()+(a * size);
 
 }
 
-void smallCube::turnleft(){ // 0->1 1->2 2->3 3->0 //front left back right bottom up
+void smallCube::turnleft(){
     char newsides[6];
     for (int i = 1; i < 4; i++) {
         newsides[i] = sides[i-1];
@@ -179,7 +179,7 @@ void smallCube::turnleft(){ // 0->1 1->2 2->3 3->0 //front left back right botto
         sides[i] = newsides[i];
     }
 }
-void smallCube::turnright(){ // 0->3 3->2 1->0 2->1
+void smallCube::turnright(){
     char newsides[6];
     for (int i = 0; i < 3; i++) {
         newsides[i] = sides[i+1];
@@ -191,7 +191,7 @@ void smallCube::turnright(){ // 0->3 3->2 1->0 2->1
         sides[i] = newsides[i];
     }
 }
-void smallCube::turnup(){ // front left back right bottom up
+void smallCube::turnup(){
     char newsides[6];
     newsides[0] = sides[5];
     newsides[5] = sides[2];
@@ -203,7 +203,7 @@ void smallCube::turnup(){ // front left back right bottom up
         sides[i] = newsides[i];
     }
 }
-void smallCube::turndown(){ //front left back right bottom up
+void smallCube::turndown(){
     char newsides[6];
     newsides[0] = sides[4];
     newsides[1] = sides[1];

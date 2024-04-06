@@ -9,7 +9,7 @@ void Cube::SetSize(float size) { //fix it, no connect with small bricks
     for (int x = 0; x < 3; x++) {
         for (int y = 0; y < 3; y++) {
             for (int z = 0; z < 3; z++) {
-                bricks[x][y][z].Init();
+                bricks[x][y][z].Init(size);
             }
         }
     }
@@ -36,13 +36,13 @@ void Cube::Init() { //устанавливаем центры кубиков о�
                 bricks[x+1][y+1][z+1].SetX(float(x)*(size/3));
                 bricks[x+1][y+1][z+1].SetY(float(y)*(size/3));
                 bricks[x+1][y+1][z+1].SetZ(float(z)*(size/3));
-                bricks[x+1][y+1][z+1].Init(); //инициализируем их
+                bricks[x+1][y+1][z+1].Init(size); //инициализируем их
             }
         }
     }
 }
 
-void Cube::turnVer(int ver, int mode) {
+void Cube::turnVer(int ver, int mode) { //свапаем кубики соответствующие после их поворотов вокруг оси
     for (int y = 0; y < 3; y++) {
         for (int z = 0; z < 3; z++) {
             if (mode == -1) {
@@ -95,7 +95,7 @@ void Cube::turnVer(int ver, int mode) {
     }
 }
 
-void Cube::turnHor(int hor, int mode) {
+void Cube::turnHor(int hor, int mode) { //свапаем кубики соответствующие после их поворотов вокруг оси
     for (int x = 0; x < 3; x++) {
         for (int z = 0; z < 3; z++) {
             if (mode == -1) {
