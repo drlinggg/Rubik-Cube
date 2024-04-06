@@ -3,7 +3,7 @@
 int main() {
     CubeDlg Screen;
     Screen.init();
-    float x = -1; float y = -1; float z = -1;
+    float x = 1, y = 1, z = 1;
     do {
         if (glfwGetKey(Screen.window, GLFW_KEY_1)) {
             x = 1, y = 1, z = 1;
@@ -24,7 +24,7 @@ int main() {
             x = 1, y = -1, z = -1;
         }
         if (glfwGetKey(Screen.window, GLFW_KEY_7)) {
-            x = -1, y = -1, z = -1;
+             x = -1, y = -1, z = -1;
         }
         if (glfwGetKey(Screen.window, GLFW_KEY_8)) {
             x = -1, y = -1, z = 1;

@@ -8,9 +8,10 @@
 
 class CubeDlg {
 private:
-    GLfloat nXangle;
-    GLfloat nYangle;
-    GLfloat nZangle;
+    GLfloat x = 1;
+    GLfloat y = 1;
+    GLfloat z = 1;
+    GLfloat degres = 60;
 public:
     GLFWwindow* window;
     std::vector<Shader*> shaders;
@@ -18,7 +19,6 @@ public:
     //void intermix();
     //void load();
     //void save();
-    void render(std::vector<float>& grani);
     void drawScene(float x, float y, float z);
     Cube br;                              //экземпляр куба
 };

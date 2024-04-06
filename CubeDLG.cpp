@@ -5,9 +5,6 @@
 using namespace glm;
 
 int CubeDlg::init() {
-    nXangle = 0;
-    nYangle = 0;
-    nZangle = 0;
 
     //инициализация glfw
     if( !glfwInit() ){
@@ -53,20 +50,14 @@ int CubeDlg::init() {
 }
 
 void CubeDlg::drawScene(float x, float y, float z) {
-    // Проекционная матрица : 45&deg; поле обзора, 1:1 соотношение сторон, диапазон : 0.1 юнит <-> 100 юнитов
-    glm::mat4 Projection = glm::perspective(glm::radians(60.0f), 1.0f, 0.1f, 100.0f);
-    // Или, для ортокамеры
+    glm::mat4 Projection = glm::perspective(glm::radians(degres), 1.0f, 0.1f, 100.0f);
     glm::mat4 View = glm::lookAt(
             glm::vec3(x,y,z), // Камера находится в мировых координатах (4,3,3)
             glm::vec3(0,0,0), // И направлена в начало координат
             glm::vec3(0,1,0)  // "Голова" находится сверху
     );
-    // Матрица модели : единичная матрица (Модель находится в начале координат)
     glm::mat4 Model = glm::mat4(1.0f);  // Индивидуально для каждой модели
-    // Итоговая матрица ModelViewProjection, которая является результатом перемножения наших трех матриц
-    glm::mat4 MVP = Projection * View * Model; // Помните, что умножение матрицы производиться в обратном порядке
-    // Получить хэндл переменной в шейдере
-    // Только один раз во время инициализации.
+    glm::mat4 MVP = Projection * View * Model;
     br.Draw(shaders, MVP);
     glfwSwapBuffers(window);
 }

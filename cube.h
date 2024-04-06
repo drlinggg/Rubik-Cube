@@ -11,19 +11,14 @@ private:
     float X = 0;
     float Z = 0;
     float Y = 0;
+    float size = 0.6f;
 
 public:
     smallCube bricks[3][3][3];
     void turn(int idCubeFace, int mode); // mode -90 90 180 id 1-6??????
-    void SetX(float x);
-    void SetY(float y);
-    void SetZ(float z);
     void SetSize(float size);
-    void SetDelta(float d);
-    float GetX();
-    float GetY();
-    float GetZ();
     float GetSize();
+    void SetDelta(float d);
     float GetDelta();
 
     void Draw(std::vector<Shader*> shaders, glm::mat4 MVP);

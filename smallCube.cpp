@@ -128,7 +128,7 @@ void smallCube::Draw(std::vector<Shader*>shaders, glm::mat4 MVP) {
     for (int gran = 0; gran < grani.size(); gran++) {
         g_vertex_buffer_data[gran] = grani[gran];
     }
-    GLuint vertexbuffer;// Это будет идентификатором нашего буфера вершин
+    GLuint vertexbuffer;
     glGenBuffers(1,&vertexbuffer);                                                                                     // Создадим 1 буфер и поместим в переменную vertexbuffer его идентификатор
     glBindBuffer(GL_ARRAY_BUFFER,vertexbuffer);                                                                        // Сделаем только что созданный буфер текущим
     glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data,GL_STATIC_DRAW);                  // Передадим информацию о вершинах в OpenGL
@@ -144,8 +144,6 @@ void smallCube::Draw(std::vector<Shader*>shaders, glm::mat4 MVP) {
     );
     for (int i = 0; i < 6; i++) {
         GLuint MatrixID = glGetUniformLocation(shaders[sides[i]]->id, "MVP");
-        // Передать наши трансформации в текущий шейдер
-        // Это делается в основном цикле, поскольку каждая модель будет иметь другую MVP-матрицу (как минимум часть M)
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
         shaders[sides[i]]->use();
         glDrawArrays(GL_TRIANGLES, i*6, 6);
