@@ -17,9 +17,11 @@ public:
     smallCube bricks[3][3][3];
     void turnHor(int hor, int mode);
     void turnVer(int ver, int mode);
+    void turnThrough(int ver, int mode);
     void SetSize(float size);
     float GetSize();
     void shuffle();
+    bool is_correct();
     void solve();
 
     void Draw(std::vector<Shader*> shaders, glm::mat4 MVP);

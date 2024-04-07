@@ -51,6 +51,10 @@ int CubeDlg::init() {
 }
 
 void CubeDlg::drawScene(float x, float y, float z) {
+    glLoadIdentity();
+    glFinish();
+    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     //получаем матрицу для преображения точек относительно камеры
     glm::mat4 Projection = glm::perspective(glm::radians(degres), 1.0f, 0.1f, 100.0f);
     glm::mat4 View = glm::lookAt(

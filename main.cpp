@@ -31,17 +31,80 @@ int main() {
         }
         if (glfwGetKey(Screen.window, GLFW_KEY_9)) {
             if (!glfwGetKey(Screen.window, GLFW_KEY_9)) {
-                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-                glLoadIdentity();
-                glFinish();
                 Screen.br.shuffle();
-                glfwPollEvents();
             }
         }
-        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glLoadIdentity();
-        glFinish();
+        //test
+        if (glfwGetKey(Screen.window, GLFW_KEY_A)) {
+            if (!glfwGetKey(Screen.window, GLFW_KEY_A)) {
+                Screen.br.turnVer(0,-1);
+            }
+        }
+        if (glfwGetKey(Screen.window, GLFW_KEY_S)) {
+            if (!glfwGetKey(Screen.window, GLFW_KEY_S)) {
+                Screen.br.turnVer(1,-1);
+            }
+        }
+        if (glfwGetKey(Screen.window, GLFW_KEY_D)) {
+            if (!glfwGetKey(Screen.window, GLFW_KEY_D)) {
+                Screen.br.turnVer(2,-1);
+            }
+        }
+        if (glfwGetKey(Screen.window, GLFW_KEY_Q)) {
+            if (!glfwGetKey(Screen.window, GLFW_KEY_Q)) {
+                Screen.br.turnVer(0,1);
+            }
+        }
+        if (glfwGetKey(Screen.window, GLFW_KEY_W)) {
+            if (!glfwGetKey(Screen.window, GLFW_KEY_W)) {
+                Screen.br.turnVer(1,1);
+            }
+        }
+        if (glfwGetKey(Screen.window, GLFW_KEY_E)) {
+            if (!glfwGetKey(Screen.window, GLFW_KEY_E)) {
+                Screen.br.turnVer(2,1);
+            }
+        }
+        if (glfwGetKey(Screen.window, GLFW_KEY_R)) {
+            if (!glfwGetKey(Screen.window, GLFW_KEY_R)) {
+                Screen.br.turnHor(0,-1);
+            }
+        }
+        if (glfwGetKey(Screen.window, GLFW_KEY_T)) {
+            if (!glfwGetKey(Screen.window, GLFW_KEY_T)) {
+                Screen.br.turnHor(1,-1);
+            }
+        }
+        if (glfwGetKey(Screen.window, GLFW_KEY_Y)) {
+            if (!glfwGetKey(Screen.window, GLFW_KEY_Y)) {
+                Screen.br.turnHor(2,-1);
+            }
+        }
+        if (glfwGetKey(Screen.window, GLFW_KEY_F)) {
+            if (!glfwGetKey(Screen.window, GLFW_KEY_F)) {
+                Screen.br.turnHor(0,1);
+            }
+        }
+        if (glfwGetKey(Screen.window, GLFW_KEY_G)) {
+            if (!glfwGetKey(Screen.window, GLFW_KEY_G)) {
+                Screen.br.turnHor(1,1);
+            }
+        }
+        if (glfwGetKey(Screen.window, GLFW_KEY_H)) {
+            if (!glfwGetKey(Screen.window, GLFW_KEY_H)) {
+                Screen.br.turnHor(2,1);
+            }
+        }
+        if (glfwGetKey(Screen.window, GLFW_KEY_U)) {
+            if (!glfwGetKey(Screen.window, GLFW_KEY_U)) {
+                Screen.br.turnThrough(2,-1);
+            }
+        }
+        if (glfwGetKey(Screen.window, GLFW_KEY_J)) {
+            if (!glfwGetKey(Screen.window, GLFW_KEY_J)) {
+                Screen.br.turnThrough(2,1);
+            }
+        }
         Screen.drawScene(x,y,z);
         glfwPollEvents();
     }

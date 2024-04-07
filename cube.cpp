@@ -148,20 +148,80 @@ void Cube::turnHor(int hor, int mode) { //свапаем кубики соотв
     }
 }
 
+void Cube::turnThrough(int ver, int mode) {
+    for (int x = 0; x < 3; x++) {
+        for (int y = 0; y < 3; y++) {
+            bricks[x][y][ver].turndown();
+            if (mode == -1) {
+                bricks[x][y][ver].turnright();
+            }
+            else {
+                bricks[x][y][ver].turnleft();
+            }
+            bricks[x][y][ver].turnup();
+        }
+    }
+    smallCube start = bricks[0][0][ver];
+    smallCube second = bricks[2][0][ver];
+    smallCube third = bricks[2][2][ver];
+    smallCube fouth = bricks[0][2][ver];
+    if (mode == -1) {
+        for (int i = 0; i < 6; i++) {
+            bricks[2][0][ver].sides[i] = start.sides[i];
+            bricks[2][2][ver].sides[i] = second.sides[i];
+            bricks[0][2][ver].sides[i] = third.sides[i];
+            bricks[0][0][ver].sides[i] = fouth.sides[i];
+        }
+    }
+    else {
+        for (int i = 0; i < 6; i++) {
+            bricks[0][2][ver].sides[i] = start.sides[i];
+            bricks[2][2][ver].sides[i] = fouth.sides[i];
+            bricks[2][0][ver].sides[i] = third.sides[i];
+            bricks[0][0][ver].sides[i] = second.sides[i];
+        }
+    }
+    start = bricks[0][1][ver];
+    second = bricks[1][2][ver];
+    third = bricks[2][1][ver];
+    fouth = bricks[1][0][ver];
+    if (mode == -1) {
+        for (int i = 0; i < 6; i++) {
+            bricks[2][1][ver].sides[i] = fouth.sides[i];
+            bricks[1][2][ver].sides[i] = third.sides[i];
+            bricks[0][1][ver].sides[i] = second.sides[i];
+            bricks[1][0][ver].sides[i] = start.sides[i];
+        }
+    }
+    else {
+        for (int i = 0; i < 6; i++) {
+            bricks[1][2][ver].sides[i] = start.sides[i];
+            bricks[2][1][ver].sides[i] = second.sides[i];
+            bricks[1][0][ver].sides[i] = third.sides[i];
+            bricks[0][1][ver].sides[i] = fouth.sides[i];
+        }
+    }
+}
+
 void Cube::shuffle() {
     int countOperations = rand() % 1000;
     FILE* save = fopen("../input.txt", "w");
     char way, id, mode;
     for (int i = 0; i < countOperations; i++) {
-        way = rand()%2;
+        way = rand()%3;
         id = rand()%3;
         mode = rand()%2-1;
-        if (way) {
+        if (way == 0) {
             turnHor(id, mode);
         }
-        else {
+        else if (way == 1){
             turnVer(id, mode);
         }
+        else {
+            turnThrough(id, mode);
+        }
+        glLoadIdentity();
+        glFinish();
         std::putc(way+97,save);
         std::putc(id+97,save);
         std::putc(mode+98,save);
