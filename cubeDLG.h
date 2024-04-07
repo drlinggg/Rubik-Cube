@@ -11,15 +11,20 @@ private:
     GLfloat x = 1;
     GLfloat y = 1;
     GLfloat z = 1;
-    GLfloat degres = 90; //угол, причем не работает
+    GLfloat yaw = 0.0f;
+    GLfloat pitch = -90.0f;
+    GLfloat radius = 2;
+    void reCalc();
 public:
     GLFWwindow* window;
     std::vector<Shader*> shaders;
+    void processInput();
     int init();
     void load();
     void save();
-    void drawScene(float x, float y, float z);
+    void drawScene();
     Cube br;                              //экземпляр куба
 };
+
 
 #endif //LRCUBE_CUBEDLG_H
