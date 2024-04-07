@@ -14,16 +14,17 @@ private:
     GLfloat yaw = 0.0f;
     GLfloat pitch = -90.0f;
     GLfloat radius = 2;
-    void reCalc();
-public:
     GLFWwindow* window;
     std::vector<Shader*> shaders;
+    Cube br; //экземпляр куба
+    void reCalc();
+public:
+    GLFWwindow* getWindow();
     void processInput();
     int init();
     void load();
     void save();
     void drawScene();
-    Cube br;                              //экземпляр куба
 };
 
 

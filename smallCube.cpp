@@ -238,3 +238,11 @@ void smallCube::SetY(float y) {
 void smallCube::SetZ(float z) {
     Z = z;
 }
+
+char smallCube::Side(int id) {
+    return sides[id];
+}
+
+void smallCube::SetSide(int index, int id) {
+    sides[index] = id;
+}

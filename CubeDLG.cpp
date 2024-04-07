@@ -6,19 +6,16 @@
 using namespace glm;
 
 int CubeDlg::init() {
-
     //инициализация glfw
     if( !glfwInit() ){
         std::cout << "no glfw init";
         return -1;
     }
-
     glfwWindowHint(GLFW_SAMPLES, 4); // 4x Сглаживание
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // Мы хотим использовать OpenGL 3.3
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // Мы не хотим старый OpenGL
-
     window = glfwCreateWindow( 1000, 1000, "Rubic Cube", NULL, NULL);  //создать окно
     if( window == NULL ){
         std::cout << "error window create";
@@ -26,26 +23,20 @@ int CubeDlg::init() {
         return -1;
     }
     glfwMakeContextCurrent(window);
-
     br.Init();
-
-
     glewExperimental=true;                              // инициализация GLEW, Флаг необходим в Core-режиме OpenGL
     if (glewInit() != GLEW_OK) {
         std::cout << "no glew init";
         return -1;
     }
-
     glEnable(GL_DEPTH_TEST);
-
     shaders.resize(6); //грузим шейдеры сторон
-        shaders[0] = load_shader("../main.glslv", "../main.glslf");
-        shaders[1] = load_shader("../main.glslv", "../left.glslf");
-        shaders[2] = load_shader("../main.glslv", "../back.glslf");
-        shaders[3] = load_shader("../main.glslv", "../right.glslf");
-        shaders[4] = load_shader("../main.glslv", "../bottom.glslf");
-        shaders[5] = load_shader("../main.glslv", "../up.glslf");
-
+    shaders[0] = load_shader("../main.glslv", "../main.glslf");
+    shaders[1] = load_shader("../main.glslv", "../left.glslf");
+    shaders[2] = load_shader("../main.glslv", "../back.glslf");
+    shaders[3] = load_shader("../main.glslv", "../right.glslf");
+    shaders[4] = load_shader("../main.glslv", "../bottom.glslf");
+    shaders[5] = load_shader("../main.glslv", "../up.glslf");
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
     return 0;
 }
@@ -64,7 +55,6 @@ void CubeDlg::drawScene() {
     );
     glm::mat4 Model = glm::mat4(1.0f);  // Индивидуально для каждой модели
     glm::mat4 MVP = Projection * View * Model;
-
     //рисуем куб с помощью шейдеров и матрицы
     br.Draw(shaders, MVP);
     glfwSwapBuffers(window);
@@ -82,7 +72,6 @@ void CubeDlg::reCalc() {
 }
 
 void CubeDlg::processInput() {
-    const double PI = 3.141592653589793;
     if (glfwGetKey(window, GLFW_KEY_9)) {
         if (!glfwGetKey(window, GLFW_KEY_9)) {
             br.shuffle();
@@ -90,7 +79,6 @@ void CubeDlg::processInput() {
     }
     //test
     if (glfwGetKey(window, GLFW_KEY_1)) {
-
         // Вычисление новых координат камеры идиотия с питчем и явом (если честно я еще не разобрался со всем этим и
         // просто придал рандомные значения, вроде нормально все работает
         reCalc();
@@ -171,3 +159,8 @@ void CubeDlg::processInput() {
         }
     }
 }
+
+GLFWwindow* CubeDlg::getWindow() {
+    return window;
+}
+

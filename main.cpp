@@ -8,7 +8,7 @@ int main() {
         Screen.drawScene();
         glfwPollEvents();
     }
-    while( glfwGetKey(Screen.window, GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
-                 glfwWindowShouldClose(Screen.window) == 0 );
+    while( glfwGetKey(Screen.getWindow(), GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
+                 glfwWindowShouldClose(Screen.getWindow()) == 0 );
     glfwTerminate();
 }

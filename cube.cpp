@@ -4,21 +4,6 @@
 
 #include "cube.h"
 
-void Cube::SetSize(float size) {
-    this->size = size;
-    for (int x = 0; x < 3; x++) {
-        for (int y = 0; y < 3; y++) {
-            for (int z = 0; z < 3; z++) {
-                bricks[x][y][z].Init(size);
-            }
-        }
-    }
-}
-
-float Cube::GetSize() { //useless
-    return size;
-}
-
 void Cube::Draw(std::vector<Shader*> shaders, glm::mat4 MVP) { //рисуем каждый кубик
     for (int x = 0; x < 3; x++) {
         for (int y = 0; y < 3; y++) {
@@ -30,6 +15,8 @@ void Cube::Draw(std::vector<Shader*> shaders, glm::mat4 MVP) { //рисуем к
 }
 
 void Cube::Init() { //устанавливаем центры кубиков относительно нашего
+    X = Y = Z = 0;
+    size = 1.0f;
     for (int x = -1; x < 2; x++) {
         for (int y = -1; y < 2; y++) {
             for (int z = -1; z < 2; z++) {
@@ -59,18 +46,18 @@ void Cube::turnVer(int ver, int mode) { //свапаем кубики соотв
     smallCube fouth = bricks[ver][2][0];
     if (mode == -1) {
         for (int i = 0; i < 6; i++) {
-            bricks[ver][2][0].sides[i] = start.sides[i];
-            bricks[ver][2][2].sides[i] = fouth.sides[i];
-            bricks[ver][0][0].sides[i] = second.sides[i];
-            bricks[ver][0][2].sides[i] = third.sides[i];
+            bricks[ver][2][0].SetSide(i, start.Side(i));
+            bricks[ver][2][2].SetSide(i, fouth.Side(i));
+            bricks[ver][0][0].SetSide(i, second.Side(i));
+            bricks[ver][0][2].SetSide(i, third.Side(i));
         }
     }
     else {
         for (int i = 0; i < 6; i++) {
-            bricks[ver][2][0].sides[i] = third.sides[i];
-            bricks[ver][0][2].sides[i] = start.sides[i];
-            bricks[ver][2][2].sides[i] = second.sides[i];
-            bricks[ver][0][0].sides[i] = fouth.sides[i];
+            bricks[ver][2][0].SetSide(i, third.Side(i));
+            bricks[ver][0][2].SetSide(i, start.Side(i));
+            bricks[ver][2][2].SetSide(i, second.Side(i));
+            bricks[ver][0][0].SetSide(i, fouth.Side(i));
         }
     }
     start = bricks[ver][1][0];
@@ -79,18 +66,18 @@ void Cube::turnVer(int ver, int mode) { //свапаем кубики соотв
     fouth = bricks[ver][2][1];
     if (mode == -1) {
         for (int i = 0; i < 6; i++) {
-            bricks[ver][1][0].sides[i] = second.sides[i];
-            bricks[ver][0][1].sides[i] = third.sides[i];
-            bricks[ver][1][2].sides[i] = fouth.sides[i];
-            bricks[ver][2][1].sides[i] = start.sides[i];
+            bricks[ver][1][0].SetSide(i, second.Side(i));
+            bricks[ver][0][1].SetSide(i, third.Side(i));
+            bricks[ver][1][2].SetSide(i, fouth.Side(i));
+            bricks[ver][2][1].SetSide(i, start.Side(i));
         }
     }
     else {
         for (int i = 0; i < 6; i++) {
-            bricks[ver][1][0].sides[i] = fouth.sides[i];
-            bricks[ver][0][1].sides[i] = start.sides[i];
-            bricks[ver][1][2].sides[i] = second.sides[i];
-            bricks[ver][2][1].sides[i] = third.sides[i];
+            bricks[ver][1][0].SetSide(i, fouth.Side(i));
+            bricks[ver][0][1].SetSide(i, start.Side(i));
+            bricks[ver][1][2].SetSide(i, second.Side(i));
+            bricks[ver][2][1].SetSide(i, third.Side(i));
         }
     }
 }
@@ -112,18 +99,18 @@ void Cube::turnHor(int hor, int mode) { //свапаем кубики соотв
     smallCube fouth = bricks[2][hor][0];
     if (mode == -1) {
         for (int i = 0; i < 6; i++) {
-            bricks[0][hor][2].sides[i] = start.sides[i];
-            bricks[2][hor][2].sides[i] = second.sides[i];
-            bricks[2][hor][0].sides[i] = third.sides[i];
-            bricks[0][hor][0].sides[i] = fouth.sides[i];
+            bricks[0][hor][2].SetSide(i, start.Side(i));
+            bricks[2][hor][2].SetSide(i, second.Side(i));
+            bricks[2][hor][0].SetSide(i, third.Side(i));
+            bricks[0][hor][0].SetSide(i, fouth.Side(i));
         }
     }
     else {
         for (int i = 0; i < 6; i++) {
-            bricks[2][hor][0].sides[i] = start.sides[i];
-            bricks[2][hor][2].sides[i] = fouth.sides[i];
-            bricks[0][hor][0].sides[i] = second.sides[i];
-            bricks[0][hor][2].sides[i] = third.sides[i];
+            bricks[2][hor][0].SetSide(i,start.Side(i));
+            bricks[2][hor][2].SetSide(i,fouth.Side(i));
+            bricks[0][hor][0].SetSide(i,second.Side(i));
+            bricks[0][hor][2].SetSide(i,third.Side(i));
         }
     }
     start = bricks[1][hor][0];
@@ -132,18 +119,18 @@ void Cube::turnHor(int hor, int mode) { //свапаем кубики соотв
     fouth = bricks[2][hor][1];
     if (mode == -1) {
         for (int i = 0; i < 6; i++) {
-            bricks[0][hor][1].sides[i] = start.sides[i];
-            bricks[1][hor][2].sides[i] = second.sides[i];
-            bricks[2][hor][1].sides[i] = third.sides[i];
-            bricks[1][hor][0].sides[i] = fouth.sides[i];
+            bricks[0][hor][1].SetSide(i,start.Side(i));
+            bricks[1][hor][2].SetSide(i,second.Side(i));
+            bricks[2][hor][1].SetSide(i,third.Side(i));
+            bricks[1][hor][0].SetSide(i,fouth.Side(i));
         }
     }
     else {
         for (int i = 0; i < 6; i++) {
-            bricks[2][hor][1].sides[i] = start.sides[i];
-            bricks[1][hor][0].sides[i] = second.sides[i];
-            bricks[0][hor][1].sides[i] = third.sides[i];
-            bricks[1][hor][2].sides[i] = fouth.sides[i];
+            bricks[2][hor][1].SetSide(i,start.Side(i));
+            bricks[1][hor][0].SetSide(i,second.Side(i));
+            bricks[0][hor][1].SetSide(i,third.Side(i));
+            bricks[1][hor][2].SetSide(i,fouth.Side(i));
         }
     }
 }
@@ -167,18 +154,18 @@ void Cube::turnThrough(int ver, int mode) {
     smallCube fouth = bricks[0][2][ver];
     if (mode == -1) {
         for (int i = 0; i < 6; i++) {
-            bricks[2][0][ver].sides[i] = start.sides[i];
-            bricks[2][2][ver].sides[i] = second.sides[i];
-            bricks[0][2][ver].sides[i] = third.sides[i];
-            bricks[0][0][ver].sides[i] = fouth.sides[i];
+            bricks[2][0][ver].SetSide(i,start.Side(i));
+            bricks[2][2][ver].SetSide(i,second.Side(i));
+            bricks[0][2][ver].SetSide(i,third.Side(i));
+            bricks[0][0][ver].SetSide(i,fouth.Side(i));
         }
     }
     else {
         for (int i = 0; i < 6; i++) {
-            bricks[0][2][ver].sides[i] = start.sides[i];
-            bricks[2][2][ver].sides[i] = fouth.sides[i];
-            bricks[2][0][ver].sides[i] = third.sides[i];
-            bricks[0][0][ver].sides[i] = second.sides[i];
+            bricks[0][2][ver].SetSide(i,start.Side(i));
+            bricks[2][2][ver].SetSide(i,fouth.Side(i));
+            bricks[2][0][ver].SetSide(i,third.Side(i));
+            bricks[0][0][ver].SetSide(i,second.Side(i));
         }
     }
     start = bricks[0][1][ver];
@@ -187,18 +174,18 @@ void Cube::turnThrough(int ver, int mode) {
     fouth = bricks[1][0][ver];
     if (mode == -1) {
         for (int i = 0; i < 6; i++) {
-            bricks[2][1][ver].sides[i] = fouth.sides[i];
-            bricks[1][2][ver].sides[i] = third.sides[i];
-            bricks[0][1][ver].sides[i] = second.sides[i];
-            bricks[1][0][ver].sides[i] = start.sides[i];
+            bricks[2][1][ver].SetSide(i,fouth.Side(i));
+            bricks[1][2][ver].SetSide(i,third.Side(i));
+            bricks[0][1][ver].SetSide(i,second.Side(i));
+            bricks[1][0][ver].SetSide(i,start.Side(i));
         }
     }
     else {
         for (int i = 0; i < 6; i++) {
-            bricks[1][2][ver].sides[i] = start.sides[i];
-            bricks[2][1][ver].sides[i] = second.sides[i];
-            bricks[1][0][ver].sides[i] = third.sides[i];
-            bricks[0][1][ver].sides[i] = fouth.sides[i];
+            bricks[1][2][ver].SetSide(i,start.Side(i));
+            bricks[2][1][ver].SetSide(i,second.Side(i));
+            bricks[1][0][ver].SetSide(i,third.Side(i));
+            bricks[0][1][ver].SetSide(i,fouth.Side(i));
         }
     }
 }
@@ -227,4 +214,20 @@ void Cube::shuffle() {
         std::putc(mode+98,save);
     }
     std::fclose(save);
+}
+
+
+void Cube::SetSize(float size) {
+    this->size = size;
+    for (int x = 0; x < 3; x++) {
+        for (int y = 0; y < 3; y++) {
+            for (int z = 0; z < 3; z++) {
+                bricks[x][y][z].Init(size);
+            }
+        }
+    }
+}
+
+float Cube::GetSize() { //useless
+    return size;
 }
