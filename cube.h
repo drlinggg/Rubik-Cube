@@ -19,8 +19,8 @@ public:
     void turnVer(int ver, int mode);
     void SetSize(float size);
     float GetSize();
-    void SetDelta(float d);
-    float GetDelta();
+    void shuffle();
+    void solve();
 
     void Draw(std::vector<Shader*> shaders, glm::mat4 MVP);
     void Init();

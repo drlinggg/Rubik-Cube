@@ -4,7 +4,7 @@
 
 #include "cube.h"
 
-void Cube::SetSize(float size) { //fix it, no connect with small bricks
+void Cube::SetSize(float size) {
     this->size = size;
     for (int x = 0; x < 3; x++) {
         for (int y = 0; y < 3; y++) {
@@ -146,4 +146,25 @@ void Cube::turnHor(int hor, int mode) { //свапаем кубики соотв
             bricks[1][hor][2].sides[i] = fouth.sides[i];
         }
     }
+}
+
+void Cube::shuffle() {
+    int countOperations = rand() % 1000;
+    FILE* save = fopen("../input.txt", "w");
+    char way, id, mode;
+    for (int i = 0; i < countOperations; i++) {
+        way = rand()%2;
+        id = rand()%3;
+        mode = rand()%2-1;
+        if (way) {
+            turnHor(id, mode);
+        }
+        else {
+            turnVer(id, mode);
+        }
+        std::putc(way+97,save);
+        std::putc(id+97,save);
+        std::putc(mode+98,save);
+    }
+    std::fclose(save);
 }

@@ -16,7 +16,6 @@ public:
     GLFWwindow* window;
     std::vector<Shader*> shaders;
     int init();
-    //void intermix();
     //void load();
     //void save();
     void drawScene(float x, float y, float z);
