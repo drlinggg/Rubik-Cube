@@ -27,8 +27,12 @@ void Cube::Init() { //устанавливаем центры кубиков о�
             }
         }
     }
+    for (int pos = 0; pos < 54; pos++) {
+        colorSides[pos] = pos / 9;
+    }
 }
 
+//front left back right bottom up
 void Cube::turnVer(int ver, int mode) { //свапаем кубики соответствующие после их поворотов вокруг оси
     for (int y = 0; y < 3; y++) {
         for (int z = 0; z < 3; z++) {
@@ -189,33 +193,6 @@ void Cube::turnThrough(int ver, int mode) {
         }
     }
 }
-
-void Cube::shuffle() {
-    int countOperations = rand() % 1000;
-    FILE* save = fopen("../input.txt", "w");
-    char way, id, mode;
-    for (int i = 0; i < countOperations; i++) {
-        way = rand()%3;
-        id = rand()%3;
-        mode = rand()%2-1;
-        if (way == 0) {
-            turnHor(id, mode);
-        }
-        else if (way == 1){
-            turnVer(id, mode);
-        }
-        else {
-            turnThrough(id, mode);
-        }
-        glLoadIdentity();
-        glFinish();
-        std::putc(way+97,save);
-        std::putc(id+97,save);
-        std::putc(mode+98,save);
-    }
-    std::fclose(save);
-}
-
 
 void Cube::SetSize(float size) {
     this->size = size;

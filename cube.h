@@ -13,12 +13,7 @@ private:
     float Y;
     float size;
     smallCube bricks[3][3][3];
-    void al1(); // нижний крест
-    void al2(); // нижний полный часть среднего
-    void al3(); // два нижних слоя
-    void al4(); // верхний крест
-    void al5(); // угловые верх на свои места
-    void al6(); // ориентация верхних угловых кубиков
+    char colorSides[54]; //front left back right bottom up
 
 public:
     void turnHor(int hor, int mode);
@@ -26,7 +21,6 @@ public:
     void turnThrough(int ver, int mode);
     void SetSize(float size);
     float GetSize();
-    void shuffle();
     bool is_correct();
     void solve();
     void Draw(std::vector<Shader*> shaders, glm::mat4 MVP);

@@ -11,8 +11,8 @@ private:
     GLfloat x = 1;
     GLfloat y = 1;
     GLfloat z = 1;
-    GLfloat yaw = 0.0f;
-    GLfloat pitch = -90.0f;
+    GLfloat angleHor;
+    GLfloat angleVer;
     GLfloat radius = 2;
     GLFWwindow* window;
     std::vector<Shader*> shaders;
@@ -20,6 +20,7 @@ private:
     void reCalc();
 public:
     GLFWwindow* getWindow();
+    void shuffle();
     void processInput();
     int init();
     void load();

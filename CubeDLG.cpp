@@ -38,6 +38,8 @@ int CubeDlg::init() {
     shaders[4] = load_shader("../main.glslv", "../bottom.glslf");
     shaders[5] = load_shader("../main.glslv", "../up.glslf");
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
+    angleHor = 0;
+    angleVer = 0;
     return 0;
 }
 
@@ -62,9 +64,9 @@ void CubeDlg::drawScene() {
 
 void CubeDlg::reCalc() {
     glm::vec3 direction;
-    direction.x = radius * sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-    direction.y = radius * sin(glm::radians(pitch));
-    direction.z = radius * -cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    direction.x = radius * sin(angleHor);
+    direction.y = radius * cos(angleVer);
+    direction.z = radius * cos(angleHor);
     glm::normalize(direction);
     x = direction[0];
     y = direction[1];
@@ -74,20 +76,27 @@ void CubeDlg::reCalc() {
 void CubeDlg::processInput() {
     if (glfwGetKey(window, GLFW_KEY_9)) {
         if (!glfwGetKey(window, GLFW_KEY_9)) {
-            br.shuffle();
+            shuffle();
         }
     }
     //test
     if (glfwGetKey(window, GLFW_KEY_1)) {
-        // Вычисление новых координат камеры идиотия с питчем и явом (если честно я еще не разобрался со всем этим и
-        // просто придал рандомные значения, вроде нормально все работает
         reCalc();
-        pitch -= 0.4;
-        yaw += 0.4;
-        (pitch >= 90 ? pitch = -90.0f : true);
-        (yaw >= 180 ? yaw = 0.0f : true);
+        angleHor+=0.01;
+    }
+    if (glfwGetKey(window, GLFW_KEY_2)) {
+        reCalc();
+        angleVer+=0.01;
     }
 
+    if (glfwGetKey(window, GLFW_KEY_EQUAL)) {
+        reCalc();
+        radius+=0.01;
+    }
+    if (glfwGetKey(window, GLFW_KEY_MINUS)) {
+        reCalc();
+        radius-=0.01;
+    }ка
     if (glfwGetKey(window, GLFW_KEY_A)) {
         if (!glfwGetKey(window, GLFW_KEY_A)) {
             br.turnVer(0, -1);
@@ -159,6 +168,32 @@ void CubeDlg::processInput() {
         }
     }
 }
+
+void CubeDlg::shuffle() {
+    int countOperations = rand() % 1000;
+    //FILE* save = fopen("../input.txt", "w");
+    char way, id, mode;
+    for (int i = 0; i < countOperations; i++) {
+        way = rand()%3;
+        id = rand()%3;
+        mode = rand()%2-1;
+        if (way == 0) {
+            br.turnHor(id, mode);
+        }
+        else if (way == 1){
+            br.turnVer(id, mode);
+        }
+        else {
+            br.turnThrough(id, mode);
+        }
+        drawScene();
+        //std::putc(way+97,save);
+        //std::putc(id+97,save);
+        //std::putc(mode+98,save);
+    }
+    //std::fclose(save);
+}
+
 
 GLFWwindow* CubeDlg::getWindow() {
     return window;
