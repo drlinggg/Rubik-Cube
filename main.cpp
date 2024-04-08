@@ -9,6 +9,6 @@ int main() {
         glfwPollEvents();
     }
     while( glfwGetKey(Screen.getWindow(), GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
-                 glfwWindowShouldClose(Screen.getWindow()) == 0 );
+           glfwWindowShouldClose(Screen.getWindow()) == 0 );
     glfwTerminate();
 }

@@ -28,7 +28,7 @@ void Cube::Init() { //устанавливаем центры кубиков о�
         }
     }
     //for (int pos = 0; pos < 54; pos++) {
-        //colorSides[pos] = pos / 9;
+    //colorSides[pos] = pos / 9;
     //}
 }
 
@@ -210,7 +210,7 @@ float Cube::GetSize() { //useless
 
 void Cube::solve() {
     assembling_cross();//Сборка неправильного креста
-    assembling_white_side();//Сборка белой стороны
+    assembling_bottom_side();//Сборка белой стороны
     second_layer();//Сборка второго слоя
     assembling_second_cross(); //сборка 2 креста
     assembling_true_angle();//Поставление правильных углов
@@ -219,12 +219,9 @@ void Cube::solve() {
 }
 
 void Cube::assembling_cross() {
-    while (!check_nn_cross()) {
-        //
-    }
 }
 
-void Cube::assembling_white_side() {
+void Cube::assembling_bottom_side() {
 
 }
 

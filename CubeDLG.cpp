@@ -80,93 +80,30 @@ void CubeDlg::processInput() {
         }
     }
     //test
-    if (glfwGetKey(window, GLFW_KEY_1)) {
+    if (glfwGetKey(window, GLFW_KEY_W)) {
+        reCalc();
+        if (angleVer < 0) {
+            angleVer += 0.01;
+        }
+        std::cout << angleVer << '\n';
+    }
+    if (glfwGetKey(window, GLFW_KEY_S)) {
+        reCalc();
+        if (angleVer > -2.99) {
+            angleVer -= 0.01;
+        }
+        std::cout << angleVer << '\n';
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_A)) {
+        reCalc();
+        angleHor-=0.01;
+    }
+    if (glfwGetKey(window, GLFW_KEY_D)) {
         reCalc();
         angleHor+=0.01;
     }
-    if (glfwGetKey(window, GLFW_KEY_2)) {
-        reCalc();
-        angleVer+=0.01;
-    }
 
-    if (glfwGetKey(window, GLFW_KEY_EQUAL)) {
-        reCalc();
-        radius+=0.01;
-    }
-    if (glfwGetKey(window, GLFW_KEY_MINUS)) {
-        reCalc();
-        radius-=0.01;
-    }
-    if (glfwGetKey(window, GLFW_KEY_A)) {
-        if (!glfwGetKey(window, GLFW_KEY_A)) {
-            br.turnVer(0, -1);
-        }
-    }
-    if (glfwGetKey(window, GLFW_KEY_S)) {
-        if (!glfwGetKey(window, GLFW_KEY_S)) {
-            br.turnVer(1, -1);
-        }
-    }
-    if (glfwGetKey(window, GLFW_KEY_D)) {
-        if (!glfwGetKey(window, GLFW_KEY_D)) {
-            br.turnVer(2, -1);
-        }
-    }
-    if (glfwGetKey(window, GLFW_KEY_Q)) {
-        if (!glfwGetKey(window, GLFW_KEY_Q)) {
-            br.turnVer(0, 1);
-        }
-    }
-    if (glfwGetKey(window, GLFW_KEY_W)) {
-        if (!glfwGetKey(window, GLFW_KEY_W)) {
-            br.turnVer(1, 1);
-        }
-    }
-    if (glfwGetKey(window, GLFW_KEY_E)) {
-        if (!glfwGetKey(window, GLFW_KEY_E)) {
-            br.turnVer(2, 1);
-        }
-    }
-    if (glfwGetKey(window, GLFW_KEY_R)) {
-        if (!glfwGetKey(window, GLFW_KEY_R)) {
-            br.turnHor(0, -1);
-        }
-    }
-    if (glfwGetKey(window, GLFW_KEY_T)) {
-        if (!glfwGetKey(window, GLFW_KEY_T)) {
-            br.turnHor(1, -1);
-        }
-    }
-    if (glfwGetKey(window, GLFW_KEY_Y)) {
-        if (!glfwGetKey(window, GLFW_KEY_Y)) {
-            br.turnHor(2, -1);
-        }
-    }
-    if (glfwGetKey(window, GLFW_KEY_F)) {
-        if (!glfwGetKey(window, GLFW_KEY_F)) {
-            br.turnHor(0, 1);
-        }
-    }
-    if (glfwGetKey(window, GLFW_KEY_G)) {
-        if (!glfwGetKey(window, GLFW_KEY_G)) {
-            br.turnHor(1, 1);
-        }
-    }
-    if (glfwGetKey(window, GLFW_KEY_H)) {
-        if (!glfwGetKey(window, GLFW_KEY_H)) {
-            br.turnHor(2, 1);
-        }
-    }
-    if (glfwGetKey(window, GLFW_KEY_U)) {
-        if (!glfwGetKey(window, GLFW_KEY_U)) {
-            br.turnThrough(2, -1);
-        }
-    }
-    if (glfwGetKey(window, GLFW_KEY_J)) {
-        if (!glfwGetKey(window, GLFW_KEY_J)) {
-            br.turnThrough(2, 1);
-        }
-    }
 }
 
 void CubeDlg::shuffle() {
@@ -198,4 +135,3 @@ void CubeDlg::shuffle() {
 GLFWwindow* CubeDlg::getWindow() {
     return window;
 }
-
