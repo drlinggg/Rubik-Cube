@@ -3,6 +3,7 @@
 //
 
 #include "cubeDLG.h"
+#include "Windows.h"
 using namespace glm;
 
 int CubeDlg::init() {
@@ -76,16 +77,15 @@ void CubeDlg::reCalc() {
 void CubeDlg::processInput() {
     if (glfwGetKey(window, GLFW_KEY_9)) {
         if (!glfwGetKey(window, GLFW_KEY_9)) {
-            shuffle();
+            shuffle(30);
         }
     }
     if (glfwGetKey(window, GLFW_KEY_0)) {
         if (!glfwGetKey(window, GLFW_KEY_0)) {
-            br.solve();
+            solve(10);
         }
     }
 
-    //test
     if (glfwGetKey(window, GLFW_KEY_W)) {
         reCalc();
         if (angleVer < 0) {
@@ -112,8 +112,7 @@ void CubeDlg::processInput() {
 
 }
 
-void CubeDlg::shuffle() {
-    int countOperations = rand() % 500;
+void CubeDlg::shuffle(int countOperations) {
     //FILE* save = fopen("../input.txt", "w");
     char way, id, mode;
     for (int i = 0; i < countOperations; i++) {
@@ -140,4 +139,291 @@ void CubeDlg::shuffle() {
 
 GLFWwindow* CubeDlg::getWindow() {
     return window;
+}
+
+void CubeDlg::solve(int miliSeconds) {
+    assembling_cross(miliSeconds);//Сборка неправильного креста
+    F2L(miliSeconds);
+    OLL(miliSeconds);
+    PLL(miliSeconds);
+}
+
+void CubeDlg::assembling_cross(int miliSeconds) { //front left back right bottom up
+    for (int k = 0; k < 15; k++) {
+        if (br.bricks[1][2][0].Side(0) != 0 && br.bricks[1][2][0].Side(5) == 5 ||
+            br.bricks[0][2][1].Side(1) != 1 && br.bricks[0][2][1].Side(5) == 5 ||
+            br.bricks[1][2][2].Side(2) != 2 && br.bricks[1][2][2].Side(5) == 5 ||
+            br.bricks[2][2][1].Side(3) != 3 && br.bricks[2][2][1].Side(5) == 5) {
+            while (true) {
+                br.turnHor(2, -1);
+                if (br.bricks[1][2][0].Side(0) == 0 && br.bricks[1][2][0].Side(5) == 5 ||
+                    br.bricks[0][2][1].Side(1) == 1 && br.bricks[0][2][1].Side(5) == 5 ||
+                    br.bricks[1][2][2].Side(2) == 2 && br.bricks[1][2][2].Side(5) == 5 ||
+                    br.bricks[2][2][1].Side(3) == 3 && br.bricks[2][2][1].Side(5) == 5) {
+                    break;
+                }
+            }
+        }
+        //    frontSide;
+        if (br.bricks[0][1][0].Side(0) == 5) {
+            if (br.bricks[0][2][1].Side(5) == 5) {
+                br.turnHor(2, -1);
+                br.turnVer(0, -1);
+                br.turnHor(2, 1);
+            }
+            else {
+                br.turnVer(0, -1);
+            }
+        }
+        ;
+
+        if (br.bricks[2][1][0].Side(0) == 5) {
+            if (br.bricks[2][2][1].Side(5) == 5) {
+                br.turnHor(2, 1);
+                br.turnVer(2, -1);
+                br.turnHor(2, -1);
+            }
+            else {
+                br.turnVer(2, -1);
+            }
+        }
+        ;
+        if (br.bricks[1][2][0].Side(0) == 5) {
+            if (br.bricks[0][2][1].Side(5) != 5) {
+                br.turnThrough(0, 1);
+                br.turnVer(2, -1);
+            }
+            else {
+                br.turnThrough(0, -1);
+                br.turnVer(0, -1);
+            }
+        }
+        ;
+        if (br.bricks[1][0][0].Side(0) == 5) {
+            if (br.bricks[0][2][1].Side(5) != 5) {
+                br.turnThrough(0, 1);
+                br.turnVer(0, -1);
+            }
+            else {
+                br.turnThrough(0, -1);
+                br.turnVer(2, -1);
+            }
+        }
+        ;
+        //backSide;
+        if (br.bricks[0][1][2].Side(2) == 5) {
+            if (br.bricks[0][2][1].Side(5) == 5) {
+                br.turnHor(2, -1);
+                br.turnVer(0, 1);
+                br.turnHor(2, 1);
+            }
+            else {
+                br.turnVer(0, 1);
+            }
+        }
+        ;
+        if (br.bricks[2][1][2].Side(2) == 5) {
+            if (br.bricks[2][2][1].Side(5) == 5) {
+                br.turnHor(2, -1);
+                br.turnVer(2, 1);
+                br.turnHor(2, 1);
+            }
+            else {
+                br.turnVer(2, 1);
+            }
+        }
+        ;
+        if (br.bricks[1][2][2].Side(2) == 5) {
+            if (br.bricks[0][2][1].Side(5) != 5) {
+                br.turnThrough(2, -1);
+                br.turnVer(0, 1);
+            }
+            else {
+                br.turnThrough(2, 1);
+                br.turnVer(2, 1);
+            }
+        }
+        ;
+        if (br.bricks[1][0][2].Side(2) == 5) {
+            if (br.bricks[0][2][1].Side(5) != 5) {
+                br.turnThrough(2, -1);
+                br.turnVer(0, 1);
+            }
+            else {
+                br.turnThrough(2, 1);
+                br.turnVer(2, 1);
+            }
+        }
+        ;
+//        left  нижний слой ошибка
+        if (br.bricks[0][1][0].Side(1) == 5) {
+            if (br.bricks[1][2][0].Side(5) == 5) {
+                br.turnHor(2, -1);
+                br.turnThrough(0, 1);
+                br.turnHor(2, 1);
+            }
+            else {
+                br.turnThrough(0, 1);
+            }
+        }
+        ;
+        if (br.bricks[0][1][2].Side(1) == 5) {
+            if (br.bricks[1][2][2].Side(5) == 5) {
+                br.turnHor(2, 1);
+                br.turnThrough(2, 1);
+                br.turnHor(2, -1);
+            }
+            else {
+                br.turnThrough(2, 1);
+            }
+        }
+        ;
+        if (br.bricks[0][2][1].Side(1) == 5) {
+            if (br.bricks[1][2][2].Side(5) == 5) {
+                br.turnVer(0, 1);
+                br.turnThrough(2, 1);
+            }
+            else {
+                br.turnVer(0, -1);
+                br.turnThrough(0, 1);
+            }
+        }
+        ;
+        if (br.bricks[0][1][0].Side(1) == 5) {
+            if (br.bricks[1][2][0].Side(5) != 5) {
+                br.turnVer(0, -1);
+                br.turnThrough(0,1);
+            }
+            else if (br.bricks[1][2][2].Side(5) != 5){
+                br.turnVer(0,1);
+                br.turnThrough(2, 1);
+            }
+            else {
+                br.turnHor(0,1);
+
+            }
+        }
+        ;
+        //right
+        if (br.bricks[2][1][0].Side(3) == 5) {
+            if (br.bricks[1][2][0].Side(5) == 5) {
+                br.turnHor(2, -1);
+                br.turnThrough(0, 1);
+                br.turnHor(2, 1);
+            }
+            else{
+                br.turnThrough(0, -1);
+            }
+        }
+        ;
+        if (br.bricks[2][1][2].Side(3) == 5) {
+            if (br.bricks[1][2][2].Side(5) == 5) {
+                br.turnHor(2, 1);
+                br.turnThrough(2, 1);
+                br.turnHor(2, -1);
+            }
+            else {
+                br.turnThrough(2, 1);
+            }
+        }
+        ;
+        if (br.bricks[2][2][1].Side(3) == 5) {
+            if (br.bricks[1][2][2].Side(5) == 5) {
+                br.turnVer(0,1);
+                br.turnThrough(0,-1);
+            }
+            else {
+                br.turnVer(0, -1);
+                br.turnThrough(2, -1);
+            }
+        }
+        ;
+        if (br.bricks[2][0][1].Side(3) == 5) {
+            if (br.bricks[1][2][0].Side(5) != 5) {
+                br.turnVer(0, -1);
+                br.turnThrough(0,-1);
+            }
+            else if (br.bricks[1][2][2].Side(5) != 5){
+                br.turnVer(0,1);
+                br.turnThrough(2, -1);
+            }
+            else {
+                br.turnHor(0,1);
+
+            }
+        }
+        ;
+        if (br.bricks[1][0][0].Side(4) == 5) {
+            if (br.bricks[1][2][0].Side(5) != 5) {
+                br.turnThrough(0, 1);
+                br.turnThrough(0, 1);
+            }
+            else {
+                br.turnThrough(0,1);
+                br.turnHor(1,1);
+            }
+        }
+        ;
+        if (br.bricks[0][0][1].Side(4) == 5) {
+            if (br.bricks[0][2][1].Side(5) != 5) {
+                br.turnVer(0, 1);
+                br.turnVer(0, 1);
+            }
+            else {
+                br.turnVer(0, 1);
+                br.turnHor(1,1);
+            }
+        }
+        ;
+        if (br.bricks[1][0][2].Side(4) == 5) {
+            if (br.bricks[1][2][2].Side(5) != 5) {
+                br.turnThrough(2, 1);
+                br.turnThrough(2, 1);
+            }
+            else {
+                br.turnVer(0, 1);
+                br.turnHor(1,1);
+            }
+        }
+        ;
+        if (br.bricks[2][0][1].Side(4) == 5) {
+            if (br.bricks[2][2][1].Side(5) != 5){
+                br.turnVer(2,1);
+                br.turnVer(2,1);
+            }
+            else {
+                br.turnVer(2,1);
+                br.turnHor(1,1);
+            }
+        }
+        br.turnHor(0,-1);
+        Sleep(miliSeconds);
+        drawScene();
+    }
+}
+
+
+void CubeDlg::F2L(int miliSeconds) {
+
+}
+
+void CubeDlg::OLL(int miliSeconds) {
+
+}
+
+void CubeDlg::PLL(int miliSeconds) {
+
+}
+
+
+bool CubeDlg::check_nn_cross() { //doesnt work
+    int check = 0;
+    (br.bricks[0][0][1].Side(5) == 5 ? check++ : NULL);
+    (br.bricks[1][0][0].Side(5) == 5 ? check++ : NULL);
+    (br.bricks[1][0][2].Side(5) == 5 ? check++ : NULL);
+    (br.bricks[2][0][1].Side(5) == 5 ? check++ : NULL);
+    if (check == 4) {
+        return true;
+    }
+    return false;
 }

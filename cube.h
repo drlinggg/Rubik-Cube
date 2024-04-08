@@ -12,12 +12,6 @@ private:
     float Z;
     float Y;
     float size;
-    smallCube bricks[3][3][3];
-    bool check_nn_cross();
-    void assembling_cross();//Сборка неправильного креста
-    void F2L();
-    void OLL();
-    void PLL();
     //char colorSides[54]; //front left back right bottom up
 
 public:
@@ -27,9 +21,10 @@ public:
     void SetSize(float size);
     float GetSize();
     bool is_correct();
-    void solve();
     void Draw(std::vector<Shader*> shaders, glm::mat4 MVP);
     void Init();
+
+    smallCube bricks[3][3][3];
 };
 
 #endif //RUBIK_CUBE_CUBE_H

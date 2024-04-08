@@ -1,7 +1,7 @@
 //
 // Created by Andrei Banakh on 04.04.2024.
 //
-#include "cube.h"
+#include "Cube.h"
 
 #ifndef LRCUBE_CUBEDLG_H
 #define LRCUBE_CUBEDLG_H
@@ -18,9 +18,15 @@ private:
     std::vector<Shader*> shaders;
     Cube br; //экземпляр куба
     void reCalc();
+    bool check_nn_cross();
+    void assembling_cross(int miliSeconds);//Сборка неправильного креста
+    void F2L(int miliSeconds);
+    void OLL(int miliSeconds);
+    void PLL(int miliSeconds);
+    void solve(int speedMilisec);
 public:
     GLFWwindow* getWindow();
-    void shuffle();
+    void shuffle(int countOperations);
     void processInput();
     int init();
     void load();
