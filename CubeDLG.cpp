@@ -96,7 +96,7 @@ void CubeDlg::processInput() {
     if (glfwGetKey(window, GLFW_KEY_MINUS)) {
         reCalc();
         radius-=0.01;
-    }ка
+    }
     if (glfwGetKey(window, GLFW_KEY_A)) {
         if (!glfwGetKey(window, GLFW_KEY_A)) {
             br.turnVer(0, -1);
@@ -170,20 +170,20 @@ void CubeDlg::processInput() {
 }
 
 void CubeDlg::shuffle() {
-    int countOperations = rand() % 1000;
+    int countOperations = rand() % 500;
     //FILE* save = fopen("../input.txt", "w");
     char way, id, mode;
     for (int i = 0; i < countOperations; i++) {
         way = rand()%3;
         id = rand()%3;
         mode = rand()%2-1;
-        if (way == 0) {
+        if (way == 0 && id != 1) {
             br.turnHor(id, mode);
         }
-        else if (way == 1){
+        else if (way == 1 && id != 1){
             br.turnVer(id, mode);
         }
-        else {
+        else if (way == 2 && id != 1) {
             br.turnThrough(id, mode);
         }
         drawScene();

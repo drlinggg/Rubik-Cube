@@ -27,12 +27,11 @@ void Cube::Init() { //устанавливаем центры кубиков о�
             }
         }
     }
-    for (int pos = 0; pos < 54; pos++) {
-        colorSides[pos] = pos / 9;
-    }
+    //for (int pos = 0; pos < 54; pos++) {
+        //colorSides[pos] = pos / 9;
+    //}
 }
 
-//front left back right bottom up
 void Cube::turnVer(int ver, int mode) { //свапаем кубики соответствующие после их поворотов вокруг оси
     for (int y = 0; y < 3; y++) {
         for (int z = 0; z < 3; z++) {
@@ -207,4 +206,56 @@ void Cube::SetSize(float size) {
 
 float Cube::GetSize() { //useless
     return size;
+}
+
+void Cube::solve() {
+    assembling_cross();//Сборка неправильного креста
+    assembling_white_side();//Сборка белой стороны
+    second_layer();//Сборка второго слоя
+    assembling_second_cross(); //сборка 2 креста
+    assembling_true_angle();//Поставление правильных углов
+    turning_corners();//Переворачиваем углы
+    final();//Постановка центров
+}
+
+void Cube::assembling_cross() {
+    while (!check_nn_cross()) {
+        //
+    }
+}
+
+void Cube::assembling_white_side() {
+
+}
+
+void Cube::second_layer() {
+
+}
+
+void Cube::assembling_second_cross() {
+
+}
+
+void Cube::assembling_true_angle() {
+
+}
+
+void Cube::turning_corners() {
+
+}
+
+void Cube::final() {
+
+}
+
+bool Cube::check_nn_cross() {
+    int check = 0;
+    (bricks[0][0][1].Side(0) == 0 ? check++ : NULL);
+    (bricks[1][0][0].Side(0) == 0 ? check++ : NULL);
+    (bricks[1][0][2].Side(0) == 0 ? check++ : NULL);
+    (bricks[2][0][1].Side(0) == 0 ? check++ : NULL);
+    if (check == 4) {
+        return true;
+    }
+    return false;
 }
