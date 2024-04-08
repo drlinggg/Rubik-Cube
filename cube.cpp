@@ -32,7 +32,7 @@ void Cube::Init() { //устанавливаем центры кубиков о�
     //}
 }
 
-void Cube::turnVer(int ver, int mode) { //свапаем кубики соответствующие после их поворотов вокруг оси
+void Cube::turnVer(int ver, int mode) { //свапаем кубики соответствующие после их поворотов вокруг оси //-1 вверх лол
     for (int y = 0; y < 3; y++) {
         for (int z = 0; z < 3; z++) {
             if (mode == -1) {
@@ -210,47 +210,267 @@ float Cube::GetSize() { //useless
 
 void Cube::solve() {
     assembling_cross();//Сборка неправильного креста
-    assembling_bottom_side();//Сборка белой стороны
-    second_layer();//Сборка второго слоя
-    assembling_second_cross(); //сборка 2 креста
-    assembling_true_angle();//Поставление правильных углов
-    turning_corners();//Переворачиваем углы
-    final();//Постановка центров
+    F2L();
+    OLL();
+    PLL();
 }
 
-void Cube::assembling_cross() {
+void Cube::assembling_cross() { //front left back right bottom up
+    for (int k = 0; k < 40; k++) {
+        if (bricks[1][2][0].Side(0) != 0 && bricks[1][2][0].Side(5) == 5 ||
+            bricks[0][2][1].Side(1) != 1 && bricks[0][2][1].Side(5) == 5 ||
+            bricks[1][2][2].Side(2) != 2 && bricks[1][2][2].Side(5) == 5 ||
+            bricks[2][2][1].Side(3) != 3 && bricks[2][2][1].Side(5) == 5) {
+            while (true) {
+                turnHor(2, -1);
+                if (bricks[1][2][0].Side(0) == 0 && bricks[1][2][0].Side(5) == 5 ||
+                    bricks[0][2][1].Side(1) == 1 && bricks[0][2][1].Side(5) == 5 ||
+                    bricks[1][2][2].Side(2) == 2 && bricks[1][2][2].Side(5) == 5 ||
+                    bricks[2][2][1].Side(3) == 3 && bricks[2][2][1].Side(5) == 5) {
+                    break;
+                }
+            }
+        }
+        //    frontSide;
+        if (bricks[0][1][0].Side(0) == 5) {
+            if (bricks[0][2][1].Side(5) == 5) {
+                turnHor(2, -1);
+                turnVer(0, -1);
+                turnHor(2, 1);
+            }
+            else {
+                turnVer(0, -1);
+            }
+        }
+
+        if (bricks[2][1][0].Side(0) == 5) {
+            if (bricks[2][2][1].Side(5) == 5) {
+                turnHor(2, 1);
+                turnVer(2, -1);
+                turnHor(2, -1);
+            }
+            else {
+                turnVer(2, -1);
+            }
+        }
+        if (bricks[1][2][0].Side(0) == 5) {
+            if (bricks[0][2][1].Side(5) != 5) {
+                turnThrough(0, 1);
+                turnVer(2, -1);
+            }
+            else {
+                turnThrough(0, -1);
+                turnVer(0, -1);
+            }
+        }
+        if (bricks[1][0][0].Side(0) == 5) {
+            if (bricks[0][2][1].Side(5) != 5) {
+                turnThrough(0, 1);
+                turnVer(0, -1);
+            }
+            else {
+                turnThrough(0, -1);
+                turnVer(2, -1);
+            }
+        }
+        //backSide;
+        if (bricks[0][1][2].Side(2) == 5) {
+            if (bricks[0][2][1].Side(5) == 5) {
+                turnHor(2, -1);
+                turnVer(0, 1);
+                turnHor(2, 1);
+            }
+            else {
+                turnVer(0, 1);
+            }
+        }
+
+        if (bricks[2][1][2].Side(2) == 5) {
+            if (bricks[2][2][1].Side(5) == 5) {
+                turnHor(2, -1);
+                turnVer(2, 1);
+                turnHor(2, 1);
+            }
+            else {
+                turnVer(2, 1);
+            }
+        }
+        if (bricks[1][2][2].Side(2) == 5) {
+            if (bricks[0][2][1].Side(5) != 5) {
+                turnThrough(2, -1);
+                turnVer(0, 1);
+            }
+            else {
+                turnThrough(2, 1);
+                turnVer(2, 1);
+            }
+        }
+        if (bricks[1][0][2].Side(2) == 5) {
+            if (bricks[0][2][1].Side(5) != 5) {
+                turnThrough(2, -1);
+                turnVer(0, 1);
+            }
+            else {
+                turnThrough(2, 1);
+                turnVer(2, 1);
+            }
+        }
+//        left  нижний слой ошибка
+        if (bricks[0][1][0].Side(1) == 5) {
+            if (bricks[1][2][0].Side(5) == 5) {
+                turnHor(2, -1);
+                turnThrough(0, 1);
+                turnHor(2, 1);
+            }
+            else {
+                turnThrough(0, 1);
+            }
+        }
+
+        if (bricks[0][1][2].Side(1) == 5) {
+            if (bricks[1][2][2].Side(5) == 5) {
+                turnHor(2, 1);
+                turnThrough(2, 1);
+                turnHor(2, -1);
+            }
+            else {
+                turnThrough(2, 1);
+            }
+        }
+        if (bricks[0][2][1].Side(1) == 5) {
+            if (bricks[1][2][2].Side(5) == 5) {
+                turnVer(0, 1);
+                turnThrough(2, 1);
+            }
+            else {
+                turnVer(0, -1);
+                turnThrough(0, 1);
+            }
+        }
+        if (bricks[0][1][0].Side(1) == 5) {
+            if (bricks[1][2][0].Side(5) != 5) {
+                turnVer(0, -1);
+                turnThrough(0,1);
+            }
+            else if (bricks[1][2][2].Side(5) != 5){
+                turnVer(0,1);
+                turnThrough(2, 1);
+            }
+            else {
+                turnHor(0,1);
+
+            }
+        }
+        //right
+        if (bricks[2][1][0].Side(3) == 5) {
+            if (bricks[1][2][0].Side(5) == 5) {
+                turnHor(2, -1);
+                turnThrough(0, 1);
+                turnHor(2, 1);
+            }
+            else {
+                turnThrough(0, 1);
+            }
+        }
+
+        if (bricks[2][1][2].Side(3) == 5) {
+            if (bricks[1][2][2].Side(5) == 5) {
+                turnHor(2, 1);
+                turnThrough(2, 1);
+                turnHor(2, -1);
+            }
+            else {
+                turnThrough(2, 1);
+            }
+        }
+        if (bricks[2][2][1].Side(3) == 5) {
+            if (bricks[1][2][2].Side(5) == 5) {
+                turnVer(0,1);
+                turnThrough(0,-1);
+            }
+            else {
+                turnVer(0, -1);
+                turnThrough(2, -1);
+            }
+        }
+        if (bricks[2][0][1].Side(3) == 5) {
+            if (bricks[1][2][0].Side(5) != 5) {
+                turnVer(0, -1);
+                turnThrough(0,-1);
+            }
+            else if (bricks[1][2][2].Side(5) != 5){
+                turnVer(0,1);
+                turnThrough(2, -1);
+            }
+            else {
+                turnHor(0,1);
+
+            }
+        }
+        if (bricks[1][0][0].Side(4) == 5) {
+            if (bricks[1][2][0].Side(5) != 5) {
+                turnThrough(0, 1);
+                turnThrough(0, 1);
+            }
+            else {
+                turnThrough(0,1);
+                turnHor(1,1);
+            }
+        }
+        if (bricks[0][0][1].Side(4) == 5) {
+            if (bricks[0][2][1].Side(5) != 5) {
+                turnVer(0, 1);
+                turnVer(0, 1);
+            }
+            else {
+                turnVer(0, 1);
+                turnHor(1,1);
+            }
+        }
+        if (bricks[1][0][2].Side(4) == 5) {
+            if (bricks[1][2][2].Side(5) != 5) {
+                turnThrough(2, 1);
+                turnThrough(2, 1);
+            }
+            else {
+                turnVer(0, 1);
+                turnHor(1,1);
+            }
+        }
+        if (bricks[2][0][1].Side(4) == 5) {
+            if (bricks[2][2][1].Side(5) != 5){
+                turnVer(2,1);
+                turnVer(2,1);
+            }
+            else {
+                turnVer(2,1);
+                turnHor(1,1);
+            }
+        }
+        turnHor(0,-1);
+    }
 }
 
-void Cube::assembling_bottom_side() {
+
+void Cube::F2L() {
 
 }
 
-void Cube::second_layer() {
+void Cube::OLL() {
 
 }
 
-void Cube::assembling_second_cross() {
+void Cube::PLL() {
 
 }
 
-void Cube::assembling_true_angle() {
-
-}
-
-void Cube::turning_corners() {
-
-}
-
-void Cube::final() {
-
-}
 
 bool Cube::check_nn_cross() {
     int check = 0;
-    (bricks[0][0][1].Side(0) == 0 ? check++ : NULL);
-    (bricks[1][0][0].Side(0) == 0 ? check++ : NULL);
-    (bricks[1][0][2].Side(0) == 0 ? check++ : NULL);
-    (bricks[2][0][1].Side(0) == 0 ? check++ : NULL);
+    (bricks[0][0][1].Side(5) == 5 ? check++ : NULL);
+    (bricks[1][0][0].Side(5) == 5 ? check++ : NULL);
+    (bricks[1][0][2].Side(5) == 5 ? check++ : NULL);
+    (bricks[2][0][1].Side(5) == 5 ? check++ : NULL);
     if (check == 4) {
         return true;
     }

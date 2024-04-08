@@ -15,12 +15,9 @@ private:
     smallCube bricks[3][3][3];
     bool check_nn_cross();
     void assembling_cross();//Сборка неправильного креста
-    void assembling_bottom_side(); // сборка стороны
-    void second_layer();//Сборка второго слоя
-    void assembling_second_cross(); //сборка 2 креста
-    void assembling_true_angle();//Поставление правильных углов
-    void turning_corners();//Переворачиваем углы
-    void final();//Постановка центров
+    void F2L();
+    void OLL();
+    void PLL();
     //char colorSides[54]; //front left back right bottom up
 
 public:

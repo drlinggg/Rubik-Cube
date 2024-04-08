@@ -79,6 +79,12 @@ void CubeDlg::processInput() {
             shuffle();
         }
     }
+    if (glfwGetKey(window, GLFW_KEY_0)) {
+        if (!glfwGetKey(window, GLFW_KEY_0)) {
+            br.solve();
+        }
+    }
+
     //test
     if (glfwGetKey(window, GLFW_KEY_W)) {
         reCalc();
