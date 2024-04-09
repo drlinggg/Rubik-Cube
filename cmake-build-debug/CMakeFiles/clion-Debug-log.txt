@@ -4,6 +4,6 @@ GLVND not supported. Try find OpenGL legacy
 -- Including Win32 support
 -- GLM: Version 1.0.0
 -- GLM: Build with C++ features auto detection
--- Configuring done (0.1s)
--- Generating done (0.0s)
+-- Configuring done (0.6s)
+-- Generating done (0.1s)
 -- Build files have been written to: C:/Users/User/Desktop/ucheba/c++ 2023-24/lrcube/cmake-build-debug

@@ -154,7 +154,7 @@ void smallCube::Draw(std::vector<Shader*>shaders, glm::mat4 MVP) {
 }
 
 void smallCube::Init(float size) {
-    const float a = 0.16f;
+    const float a = 0.155f;
     //test 0.05 game (a * size)
     faceLeftBottom[0] = GetX()-(a * size); faceLeftBottom[1] = GetY()-(a * size), faceLeftBottom[2] = GetZ()-(a * size); //прорезы между кубами
     faceRightBottom[0] = GetX()+(a * size), faceRightBottom[1] = GetY()-(a * size), faceRightBottom[2] = GetZ()-(a * size);

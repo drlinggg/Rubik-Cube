@@ -86,6 +86,18 @@ void CubeDlg::processInput() {
         }
     }
 
+    if (glfwGetKey(window, GLFW_KEY_G)) {
+        if (!glfwGetKey(window, GLFW_KEY_G)) {
+            br.turnHor(0,-1);
+        }
+    }
+    if (glfwGetKey(window, GLFW_KEY_H)) {
+        if (!glfwGetKey(window, GLFW_KEY_H)) {
+            br.turnVer(1,1);
+        }
+    }
+
+
     if (glfwGetKey(window, GLFW_KEY_W)) {
         reCalc();
         if (angleVer < 0) {
