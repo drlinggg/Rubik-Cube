@@ -144,7 +144,7 @@ void smallCube::Draw(std::vector<Shader*>shaders, glm::mat4 MVP) {
             (void *) 0            // Смещение массива в буфере
     );
     for (int i = 0; i < 6; i++) { //рисую по 6 граней с 6 разными цветами
-        GLuint MatrixID = glGetUniformLocation(shaders[sides[i]]->id, "MVP");
+        GLint MatrixID = glGetUniformLocation(shaders[sides[i]]->id, "MVP");
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
         shaders[sides[i]]->use();
         glDrawArrays(GL_TRIANGLES, i*6, 6);

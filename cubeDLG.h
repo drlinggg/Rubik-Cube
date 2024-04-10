@@ -23,12 +23,13 @@ private:
     bool check_cross();
     void turnHor(int hor, int mode);
     void turnThrough(int ver, int mode);
-
     void turnVer(int ver, int mode);
     void F2L(int miliSeconds);
     void OLL(int miliSeconds);
     void PLL(int miliSeconds);
     void solve(int speedMilisec);
+    void pifpaf1();
+    void pifpaf2();
 public:
     GLFWwindow* getWindow();
     void shuffle(int countOperations);

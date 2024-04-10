@@ -18,6 +18,10 @@ private:
     float X;
     float Y;
     float Z;
+
+public:
+    char Side(int id);
+    char sides[6] = {0,1,2,3,4,5}; //front left back right bottom up
     float faceLeftBottom[3];
     float faceRightBottom[3];
     float faceLeftUp[3];
@@ -26,10 +30,6 @@ private:
     float backRightBottom[3];
     float backLeftUp[3];
     float backRightUp[3];
-    char sides[6] = {0,1,2,3,4,5}; //front left back right bottom up
-
-public:
-    char Side(int id);
     void SetSide(int index, int id);
     void Draw(std::vector<Shader*> shaders, glm::mat4 MVP);
     void Init(float size);
