@@ -82,7 +82,7 @@ void CubeDlg::processInput() {
     }
     if (glfwGetKey(window, GLFW_KEY_0)) {
         if (!glfwGetKey(window, GLFW_KEY_0)) {
-            solve(10);
+            solve(0);
         }
     }
 
@@ -161,7 +161,7 @@ void CubeDlg::solve(int miliSeconds) {
 }
 
 void CubeDlg::assembling_cross(int miliSeconds) { //front left back right bottom up
-    for (int k = 0; k < 15; k++) {
+    for (int k = 0; k < 100; k++) {
         if (br.bricks[1][2][0].Side(0) != 0 && br.bricks[1][2][0].Side(5) == 5 ||
             br.bricks[0][2][1].Side(1) != 1 && br.bricks[0][2][1].Side(5) == 5 ||
             br.bricks[1][2][2].Side(2) != 2 && br.bricks[1][2][2].Side(5) == 5 ||
@@ -412,6 +412,62 @@ void CubeDlg::assembling_cross(int miliSeconds) { //front left back right bottom
         Sleep(miliSeconds);
         drawScene();
     }
+    //
+    if (check_nn_cross()) {
+        for (int k = 0; k < 16; k++) { //front left back right bottom up
+            if (br.bricks[2][2][1].Side(3) == 2) {
+                br.turnVer(2, 1);
+                br.turnHor(2, -1);
+                br.turnVer(2, -1);
+                br.turnHor(2, 1);
+            }
+            else if (br.bricks[2][2][1].Side(3) == 1) {
+                br.turnVer(2, -1);
+                br.turnHor(2, -1);
+                br.turnHor(2, -1);
+                br.turnVer(2, 1);
+                br.turnHor(2, -1);
+                br.turnHor(2, -1);
+                br.turnVer(2, -1);
+            }
+            else if (br.bricks[2][2][1].Side(3) == 0) {
+                br.turnThrough(0, 1);
+                br.turnVer(2, -1);
+                br.turnThrough(0, -1);
+                br.turnVer(2, 1);
+            }
+            if (br.bricks[1][2][0].Side(0) == 3 || br.bricks[2][2][1].Side(3) == 0) {
+                br.turnThrough(0, 1);
+                br.turnVer(2, -1);
+                br.turnThrough(0, -1);
+                br.turnVer(2, 1);
+            }
+            if (br.bricks[1][2][0].Side(0) != 0 || br.bricks[0][2][1].Side(1) != 1) {
+                br.turnVer(0, 1);
+                br.turnThrough(0, 1);
+                br.turnVer(0, -1);
+                br.turnThrough(0, -1);
+            }
+            if (br.bricks[1][2][0].Side(0) != 0 || br.bricks[1][2][2].Side(2) != 2) {
+                br.turnThrough(0, 1);
+                br.turnHor(2, -1);
+                br.turnHor(2, -1);
+                br.turnThrough(0, -1);
+                br.turnHor(2, -1);
+                br.turnHor(2, -1);
+                br.turnThrough(0, 1);
+            }
+            if (br.bricks[0][2][1].Side(1) == 2 || br.bricks[1][2][2].Side(2) == 1) {
+                br.turnThrough(2,-1);
+                br.turnVer(0,1);
+                br.turnThrough(2,1);
+                br.turnVer(0,-1);
+            }
+            if (check_cross()) {
+                return;
+            }
+        }
+    }
 }
 
 
@@ -428,13 +484,29 @@ void CubeDlg::PLL(int miliSeconds) {
 }
 
 
-bool CubeDlg::check_nn_cross() { //doesnt work
+bool CubeDlg::check_nn_cross() {
     int check = 0;
-    (br.bricks[0][0][1].Side(5) == 5 ? check++ : NULL);
-    (br.bricks[1][0][0].Side(5) == 5 ? check++ : NULL);
-    (br.bricks[1][0][2].Side(5) == 5 ? check++ : NULL);
-    (br.bricks[2][0][1].Side(5) == 5 ? check++ : NULL);
+    (br.bricks[0][2][1].Side(5) == 5 ? check++ : NULL);
+    (br.bricks[1][2][0].Side(5) == 5 ? check++ : NULL);
+    (br.bricks[1][2][2].Side(5) == 5 ? check++ : NULL);
+    (br.bricks[2][2][1].Side(5) == 5 ? check++ : NULL);
     if (check == 4) {
+        return true;
+    }
+    return false;
+}
+
+bool CubeDlg::check_cross() {
+    int check = 0;
+    (br.bricks[0][2][1].Side(5) == 5 ? check++ : NULL);
+    (br.bricks[1][2][0].Side(5) == 5 ? check++ : NULL);
+    (br.bricks[1][2][2].Side(5) == 5 ? check++ : NULL);
+    (br.bricks[2][2][1].Side(5) == 5 ? check++ : NULL);
+    (br.bricks[0][2][1].Side(1) == 1 ? check++ : NULL);
+    (br.bricks[1][2][0].Side(0) == 0 ? check++ : NULL);
+    (br.bricks[1][2][2].Side(2) == 2 ? check++ : NULL);
+    (br.bricks[2][2][1].Side(3) == 3 ? check++ : NULL);
+    if (check == 8) {
         return true;
     }
     return false;

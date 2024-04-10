@@ -20,6 +20,7 @@ private:
     void reCalc();
     bool check_nn_cross();
     void assembling_cross(int miliSeconds);//Сборка неправильного креста
+    bool check_cross();
     void F2L(int miliSeconds);
     void OLL(int miliSeconds);
     void PLL(int miliSeconds);
