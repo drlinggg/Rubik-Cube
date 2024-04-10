@@ -52,12 +52,14 @@ void CubeDlg::drawScene() {
     //получаем матрицу для преображения точек относительно камеры
     glm::mat4 Projection = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 100.0f);
     glm::mat4 View = glm::lookAt(
-            glm::vec3(x,y,z), // Камера находится в мировых координатах (4,3,3)
+            glm::vec3(x,y,z), // Камера находится в мировых координатах
             glm::vec3(0,0,0), // И направлена в начало координат
             glm::vec3(0,1,0)  // "Голова" находится сверху
     );
     glm::mat4 Model = glm::mat4(1.0f);  // Индивидуально для каждой модели
+    Model = glm::rotate(Model, radians(0.0f), glm::vec3(1, 1, 1)); // where x, y, z is axis of rotation (e.g. 0 1 0)
     glm::mat4 MVP = Projection * View * Model;
+
     //рисуем куб с помощью шейдеров и матрицы
     br.Draw(shaders, MVP);
     glfwSwapBuffers(window);
@@ -77,23 +79,27 @@ void CubeDlg::reCalc() {
 void CubeDlg::processInput() {
     if (glfwGetKey(window, GLFW_KEY_9)) {
         if (!glfwGetKey(window, GLFW_KEY_9)) {
+            glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_FALSE);
             shuffle(30);
+            glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
         }
     }
     if (glfwGetKey(window, GLFW_KEY_0)) {
         if (!glfwGetKey(window, GLFW_KEY_0)) {
+            glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_FALSE);
             solve(0);
+            glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
         }
     }
 
     if (glfwGetKey(window, GLFW_KEY_G)) {
         if (!glfwGetKey(window, GLFW_KEY_G)) {
-            br.turnHor(0,-1);
+            turnVer(0,-1);
         }
     }
     if (glfwGetKey(window, GLFW_KEY_H)) {
         if (!glfwGetKey(window, GLFW_KEY_H)) {
-            br.turnVer(1,1);
+            turnThrough(0,1);
         }
     }
 
@@ -116,10 +122,17 @@ void CubeDlg::processInput() {
     if (glfwGetKey(window, GLFW_KEY_A)) {
         reCalc();
         angleHor-=0.01;
+        std::cout << angleHor << '\n';
     }
     if (glfwGetKey(window, GLFW_KEY_D)) {
         reCalc();
         angleHor+=0.01;
+        std::cout << angleHor << '\n';
+    }
+    if (glfwGetKey(window, GLFW_KEY_Z)) {
+        if (!glfwGetKey(window, GLFW_KEY_Z)) {
+            turnHor(1,-1);
+        }
     }
 
 }
@@ -140,7 +153,6 @@ void CubeDlg::shuffle(int countOperations) {
         else if (way == 2 && id != 1) {
             br.turnThrough(id, mode);
         }
-        drawScene();
         //std::putc(way+97,save);
         //std::putc(id+97,save);
         //std::putc(mode+98,save);
@@ -409,8 +421,6 @@ void CubeDlg::assembling_cross(int miliSeconds) { //front left back right bottom
             }
         }
         br.turnHor(0,-1);
-        Sleep(miliSeconds);
-        drawScene();
     }
     //
     if (check_nn_cross()) {
@@ -466,6 +476,7 @@ void CubeDlg::assembling_cross(int miliSeconds) { //front left back right bottom
             if (check_cross()) {
                 return;
             }
+            //drawscene
         }
     }
 }
@@ -511,3 +522,117 @@ bool CubeDlg::check_cross() {
     }
     return false;
 }
+
+void CubeDlg::turnHor(int hor, int mode) {
+    //angle = 0.1f;
+    float totalAngle = 0;
+    while (90.0f >= totalAngle && totalAngle >= -90.0f) {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        totalAngle += 1.0f;
+        glLoadIdentity();
+        glFinish();
+        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+        glm::mat4 Projection = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 100.0f);
+        glm::mat4 View = glm::lookAt(
+                glm::vec3(x,y,z), // Камера находится в мировых координатах
+                glm::vec3(0,0,0), // И направлена в начало координат
+                glm::vec3(0,1,0)  // "Голова" находится сверху
+        );
+        glm::mat4 Model = glm::mat4(1.0f);// Индивидуально для каждой модели
+        glm::mat4 MVP = Projection * View * Model;
+        Model = glm::rotate(Model, radians(totalAngle), glm::vec3(0, -1*mode, 0)); // where x, y, z is axis of rotation (e.g. 0 1 0)
+        glm::mat4 MVProt = Projection * View * Model;
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                for (int z = 0; z < 3; z++) {
+                    if (y == hor) {
+                        br.bricks[x][y][z].Draw(shaders,MVProt);
+                    }
+                    else{
+                        br.bricks[x][y][z].Draw(shaders,MVP);
+                    }
+                }
+            }
+        }
+        //Sleep(10);
+        glfwSwapBuffers(window);
+    }
+    br.turnHor(hor, mode);
+    glfwSwapBuffers(window);
+}
+
+void CubeDlg::turnVer(int ver, int mode) {
+    //angle = 0.1f;
+    float totalAngle = 0;
+    while (90.0f >= totalAngle && totalAngle >= -90.0f) {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        totalAngle += 1.0f;
+        glLoadIdentity();
+        glFinish();
+        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+
+        glm::mat4 Projection = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 100.0f);
+        glm::mat4 View = glm::lookAt(
+                glm::vec3(x,y,z), // Камера находится в мировых координатах
+                glm::vec3(0,0,0), // И направлена в начало координат
+                glm::vec3(0,1,0)  // "Голова" находится сверху
+        );
+        glm::mat4 Model = glm::mat4(1.0f);// Индивидуально для каждой модели
+        glm::mat4 MVP = Projection * View * Model;
+        Model = glm::rotate(Model, radians(totalAngle), glm::vec3(-1*mode, 0, 0)); // where x, y, z is axis of rotation (e.g. 0 1 0)
+        glm::mat4 MVProt = Projection * View * Model;
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                for (int z = 0; z < 3; z++) {
+                    if (x == ver) {
+                        br.bricks[x][y][z].Draw(shaders,MVProt);
+                    }
+                    else{
+                        br.bricks[x][y][z].Draw(shaders,MVP);
+                    }
+                }
+            }
+        }
+        //Sleep(10);
+        glfwSwapBuffers(window);
+    }
+    br.turnVer(ver, mode);
+    glfwSwapBuffers(window);
+}
+
+void CubeDlg::turnThrough(int ver, int mode) {
+    //angle = 0.1f;
+    float totalAngle = 0;
+    while (90.0f >= totalAngle && totalAngle >= -90.0f) {
+        totalAngle += 0.01f;
+        glm::mat4 Projection = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 100.0f);
+        glm::mat4 View = glm::lookAt(
+                glm::vec3(x,y,z), // Камера находится в мировых координатах
+                glm::vec3(0,0,0), // И направлена в начало координат
+                glm::vec3(0,1,0)  // "Голова" находится сверху
+        );
+        glm::mat4 Model = glm::mat4(1.0f);// Индивидуально для каждой модели
+        glm::mat4 MVP = Projection * View * Model;
+        Model = glm::rotate(Model, radians(totalAngle), glm::vec3(0, 0, -1*mode)); // where x, y, z is axis of rotation (e.g. 0 1 0)
+        glm::mat4 MVProt = Projection * View * Model;
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                for (int z = 0; z < 3; z++) {
+                    if (z == ver) {
+                        br.bricks[x][y][z].Draw(shaders,MVProt);
+                    }
+                    else{
+                        //br.bricks[x][y][z].Draw(shaders,MVP);
+                    }
+                }
+            }
+        }
+        //Sleep(10);
+        glfwSwapBuffers(window);
+    }
+    br.turnThrough(ver, mode);
+    glfwSwapBuffers(window);
+}
+
+
+

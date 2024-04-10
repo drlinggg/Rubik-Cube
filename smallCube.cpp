@@ -132,7 +132,7 @@ void smallCube::Draw(std::vector<Shader*>shaders, glm::mat4 MVP) {
     GLuint vertexbuffer;
     glGenBuffers(1,&vertexbuffer);                                                                                     // Создадим 1 буфер и поместим в переменную vertexbuffer его идентификатор
     glBindBuffer(GL_ARRAY_BUFFER,vertexbuffer);                                                                        // Сделаем только что созданный буфер текущим
-    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data,GL_STATIC_DRAW);                  // Передадим информацию о вершинах в OpenGL
+    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data,GL_DYNAMIC_DRAW);                  // Передадим информацию о вершинах в OpenGL
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
     glVertexAttribPointer(
@@ -149,12 +149,13 @@ void smallCube::Draw(std::vector<Shader*>shaders, glm::mat4 MVP) {
         shaders[sides[i]]->use();
         glDrawArrays(GL_TRIANGLES, i*6, 6);
     }
+    //glBufferSubData(vertexbuffer, 0, 3, (void*) 0);
     glDeleteVertexArrays(1, &VertexArrayID); //в идеале бы 1 раз создавать буфферы но я создаю их кучу раз и кучу раз очищаю
     glDeleteBuffers(1, &vertexbuffer);
 }
 
 void smallCube::Init(float size) {
-    const float a = 0.155f;
+    const float a = 0.15f;
     //test 0.05 game (a * size)
     faceLeftBottom[0] = GetX()-(a * size); faceLeftBottom[1] = GetY()-(a * size), faceLeftBottom[2] = GetZ()-(a * size); //прорезы между кубами
     faceRightBottom[0] = GetX()+(a * size), faceRightBottom[1] = GetY()-(a * size), faceRightBottom[2] = GetZ()-(a * size);

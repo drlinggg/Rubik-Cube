@@ -21,6 +21,10 @@ private:
     bool check_nn_cross();
     void assembling_cross(int miliSeconds);//Сборка неправильного креста
     bool check_cross();
+    void turnHor(int hor, int mode);
+    void turnThrough(int ver, int mode);
+
+    void turnVer(int ver, int mode);
     void F2L(int miliSeconds);
     void OLL(int miliSeconds);
     void PLL(int miliSeconds);
@@ -33,6 +37,7 @@ public:
     void load();
     void save();
     void drawScene();
+
 };
 
 
