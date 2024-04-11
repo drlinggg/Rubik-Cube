@@ -199,6 +199,7 @@ void CubeDlg::assembling_cross() { //front left back right bottom up
     while (!check_nn_cross()) {
         //    frontSide;
         if (br.bricks[1][0][0].Side(4) == 5) {
+            turnHor(2,-1);
             turnThrough(0,-1);
         }
         if (br.bricks[0][1][0].Side(0) == 5) {
@@ -319,7 +320,7 @@ void CubeDlg::turnHor(int hor, int mode) {
     br.turnHor(hor, mode);
     drawScene();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    Sleep(300);
+    //Sleep(300);
 }
 
 void CubeDlg::turnVer(int ver, int mode) {
@@ -354,7 +355,7 @@ void CubeDlg::turnVer(int ver, int mode) {
     br.turnVer(ver, mode);
     drawScene();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    Sleep(300);
+    //Sleep(300);
 }
 
 void CubeDlg::turnThrough(int ver, int mode) {
@@ -389,7 +390,7 @@ void CubeDlg::turnThrough(int ver, int mode) {
     br.turnThrough(ver, mode);
     drawScene();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    Sleep(300);
+    //Sleep(300);
 }
 
 void CubeDlg::pifpaf1() {
@@ -733,6 +734,12 @@ void CubeDlg::edgelvl3() {
             turnThrough(2,1);
     }
     std::cout << "solved\n";
+    turnVer(0,-1);
+    turnVer(1,-1);
+    turnVer(2,-1);
+    turnVer(0,-1);
+    turnVer(1,-1);
+    turnVer(2,-1);
 }
 
 bool CubeDlg::check_edgeslvl3() {
