@@ -19,15 +19,15 @@ private:
     Cube br; //экземпляр куба
     void reCalc();
     bool check_nn_cross();
-    void assembling_cross(int miliSeconds);//Сборка неправильного креста
+    void assembling_cross();//Сборка неправильного креста
     bool check_cross();
     void turnHor(int hor, int mode);
     void turnThrough(int ver, int mode);
     void turnVer(int ver, int mode);
-    void F2L(int miliSeconds);
-    void OLL(int miliSeconds);
-    void PLL(int miliSeconds);
-    void solve(int speedMilisec);
+    void FF();
+    void SF();
+    void CRDOWN();
+    void solve();
     void pifpaf1();
     void pifpaf2();
 public:
