@@ -24,6 +24,9 @@ private:
     bool check_level1();
     bool check_level2();
     bool check_level3up();
+    bool check_vertexlvl3();
+    bool check_edgeslvl3();
+    bool check_solved();
     void turnHor(int hor, int mode);
     void turnThrough(int ver, int mode);
     void turnVer(int ver, int mode);
@@ -31,6 +34,8 @@ private:
     void SF();
     void CRUP();
     void CRUP2();
+    void vertexlvl3();
+    void edgelvl3();
     void solve();
     void pifpaf1();
     void pifpaf2();
@@ -43,7 +48,6 @@ public:
     void load();
     void save();
     void drawScene();
-
 };
 
 
