@@ -21,6 +21,7 @@ private:
     bool check_nn_cross();
     void assembling_cross();//Сборка неправильного креста
     bool check_cross();
+    bool check_level1();
     void turnHor(int hor, int mode);
     void turnThrough(int ver, int mode);
     void turnVer(int ver, int mode);
