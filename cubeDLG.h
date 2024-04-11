@@ -23,12 +23,14 @@ private:
     bool check_cross();
     bool check_level1();
     bool check_level2();
+    bool check_level3up();
     void turnHor(int hor, int mode);
     void turnThrough(int ver, int mode);
     void turnVer(int ver, int mode);
     void FF();
     void SF();
     void CRUP();
+    void CRUP2();
     void solve();
     void pifpaf1();
     void pifpaf2();
@@ -41,6 +43,7 @@ public:
     void load();
     void save();
     void drawScene();
+
 };
 
 

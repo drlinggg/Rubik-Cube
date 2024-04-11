@@ -177,6 +177,16 @@ void CubeDlg::solve() {
     FF();
     SF();
     CRUP();
+    Sleep(1000);
+    for (int i = 0; i < 3; i++) {
+        turnThrough(i,-1);
+    }
+    Sleep(1000);
+    CRUP2();
+    Sleep(1000);
+    for (int i = 0; i < 3; i++) {
+        turnThrough(i,1);
+    }
 }
 
 void CubeDlg::assembling_cross() { //front left back right bottom up
@@ -528,7 +538,7 @@ void CubeDlg::CRUP() {
             break;
         }
     }
-    std::cout << "up cross solved\n";
+    std::cout << "up nn cross solved\n";
 }
 
 bool CubeDlg::check_level1() {
@@ -554,6 +564,39 @@ bool CubeDlg::check_level2() {
     (br.bricks[0][1][2].Side(1) == br.bricks[0][1][1].Side(1) ? check++ : NULL);
     (br.bricks[2][1][2].Side(3) == br.bricks[2][1][1].Side(3) ? check++ : NULL);
     if (check == 8) {
+        return true;
+    }
+    return false;
+}
+
+void CubeDlg::CRUP2() {
+    while (!check_level3up()) {
+        if (br.bricks[0][2][2].Side(5) == br.bricks[0][1][1].Side(1)) {
+            for (int i = 0; i < 4; i++) {
+                pifpaf1();
+            }
+        }
+        else if (br.bricks[0][2][2].Side(2) == br.bricks[0][1][1].Side(1)) {
+            for (int i = 0; i < 2; i++) {
+                pifpaf1();
+            }
+        }
+        turnVer(0,-1);
+    }
+    std::cout << "3levelup solved\n";
+
+}
+
+bool CubeDlg::check_level3up() {
+    int check = 0;
+    for (int y = 0; y < 3; y++) {
+        for (int z = 0; z < 3; z++) {
+            if (br.bricks[0][y][z].Side(1) == br.bricks[0][1][1].Side(1)) {
+                check++;
+            }
+        }
+    }
+    if (check == 9) {
         return true;
     }
     return false;
