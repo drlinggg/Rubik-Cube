@@ -128,12 +128,12 @@ void CubeDlg::processInput() {
     }
     if (glfwGetKey(window, GLFW_KEY_B)) {
         if (!glfwGetKey(window, GLFW_KEY_B)) {
-            turnVer(1,-1);
+            turnVer(2,1);
         }
     }
     if (glfwGetKey(window, GLFW_KEY_N)) {
         if (!glfwGetKey(window, GLFW_KEY_N)) {
-            turnThrough(1,-1);
+            turnThrough(1,1);
         }
     }
 
@@ -484,41 +484,48 @@ void CubeDlg::SF() {
 }
 
 void CubeDlg::CRUP() {
-    for (int k = 0; k < 4; k++) {
-        Sleep(500);
+    for (int k = 0; k < 16; k++) {
+        Sleep(1000);
         //front left back right bottom up
         //wrong!!
-        if (br.bricks[0][2][1].Side(5) == br.bricks[1][2][1].Side(5)
-        && br.bricks[2][2][1].Side(5) == br.bricks[1][2][1].Side(5)
-        && br.bricks[1][2][2].Side(5) != br.bricks[1][2][1].Side(5)
-        && br.bricks[1][2][0].Side(5) != br.bricks[1][2][1].Side(5)) {
-            turnThrough(0,-1);
-            pifpaf1();
+        if (br.bricks[0][2][1].Side(4) == br.bricks[1][2][1].Side(4)
+        && br.bricks[2][2][1].Side(4) == br.bricks[1][2][1].Side(4)
+        && br.bricks[1][2][2].Side(4) != br.bricks[1][2][1].Side(4)
+        && br.bricks[1][2][0].Side(4) != br.bricks[1][2][1].Side(4)) {
             turnThrough(0,1);
-        }
-        else if (br.bricks[0][2][1].Side(5) == br.bricks[1][2][1].Side(5)
-        && br.bricks[1][2][2].Side(5) != br.bricks[1][2][1].Side(5)) {
-            turnThrough(0, -1);
             pifpaf1();
-            pifpaf2();
-            turnThrough(0, 1);
-        }
-        else if (br.bricks[0][2][1].Side(5) != br.bricks[1][2][1].Side(5)
-        && br.bricks[2][2][1].Side(5) != br.bricks[1][2][1].Side(5)
-        && br.bricks[1][2][2].Side(5) != br.bricks[1][2][1].Side(5)
-        && br.bricks[1][2][0].Side(5) != br.bricks[1][2][1].Side(5)) {
             turnThrough(0,-1);
-            pifpaf1();
+        }
+        else if (br.bricks[0][2][1].Side(4) == br.bricks[1][2][1].Side(4)
+                 && br.bricks[2][2][1].Side(4) != br.bricks[1][2][1].Side(4)
+                 && br.bricks[1][2][2].Side(4) == br.bricks[1][2][1].Side(4)
+                 && br.bricks[1][2][0].Side(4) != br.bricks[1][2][1].Side(4)) {
             turnThrough(0,1);
+            pifpaf1();
+            pifpaf1();
+            turnThrough(0,-1);
+        }
+        else if (br.bricks[0][2][1].Side(4) != br.bricks[1][2][1].Side(4)
+        && br.bricks[2][2][1].Side(4) != br.bricks[1][2][1].Side(4)
+        && br.bricks[1][2][2].Side(4) != br.bricks[1][2][1].Side(4)
+        && br.bricks[1][2][0].Side(4) != br.bricks[1][2][1].Side(4)) {
+            turnThrough(0,1);
+            pifpaf1();
+            turnThrough(0,-1);
             turnHor(2,-1);
             turnHor(2,-1);
-            turnThrough(0,-1);
-            pifpaf1();
-            pifpaf2();
             turnThrough(0,1);
+            pifpaf1();
+            pifpaf1();
+            turnThrough(0,-1);
         }
-        if(!check_nn_cross()) {
+        else {
+            turnHor(0,-1);
+            turnHor(1,-1);
             turnHor(2,-1);
+        }
+        if (check_nn_cross()) {
+            break;
         }
     }
     std::cout << "up cross solved\n";
@@ -542,7 +549,11 @@ bool CubeDlg::check_level2() {
     (br.bricks[2][1][0].Side(0) == br.bricks[1][1][0].Side(0) ? check++ : NULL);
     (br.bricks[0][1][2].Side(2) == br.bricks[1][1][2].Side(2) ? check++ : NULL);
     (br.bricks[2][1][2].Side(2) == br.bricks[1][1][2].Side(2) ? check++ : NULL);
-    if (check == 4) {
+    (br.bricks[0][1][0].Side(1) == br.bricks[0][1][1].Side(1) ? check++ : NULL);
+    (br.bricks[2][1][0].Side(3) == br.bricks[2][1][1].Side(3) ? check++ : NULL);
+    (br.bricks[0][1][2].Side(1) == br.bricks[0][1][1].Side(1) ? check++ : NULL);
+    (br.bricks[2][1][2].Side(3) == br.bricks[2][1][1].Side(3) ? check++ : NULL);
+    if (check == 8) {
         return true;
     }
     return false;
