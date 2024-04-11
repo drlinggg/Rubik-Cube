@@ -401,42 +401,103 @@ void CubeDlg::pifpaf2() {
 }
 
 void CubeDlg::FF() {
-    while (!check_level1()) { //front left back right bottom up
-        if (br.bricks[2][2][0].Side(0) == br.bricks[1][0][1].Side(4) && br.bricks[2][2][0].Side(5) == br.bricks[1][1][0].Side(0) && br.bricks[2][2][0].Side(3) == br.bricks[2][1][1].Side(3)) {
-            for (int i = 0; i < 5; i++) {
+    while (!check_level1()) {
+        for (int k = 0; k < 11; k++) {//front left back right bottom up
+            if (br.bricks[2][2][0].Side(0) == br.bricks[1][0][1].Side(4) &&
+                br.bricks[2][2][0].Side(5) == br.bricks[1][1][0].Side(0) &&
+                br.bricks[2][2][0].Side(3) == br.bricks[2][1][1].Side(3)) {
+                for (int i = 0; i < 5; i++) {
+                    turnVer(2, -1);
+                    turnHor(2, -1);
+                    turnVer(2, 1);
+                    turnHor(2, 1);
+                }
+            } else if (br.bricks[2][2][0].Side(0) == br.bricks[1][1][0].Side(0) &&
+                       br.bricks[2][2][0].Side(5) == br.bricks[2][1][1].Side(3) &&
+                       br.bricks[2][2][0].Side(3) == br.bricks[1][0][1].Side(4)) {
+                turnVer(2, -1);
+                turnHor(2, -1);
+                turnVer(2, 1);
+                turnHor(2, 1);
+            } else if (br.bricks[2][2][0].Side(0) == br.bricks[2][1][1].Side(3) &&
+                       br.bricks[2][2][0].Side(5) == br.bricks[1][0][1].Side(4) &&
+                       br.bricks[2][2][0].Side(3) == br.bricks[1][1][0].Side(0)) {
+                for (int i = 0; i < 3; i++) {
+                    turnVer(2, -1);
+                    turnHor(2, -1);
+                    turnVer(2, 1);
+                    turnHor(2, 1);
+                }
+            } else if (br.bricks[2][0][0].Side(0) != br.bricks[1][1][0].Side(0) ||
+                       br.bricks[2][0][0].Side(3) != br.bricks[2][1][1].Side(3) ||
+                       br.bricks[2][0][0].Side(4) != br.bricks[1][0][1].Side(4)) {
                 turnVer(2, -1);
                 turnHor(2, -1);
                 turnVer(2, 1);
                 turnHor(2, 1);
             }
-        }
-        else if (br.bricks[2][2][0].Side(0) == br.bricks[1][1][0].Side(0)&& br.bricks[2][2][0].Side(5) == br.bricks[2][1][1].Side(3)&& br.bricks[2][2][0].Side(3) == br.bricks[1][0][1].Side(4)) {
-            turnVer(2, -1);
-            turnHor(2, -1);
-            turnVer(2, 1);
-            turnHor(2, 1);
-        }
-        else if (br.bricks[2][2][0].Side(0) == br.bricks[2][1][1].Side(3)&& br.bricks[2][2][0].Side(5) == br.bricks[1][0][1].Side(4)&& br.bricks[2][2][0].Side(3) == br.bricks[1][1][0].Side(0)) {
-            for (int i = 0; i < 3; i++) {
-                turnVer(2, -1);
-                turnHor(2, -1);
-                turnVer(2, 1);
-                turnHor(2, 1);
+            if (k <= 5) {
+                turnHor(2,-1);
+            }
+            else {
+                turnHor(2,-1);
+                turnHor(1,-1);
+                turnHor(0,-1);
+            }
+            int check = 0;
+            (br.bricks[0][0][0].Side(4) == br.bricks[1][0][1].Side(4) ? check++ : NULL);
+            (br.bricks[0][0][2].Side(4) == br.bricks[1][0][1].Side(4) ? check++ : NULL);
+            (br.bricks[2][0][0].Side(4) == br.bricks[1][0][1].Side(4) ? check++ : NULL);
+            (br.bricks[2][0][2].Side(4) == br.bricks[1][0][1].Side(4) ? check++ : NULL);
+            (br.bricks[0][0][1].Side(4) == br.bricks[1][0][1].Side(4) ? check++ : NULL);
+            (br.bricks[1][0][0].Side(4) == br.bricks[1][0][1].Side(4) ? check++ : NULL);
+            (br.bricks[1][0][2].Side(4) == br.bricks[1][0][1].Side(4) ? check++ : NULL);
+            (br.bricks[2][0][1].Side(4) == br.bricks[1][0][1].Side(4) ? check++ : NULL);
+            if (check == 8) {
+                while (br.bricks[2][0][0].Side(4) != br.bricks[1][0][1].Side(4)) {
+                    turnHor(0,-1);
+                    turnHor(0,-1);
+                }
+                while (!check_level1()) {
+                    if (br.bricks[2][2][0].Side(0) == br.bricks[1][0][1].Side(4) &&
+                        br.bricks[2][2][0].Side(5) == br.bricks[1][1][0].Side(0) &&
+                        br.bricks[2][2][0].Side(3) == br.bricks[2][1][1].Side(3)) {
+                        for (int i = 0; i < 5; i++) {
+                            turnVer(2, -1);
+                            turnHor(2, -1);
+                            turnVer(2, 1);
+                            turnHor(2, 1);
+                        }
+                    } else if (br.bricks[2][2][0].Side(0) == br.bricks[1][1][0].Side(0) &&
+                               br.bricks[2][2][0].Side(5) == br.bricks[2][1][1].Side(3) &&
+                               br.bricks[2][2][0].Side(3) == br.bricks[1][0][1].Side(4)) {
+                        turnVer(2, -1);
+                        turnHor(2, -1);
+                        turnVer(2, 1);
+                        turnHor(2, 1);
+                    } else if (br.bricks[2][2][0].Side(0) == br.bricks[2][1][1].Side(3) &&
+                               br.bricks[2][2][0].Side(5) == br.bricks[1][0][1].Side(4) &&
+                               br.bricks[2][2][0].Side(3) == br.bricks[1][1][0].Side(0)) {
+                        for (int i = 0; i < 3; i++) {
+                            turnVer(2, -1);
+                            turnHor(2, -1);
+                            turnVer(2, 1);
+                            turnHor(2, 1);
+                        }
+                    } else if (br.bricks[2][0][0].Side(0) != br.bricks[1][1][0].Side(0) ||
+                               br.bricks[2][0][0].Side(3) != br.bricks[2][1][1].Side(3) ||
+                               br.bricks[2][0][0].Side(4) != br.bricks[1][0][1].Side(4)) {
+                    }
+                    turnHor(2,-1);
+                }
             }
         }
-        else if (br.bricks[2][0][0].Side(0) != br.bricks[1][1][0].Side(0) || br.bricks[2][0][0].Side(3) != br.bricks[2][1][1].Side(3) || br.bricks[2][0][0].Side(4) != br.bricks[1][0][1].Side(4)){
-            turnVer(2, -1);
-            turnHor(2, -1);
-            turnVer(2, 1);
-            turnHor(2, 1);
-        }
-        turnHor(0, 1);
-        turnHor(1, 1);
-        turnHor(2, 1);
     }
-    //todo fix 1 color left or all different 40% workin rn
+    //todo fix 1/2 color left or all different 40% workin rn fix1step too
     while (!check_nn_cross()) {
         turnHor(0,-1);
+        turnHor(1,-1);
+        turnHor(2,-1);
     }
     std::cout << "1lvl solved\n";
 }
