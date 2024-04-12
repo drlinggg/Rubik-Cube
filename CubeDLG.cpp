@@ -40,8 +40,6 @@ int CubeDlg::init() {
     shaders[4] = load_shader("../main.glslv", "../bottom.glslf");
     shaders[5] = load_shader("../main.glslv", "../up.glslf");
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
-    angleHor = 0;
-    angleVer = 0;
     return 0;
 }
 
@@ -125,18 +123,18 @@ void CubeDlg::processInput() {
             save("../input.txt");
         }
     }
-    if (glfwGetKey(window, GLFW_KEY_7)) {
-        if (!glfwGetKey(window, GLFW_KEY_7)) {
+    if (glfwGetKey(window, GLFW_KEY_1)) {
+        if (!glfwGetKey(window, GLFW_KEY_1)) {
             turnHor(0,-1);
         }
     }
-    if (glfwGetKey(window, GLFW_KEY_8)) {
-        if (!glfwGetKey(window, GLFW_KEY_8)) {
+    if (glfwGetKey(window, GLFW_KEY_2)) {
+        if (!glfwGetKey(window, GLFW_KEY_2)) {
             turnHor(1,-1);
         }
     }
-    if (glfwGetKey(window, GLFW_KEY_9)) {
-        if (!glfwGetKey(window, GLFW_KEY_9)) {
+    if (glfwGetKey(window, GLFW_KEY_3)) {
+        if (!glfwGetKey(window, GLFW_KEY_3)) {
             turnHor(2,-1);
         }
     }
@@ -155,19 +153,14 @@ void CubeDlg::processInput() {
             turnVer(2,-1);
         }
     }
-    if (glfwGetKey(window, GLFW_KEY_1)) {
-        if (!glfwGetKey(window, GLFW_KEY_1)) {
+    if (glfwGetKey(window, GLFW_KEY_7)) {
+        if (!glfwGetKey(window, GLFW_KEY_7)) {
             turnThrough(0,-1);
         }
     }
-    if (glfwGetKey(window, GLFW_KEY_2)) {
-        if (!glfwGetKey(window, GLFW_KEY_2)) {
+    if (glfwGetKey(window, GLFW_KEY_8)) {
+        if (!glfwGetKey(window, GLFW_KEY_8)) {
             turnThrough(1,-1);
-        }
-    }
-    if (glfwGetKey(window, GLFW_KEY_3)) {
-        if (!glfwGetKey(window, GLFW_KEY_3)) {
-            turnThrough(1,1);
         }
     }
 }
@@ -202,24 +195,17 @@ void CubeDlg::solve() {
         turnVer(1,1);
         turnVer(2,1);
     }
-    Sleep(1000);
     FF();
-    Sleep(1000);
     SF();
-    Sleep(1000);
     CRUP();
-    Sleep(1000);
     for (int i = 0; i < 3; i++) {
         turnThrough(i,-1);
     }
-    Sleep(1000);
     CRUP2();
-    Sleep(1000);
     for (int i = 0; i < 3; i++) {
         turnThrough(i,1);
     }
     vertexlvl3();
-    Sleep(1000);
     edgelvl3();
 }
 
@@ -320,7 +306,7 @@ void CubeDlg::turnHor(int hor, int mode) {
         totalAngle += turnSpeed;
         for (int x = 0; x < 3; x++) {
             for (int z = 0; z < 3; z++) {
-                br.bricks[x][hor][z].model = glm::rotate(br.bricks[x][hor][z].model, radians(turnSpeed), glm::vec3(0, mode, 0));
+                br.bricks[x][hor][z].model = glm::rotate(br.bricks[x][hor][z].model, radians(turnSpeed), glm::vec3(0, -1*mode, 0));
             }
         }
         drawScene();
@@ -340,7 +326,7 @@ void CubeDlg::turnVer(int ver, int mode) {
         totalAngle += turnSpeed;
         for (int y = 0; y < 3; y++) {
             for (int z = 0; z < 3; z++) {
-                br.bricks[ver][y][z].model = glm::rotate(br.bricks[ver][y][z].model, radians(turnSpeed), glm::vec3(mode, 0, 0));
+                br.bricks[ver][y][z].model = glm::rotate(br.bricks[ver][y][z].model, radians(turnSpeed), glm::vec3(-1*mode, 0, 0));
             }
         }
         drawScene();
@@ -360,7 +346,7 @@ void CubeDlg::turnThrough(int ver, int mode) {
         totalAngle += turnSpeed;
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
-                br.bricks[x][y][ver].model = glm::rotate(br.bricks[x][y][ver].model, radians(turnSpeed), glm::vec3(0, 0, mode));
+                br.bricks[x][y][ver].model = glm::rotate(br.bricks[x][y][ver].model, radians(turnSpeed), glm::vec3(0, 0, -1*mode));
             }
         }
         drawScene();

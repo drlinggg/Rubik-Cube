@@ -19,10 +19,6 @@ private:
     float Y;
     float Z;
     char sides[6] = {0,1,2,3,4,5}; //front left back right bottom up
-
-public:
-    glm::mat4 model = glm::mat4(1.0f);
-    char Side(int id);
     float faceLeftBottom[3];
     float faceRightBottom[3];
     float faceLeftUp[3];
@@ -31,6 +27,9 @@ public:
     float backRightBottom[3];
     float backLeftUp[3];
     float backRightUp[3];
+public:
+    glm::mat4 model = glm::mat4(1.0f);
+    char Side(int id);
     void SetSide(int index, int id);
     void Draw(std::vector<Shader*> shaders, glm::mat4 MVP);
     void Init(float size);

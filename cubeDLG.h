@@ -11,12 +11,12 @@ private:
     GLfloat x = 1;
     GLfloat y = 1;
     GLfloat z = 1;
-    GLfloat angleHor;
-    GLfloat angleVer;
+    GLfloat angleHor = 0;
+    GLfloat angleVer = 0;
     GLfloat radius = 2;
+    GLfloat turnSpeed = 3.0f;
     GLFWwindow* window;
     std::vector<Shader*> shaders;
-    float turnSpeed = 3;
     Cube br; //экземпляр куба
     void reCalc();
     bool check_nn_cross();
@@ -49,7 +49,6 @@ public:
     void load(const char *file);
     void save(const char *file);
     void drawScene();
-
 };
 
 

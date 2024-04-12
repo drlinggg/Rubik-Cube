@@ -136,7 +136,7 @@ void smallCube::Draw(std::vector<Shader*>shaders, glm::mat4 MVP) {
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
     glVertexAttribPointer(
-            0,                  // Атрибут 0. Подробнее об этом будет рассказано в части, посвященной шейдерам.
+            0,                  // Атрибут 0.
             3,                  // Размер
             GL_FLOAT,           // Тип
             GL_FALSE,           // Указывает, что значения не нормализованы
@@ -145,8 +145,8 @@ void smallCube::Draw(std::vector<Shader*>shaders, glm::mat4 MVP) {
     );
     MVP = MVP * model;
     for (int i = 0; i < 6; i++) { //рисую по 6 граней с 6 разными цветами
-        shaders[sides[i]]->use();
-        GLint MatrixID = glGetUniformLocation(shaders[sides[i]]->id, "MVP");
+        shaders[Side(i)]->use();
+        GLint MatrixID = glGetUniformLocation(shaders[Side(i)]->id, "MVP");
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
         glDrawArrays(GL_TRIANGLES, i*6, 6);
     }
