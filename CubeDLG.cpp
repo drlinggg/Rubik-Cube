@@ -40,8 +40,6 @@ int CubeDlg::init() {
     shaders[4] = load_shader("../main.glslv", "../bottom.glslf");
     shaders[5] = load_shader("../main.glslv", "../up.glslf");
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
-    angleHor = 0;
-    angleVer = 0;
     return 0;
 }
 
@@ -57,9 +55,7 @@ void CubeDlg::drawScene() {
             glm::vec3(0,0,0), // И направлена в начало координат
             glm::vec3(0,1,0)  // "Голова" находится сверху
     );
-    glm::mat4 Model = glm::mat4(1.0f);  // Индивидуально для каждой модели
-    Model = glm::rotate(Model, radians(0.0f), glm::vec3(1, 1, 1)); // where x, y, z is axis of rotation (e.g. 0 1 0)
-    glm::mat4 MVP = Projection * View * Model;
+    glm::mat4 MVP = Projection * View;
 
     //рисуем куб с помощью шейдеров и матрицы
     br.Draw(shaders, MVP);
@@ -127,18 +123,18 @@ void CubeDlg::processInput() {
             save("../input.txt");
         }
     }
-    if (glfwGetKey(window, GLFW_KEY_7)) {
-        if (!glfwGetKey(window, GLFW_KEY_7)) {
+    if (glfwGetKey(window, GLFW_KEY_1)) {
+        if (!glfwGetKey(window, GLFW_KEY_1)) {
             turnHor(0,-1);
         }
     }
-    if (glfwGetKey(window, GLFW_KEY_8)) {
-        if (!glfwGetKey(window, GLFW_KEY_8)) {
+    if (glfwGetKey(window, GLFW_KEY_2)) {
+        if (!glfwGetKey(window, GLFW_KEY_2)) {
             turnHor(1,-1);
         }
     }
-    if (glfwGetKey(window, GLFW_KEY_9)) {
-        if (!glfwGetKey(window, GLFW_KEY_9)) {
+    if (glfwGetKey(window, GLFW_KEY_3)) {
+        if (!glfwGetKey(window, GLFW_KEY_3)) {
             turnHor(2,-1);
         }
     }
@@ -157,19 +153,14 @@ void CubeDlg::processInput() {
             turnVer(2,-1);
         }
     }
-    if (glfwGetKey(window, GLFW_KEY_1)) {
-        if (!glfwGetKey(window, GLFW_KEY_1)) {
+    if (glfwGetKey(window, GLFW_KEY_7)) {
+        if (!glfwGetKey(window, GLFW_KEY_7)) {
             turnThrough(0,-1);
         }
     }
-    if (glfwGetKey(window, GLFW_KEY_2)) {
-        if (!glfwGetKey(window, GLFW_KEY_2)) {
+    if (glfwGetKey(window, GLFW_KEY_8)) {
+        if (!glfwGetKey(window, GLFW_KEY_8)) {
             turnThrough(1,-1);
-        }
-    }
-    if (glfwGetKey(window, GLFW_KEY_3)) {
-        if (!glfwGetKey(window, GLFW_KEY_3)) {
-            turnThrough(2,-1);
         }
     }
 }
@@ -204,24 +195,17 @@ void CubeDlg::solve() {
         turnVer(1,1);
         turnVer(2,1);
     }
-    Sleep(1000);
     FF();
-    Sleep(1000);
     SF();
-    Sleep(1000);
     CRUP();
-    Sleep(1000);
     for (int i = 0; i < 3; i++) {
         turnThrough(i,-1);
     }
-    Sleep(1000);
     CRUP2();
-    Sleep(1000);
     for (int i = 0; i < 3; i++) {
         turnThrough(i,1);
     }
     vertexlvl3();
-    Sleep(1000);
     edgelvl3();
 }
 
@@ -319,106 +303,61 @@ bool CubeDlg::check_cross() {
 void CubeDlg::turnHor(int hor, int mode) {
     float totalAngle = 0;
     while (90.0f >= totalAngle) {
-        totalAngle += 5;
-        glLoadIdentity();
-        glFinish();
-        glm::mat4 Projection = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 100.0f);
-        glm::mat4 View = glm::lookAt(
-                glm::vec3(x,y,z), // Камера находится в мировых координатах
-                glm::vec3(0,0,0), // И направлена в начало координат
-                glm::vec3(0,1,0)  // "Голова" находится сверху
-        );
-        glm::mat4 Model = glm::mat4(1.0f);// Индивидуально для каждой модели
-        Model = glm::rotate(Model, radians(totalAngle), glm::vec3(0, -1 * mode, 0)); // where x, y, z is axis of rotation (e.g. 0 1 0)
-        glm::mat4 MVP = Projection * View;
-        glm::mat4 MVProt = Projection * View * Model;
+        totalAngle += turnSpeed;
         for (int x = 0; x < 3; x++) {
-            for (int y = 0; y < 3; y++) {
-                for (int z = 0; z < 3; z++) {
-                    if (y == hor) {
-                        br.bricks[x][hor][z].Draw(shaders, MVProt);
-                    }
-                    br.bricks[x][y][z].Draw(shaders, MVP);
-                }
+            for (int z = 0; z < 3; z++) {
+                br.bricks[x][hor][z].model = glm::rotate(br.bricks[x][hor][z].model, radians(turnSpeed), glm::vec3(0, -1*mode, 0));
             }
         }
-        glfwSwapBuffers(window);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        drawScene();
+    }
+    for (int x = 0; x < 3; x++) {
+        for (int z = 0; z < 3; z++) {
+            br.bricks[x][hor][z].model = glm::mat4(1.0f);
+        }
     }
     br.turnHor(hor, mode);
     drawScene();
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    //Sleep(200);
 }
 
 void CubeDlg::turnVer(int ver, int mode) {
     float totalAngle = 0;
     while (90.0f >= totalAngle) {
-        totalAngle += 5;
-        glLoadIdentity();
-        glFinish();
-        glm::mat4 Projection = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 100.0f);
-        glm::mat4 View = glm::lookAt(
-                glm::vec3(x,y,z), // Камера находится в мировых координатах
-                glm::vec3(0,0,0), // И направлена в начало координат
-                glm::vec3(0,1,0)  // "Голова" находится сверху
-        );
-        glm::mat4 Model = glm::mat4(1.0f);// Индивидуально для каждой модели
-        Model = glm::rotate(Model, radians(totalAngle), glm::vec3(-1 * mode, 0, 0)); // where x, y, z is axis of rotation (e.g. 0 1 0)
-        glm::mat4 MVP = Projection * View;
-        glm::mat4 MVProt = Projection * View * Model;
-        for (int x = 0; x < 3; x++) {
-            for (int y = 0; y < 3; y++) {
-                for (int z = 0; z < 3; z++) {
-                    if (x == ver) {
-                        br.bricks[ver][y][z].Draw(shaders,MVProt);
-                    }
-                    br.bricks[x][y][z].Draw(shaders, MVP);
-                }
+        totalAngle += turnSpeed;
+        for (int y = 0; y < 3; y++) {
+            for (int z = 0; z < 3; z++) {
+                br.bricks[ver][y][z].model = glm::rotate(br.bricks[ver][y][z].model, radians(turnSpeed), glm::vec3(-1*mode, 0, 0));
             }
         }
-        glfwSwapBuffers(window);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        drawScene();
+    }
+    for (int y = 0; y < 3; y++) {
+        for (int z = 0; z < 3; z++) {
+            br.bricks[ver][y][z].model = glm::mat4(1.0f);
+        }
     }
     br.turnVer(ver, mode);
     drawScene();
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    //Sleep(200);
 }
 
 void CubeDlg::turnThrough(int ver, int mode) {
     float totalAngle = 0;
     while (90.0f >= totalAngle) {
-        totalAngle += 5;
-        glLoadIdentity();
-        glFinish();
-        glm::mat4 Projection = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 100.0f);
-        glm::mat4 View = glm::lookAt(
-                glm::vec3(x,y,z), // Камера находится в мировых координатах
-                glm::vec3(0,0,0), // И направлена в начало координат
-                glm::vec3(0,1,0)  // "Голова" находится сверху
-        );
-        glm::mat4 Model = glm::mat4(1.0f);// Индивидуально для каждой модели
-        Model = glm::rotate(Model, radians(totalAngle), glm::vec3(0, 0, -1 * mode)); // where x, y, z is axis of rotation (e.g. 0 1 0)
-        glm::mat4 MVP = Projection * View;
-        glm::mat4 MVProt = Projection * View * Model;
+        totalAngle += turnSpeed;
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
-                for (int z = 0; z < 3; z++) {
-                    if (z == ver) {
-                        br.bricks[x][y][ver].Draw(shaders,MVProt);
-                    }
-                    br.bricks[x][y][z].Draw(shaders, MVP);
-                }
+                br.bricks[x][y][ver].model = glm::rotate(br.bricks[x][y][ver].model, radians(turnSpeed), glm::vec3(0, 0, -1*mode));
             }
         }
-        glfwSwapBuffers(window);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        drawScene();
+    }
+    for (int x = 0; x < 3; x++) {
+        for (int y = 0; y < 3; y++) {
+            br.bricks[x][y][ver].model = glm::mat4(1.0f);
+        }
     }
     br.turnThrough(ver, mode);
     drawScene();
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    //Sleep(200);
 }
 
 void CubeDlg::changeSide() {
@@ -509,7 +448,7 @@ void CubeDlg::SF() {
                 turnHor(0, -1);
                 leftpifpaf();
             } else if (br.bricks[2][1][0].Side(3) != br.bricks[2][1][1].Side(3)
-                    && br.bricks[2][1][0].Side(0) != br.bricks[1][1][0].Side(0)) {
+                       && br.bricks[2][1][0].Side(0) != br.bricks[1][1][0].Side(0)) {
                 pifpaf1();
                 turnHor(2, -1);
                 turnHor(1, -1);
@@ -532,9 +471,9 @@ void CubeDlg::CRUP() {
         Sleep(1000);
         //front left back right bottom up
         if (br.bricks[0][2][1].Side(4) == br.bricks[1][2][1].Side(4)
-        && br.bricks[2][2][1].Side(4) == br.bricks[1][2][1].Side(4)
-        && br.bricks[1][2][2].Side(4) != br.bricks[1][2][1].Side(4)
-        && br.bricks[1][2][0].Side(4) != br.bricks[1][2][1].Side(4)) {
+            && br.bricks[2][2][1].Side(4) == br.bricks[1][2][1].Side(4)
+            && br.bricks[1][2][2].Side(4) != br.bricks[1][2][1].Side(4)
+            && br.bricks[1][2][0].Side(4) != br.bricks[1][2][1].Side(4)) {
             turnThrough(0,1);
             pifpaf1();
             turnThrough(0,-1);
@@ -549,9 +488,9 @@ void CubeDlg::CRUP() {
             turnThrough(0,-1);
         }
         else if (br.bricks[0][2][1].Side(4) != br.bricks[1][2][1].Side(4)
-        && br.bricks[2][2][1].Side(4) != br.bricks[1][2][1].Side(4)
-        && br.bricks[1][2][2].Side(4) != br.bricks[1][2][1].Side(4)
-        && br.bricks[1][2][0].Side(4) != br.bricks[1][2][1].Side(4)) {
+                 && br.bricks[2][2][1].Side(4) != br.bricks[1][2][1].Side(4)
+                 && br.bricks[1][2][2].Side(4) != br.bricks[1][2][1].Side(4)
+                 && br.bricks[1][2][0].Side(4) != br.bricks[1][2][1].Side(4)) {
             turnThrough(0,1);
             pifpaf1();
             turnThrough(0,-1);
@@ -645,7 +584,7 @@ void CubeDlg::vertexlvl3() {
             (br.bricks[2][2][1].Side(3) == br.bricks[2][1][1].Side(3) ? count++ : NULL);
         }
         if (br.bricks[1][2][0].Side(0) == br.bricks[2][1][1].Side(3)
-        && br.bricks[2][2][1].Side(3) == br.bricks[1][1][0].Side(0)) {
+            && br.bricks[2][2][1].Side(3) == br.bricks[1][1][0].Side(0)) {
             turnVer(2,-1);
             turnHor(2,-1);
             turnVer(2,1);
@@ -663,7 +602,7 @@ void CubeDlg::vertexlvl3() {
             turnHor(2,1);
         }
         else if (br.bricks[2][2][1].Side(3) == br.bricks[0][1][1].Side(1)
-             && br.bricks[0][2][1].Side(1) == br.bricks[2][1][1].Side(3)) {
+                 && br.bricks[0][2][1].Side(1) == br.bricks[2][1][1].Side(3)) {
             turnVer(2,-1);
             turnHor(2,-1);
             turnVer(2,1);
@@ -719,35 +658,35 @@ void CubeDlg::edgelvl3() {
     while (!check_edgeslvl3()) {
         for (int k = 0; k < 4; k++) {
             if (br.bricks[0][2][2].Side(1) == br.bricks[0][1][1].Side(1)
-            && br.bricks[0][2][2].Side(2) == br.bricks[1][1][2].Side(2)) {
+                && br.bricks[0][2][2].Side(2) == br.bricks[1][1][2].Side(2)) {
                 break;
             }
             changeSide();
         }
-            turnThrough(0,-1);
-            turnThrough(1,-1);
-            turnThrough(2,-1);
+        turnThrough(0,-1);
+        turnThrough(1,-1);
+        turnThrough(2,-1);
 
-            turnHor(2,-1);
-            turnHor(2,-1);
-            turnVer(2,-1);
-            turnHor(2,-1);
-            turnHor(2,-1);
-            turnVer(2,1);
-            turnThrough(0,1);
-            turnThrough(0,1);
-            turnHor(2,-1);
-            turnHor(2,-1);
-            turnVer(0,-1);
-            turnHor(2,-1);
-            turnHor(2,-1);
-            turnVer(0,1);
-            turnThrough(0,1);
-            turnThrough(0,1);
+        turnHor(2,-1);
+        turnHor(2,-1);
+        turnVer(2,-1);
+        turnHor(2,-1);
+        turnHor(2,-1);
+        turnVer(2,1);
+        turnThrough(0,1);
+        turnThrough(0,1);
+        turnHor(2,-1);
+        turnHor(2,-1);
+        turnVer(0,-1);
+        turnHor(2,-1);
+        turnHor(2,-1);
+        turnVer(0,1);
+        turnThrough(0,1);
+        turnThrough(0,1);
 
-            turnThrough(0,1);
-            turnThrough(1,1);
-            turnThrough(2,1);
+        turnThrough(0,1);
+        turnThrough(1,1);
+        turnThrough(2,1);
     }
     std::cout << "solved\n";
 }
