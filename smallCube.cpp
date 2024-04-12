@@ -136,22 +136,25 @@ void smallCube::Draw(std::vector<Shader*>shaders, glm::mat4 MVP) {
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
     glVertexAttribPointer(
-            0,                  // Атрибут 0. Подробнее об этом будет рассказано в части, посвященной шейдерам.
+            0,                  // Атрибут 0.
             3,                  // Размер
             GL_FLOAT,           // Тип
             GL_FALSE,           // Указывает, что значения не нормализованы
             0,                  // Шаг
             (void *) 0            // Смещение массива в буфере
     );
+    MVP = MVP * model;
     for (int i = 0; i < 6; i++) { //рисую по 6 граней с 6 разными цветами
-        GLint MatrixID = glGetUniformLocation(shaders[sides[i]]->id, "MVP");
+        shaders[Side(i)]->use();
+        GLint MatrixID = glGetUniformLocation(shaders[Side(i)]->id, "MVP");
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
-        shaders[sides[i]]->use();
         glDrawArrays(GL_TRIANGLES, i*6, 6);
     }
     glBufferSubData(vertexbuffer, 0, 3, (void*) 0);
     glDeleteVertexArrays(1, &VertexArrayID); //в идеале бы 1 раз создавать буфферы но я создаю их кучу раз и кучу раз очищаю
     glDeleteBuffers(1, &vertexbuffer);
+    glDeleteVertexArrays(1, &vertexbuffer);
+    glDeleteBuffers(1, &VertexArrayID);
 }
 
 void smallCube::Init(float size) {
