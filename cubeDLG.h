@@ -26,6 +26,7 @@ private:
     bool check_level3up();
     bool check_vertexlvl3();
     bool check_edgeslvl3();
+    void changeSide();
     void turnHor(int hor, int mode);
     void turnThrough(int ver, int mode);
     void turnVer(int ver, int mode);
@@ -47,6 +48,7 @@ public:
     void load(const char *file);
     void save(const char *file);
     void drawScene();
+
 };
 
 

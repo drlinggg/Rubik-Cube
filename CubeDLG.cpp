@@ -122,6 +122,11 @@ void CubeDlg::processInput() {
             load("../input.txt");
         }
     }
+    if (glfwGetKey(window, GLFW_KEY_X)) {
+        if (!glfwGetKey(window, GLFW_KEY_X)) {
+            save("../input.txt");
+        }
+    }
     if (glfwGetKey(window, GLFW_KEY_7)) {
         if (!glfwGetKey(window, GLFW_KEY_7)) {
             turnHor(0,-1);
@@ -223,12 +228,12 @@ void CubeDlg::solve() {
 void CubeDlg::assembling_cross() { //front left back right bottom up
     while (!check_nn_cross()) {
         //    frontSide;
-        if (br.bricks[1][0][0].Side(4) == 5) {
+        if (br.bricks[1][0][0].Side(4) == br.bricks[1][2][1].Side(5)) {
             turnHor(2,-1);
             turnThrough(0,-1);
         }
-        if (br.bricks[0][1][0].Side(0) == 5) {
-            if (br.bricks[0][2][1].Side(5) == 5) {
+        if (br.bricks[0][1][0].Side(0) == br.bricks[1][2][1].Side(5)) {
+            if (br.bricks[0][2][1].Side(5) == br.bricks[1][2][1].Side(5)) {
                 turnHor(2, -1);
                 turnVer(0, -1);
                 turnHor(2, 1);
@@ -236,8 +241,8 @@ void CubeDlg::assembling_cross() { //front left back right bottom up
                 turnVer(0, -1);
             }
         };
-        if (br.bricks[2][1][0].Side(0) == 5) {
-            if (br.bricks[2][2][1].Side(5) == 5) {
+        if (br.bricks[2][1][0].Side(0) == br.bricks[1][2][1].Side(5)) {
+            if (br.bricks[2][2][1].Side(5) == br.bricks[1][2][1].Side(5)) {
                 turnHor(2, 1);
                 turnVer(2, -1);
                 turnHor(2, -1);
@@ -245,8 +250,8 @@ void CubeDlg::assembling_cross() { //front left back right bottom up
                 turnVer(2, -1);
             }
         };
-        if (br.bricks[1][2][0].Side(0) == 5) {
-            if (br.bricks[0][2][1].Side(5) != 5) {
+        if (br.bricks[1][2][0].Side(0) == br.bricks[1][2][1].Side(5)) {
+            if (br.bricks[0][2][1].Side(5) != br.bricks[1][2][1].Side(5)) {
                 turnThrough(0, 1);
                 turnVer(2, -1);
             } else {
@@ -254,8 +259,8 @@ void CubeDlg::assembling_cross() { //front left back right bottom up
                 turnVer(0, -1);
             }
         };
-        if (br.bricks[1][0][0].Side(0) == 5) {
-            if (br.bricks[0][2][1].Side(5) != 5) {
+        if (br.bricks[1][0][0].Side(0) == br.bricks[1][2][1].Side(5)) {
+            if (br.bricks[0][2][1].Side(5) != br.bricks[1][2][1].Side(5)) {
                 turnThrough(0, 1);
                 turnVer(0, -1);
             } else {
@@ -263,9 +268,7 @@ void CubeDlg::assembling_cross() { //front left back right bottom up
                 turnVer(2, -1);
             }
         }
-        turnHor(0,1);
-        turnHor(1,1);
-        turnHor(2,1);
+        changeSide();
     }
     std::cout << "nn solved\n";
     while (!check_cross()) {
@@ -315,7 +318,7 @@ bool CubeDlg::check_cross() {
 
 void CubeDlg::turnHor(int hor, int mode) {
     float totalAngle = 0;
-    while (85.0f >= totalAngle) {
+    while (90.0f >= totalAngle) {
         totalAngle += 5;
         glLoadIdentity();
         glFinish();
@@ -345,7 +348,7 @@ void CubeDlg::turnHor(int hor, int mode) {
     br.turnHor(hor, mode);
     drawScene();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    //Sleep(300);
+    //Sleep(200);
 }
 
 void CubeDlg::turnVer(int ver, int mode) {
@@ -380,7 +383,7 @@ void CubeDlg::turnVer(int ver, int mode) {
     br.turnVer(ver, mode);
     drawScene();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    //Sleep(300);
+    //Sleep(200);
 }
 
 void CubeDlg::turnThrough(int ver, int mode) {
@@ -415,7 +418,13 @@ void CubeDlg::turnThrough(int ver, int mode) {
     br.turnThrough(ver, mode);
     drawScene();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    //Sleep(300);
+    //Sleep(200);
+}
+
+void CubeDlg::changeSide() {
+    for (int i = 0; i < 3; i++) {
+        turnHor(i,-1);
+    }
 }
 
 void CubeDlg::pifpaf1() {
@@ -470,18 +479,13 @@ void CubeDlg::FF() {
                 turnHor(2,-1);
             }
             else {
-                turnHor(2,-1);
-                turnHor(1,-1);
-                turnHor(0,-1);
+                changeSide();
             }
         }
     }
     std::cout << "1lvl solved\n";
-    //todo fix all different 80% workin rn fix1step too
     while (br.bricks[1][1][0].Side(0) != 0) {
-        turnHor(0,-1);
-        turnHor(1,-1);
-        turnHor(2,-1);
+        changeSide();
     }
 }
 
@@ -516,9 +520,7 @@ void CubeDlg::SF() {
                 turnHor(2, -1);
             }
             else {
-                turnHor(0,-1);
-                turnHor(1,-1);
-                turnHor(2,-1);
+                changeSide();
             }
         }
     }
@@ -561,9 +563,7 @@ void CubeDlg::CRUP() {
             turnThrough(0,-1);
         }
         else {
-            turnHor(0,-1);
-            turnHor(1,-1);
-            turnHor(2,-1);
+            changeSide();
         }
         if (check_nn_cross()) {
             break;
@@ -698,9 +698,7 @@ void CubeDlg::vertexlvl3() {
             turnHor(2,1);
             turnHor(2,1);
         }
-        turnHor(2,-1);
-        turnHor(1,-1);
-        turnHor(0,-1);
+        changeSide();
     }
     std::cout << "lvl3 vertex solved\n";
 }
@@ -724,9 +722,7 @@ void CubeDlg::edgelvl3() {
             && br.bricks[0][2][2].Side(2) == br.bricks[1][1][2].Side(2)) {
                 break;
             }
-            turnHor(2,-1);
-            turnHor(1,-1);
-            turnHor(0,-1);
+            changeSide();
         }
             turnThrough(0,-1);
             turnThrough(1,-1);
@@ -754,12 +750,6 @@ void CubeDlg::edgelvl3() {
             turnThrough(2,1);
     }
     std::cout << "solved\n";
-    turnVer(0,-1);
-    turnVer(1,-1);
-    turnVer(2,-1);
-    turnVer(0,-1);
-    turnVer(1,-1);
-    turnVer(2,-1);
 }
 
 bool CubeDlg::check_edgeslvl3() {
