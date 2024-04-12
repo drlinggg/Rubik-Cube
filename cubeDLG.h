@@ -26,7 +26,6 @@ private:
     bool check_level3up();
     bool check_vertexlvl3();
     bool check_edgeslvl3();
-    bool check_solved();
     void turnHor(int hor, int mode);
     void turnThrough(int ver, int mode);
     void turnVer(int ver, int mode);
@@ -45,8 +44,8 @@ public:
     void shuffle(int countOperations);
     void processInput();
     int init();
-    void load();
-    void save();
+    void load(const char *file);
+    void save(const char *file);
     void drawScene();
 };
 

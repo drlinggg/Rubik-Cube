@@ -14,7 +14,7 @@ void Cube::Draw(std::vector<Shader*> shaders, glm::mat4 MVP) { //рисуем к
     }
 }
 
-void Cube::Init() { //устанавливаем центры кубиков относительно нашего
+void Cube::Init(const char *load = "default") { //устанавливаем центры кубиков относительно нашего
     X = Y = Z = 0;
     size = 1.0f;
     for (int x = -1; x < 2; x++) {
@@ -27,9 +27,20 @@ void Cube::Init() { //устанавливаем центры кубиков о�
             }
         }
     }
-    //for (int pos = 0; pos < 54; pos++) {
-    //colorSides[pos] = pos / 9;
-    //}
+    if (strcmp(load, "default")) {
+        FILE* loading_file = fopen(load, "r");
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                for (int z = 0; z < 3; z++) {
+                    for (int side = 0; side < 6; side++) {
+                        int curSide = getc(loading_file);
+                        bricks[x][y][z].SetSide(side,curSide-48);
+                    }
+                }
+            }
+        }
+        fclose(loading_file);
+    }
 }
 
 void Cube::turnVer(int ver, int mode) { //свапаем кубики соответствующие после их поворотов вокруг оси //-1 вверх лол
@@ -191,19 +202,4 @@ void Cube::turnThrough(int ver, int mode) {
             bricks[0][1][ver].SetSide(i,fouth.Side(i));
         }
     }
-}
-
-void Cube::SetSize(float size) {
-    this->size = size;
-    for (int x = 0; x < 3; x++) {
-        for (int y = 0; y < 3; y++) {
-            for (int z = 0; z < 3; z++) {
-                bricks[x][y][z].Init(size);
-            }
-        }
-    }
-}
-
-float Cube::GetSize() { //useless
-    return size;
 }

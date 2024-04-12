@@ -12,19 +12,16 @@ private:
     float Z;
     float Y;
     float size;
-    //char colorSides[54]; //front left back right bottom up
-
 public:
-    void turnHor(int hor, int mode);
+    bool is_correct();
+
     void turnVer(int ver, int mode);
     void turnThrough(int ver, int mode);
-    void SetSize(float size);
-    float GetSize();
-    bool is_correct();
     void Draw(std::vector<Shader*> shaders, glm::mat4 MVP);
-    void Init();
-
+    void Init(const char *load);
     smallCube bricks[3][3][3];
+
+    void turnHor(int hor, int mode);
 };
 
 #endif //RUBIK_CUBE_CUBE_H

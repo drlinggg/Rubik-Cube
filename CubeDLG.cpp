@@ -24,7 +24,8 @@ int CubeDlg::init() {
         return -1;
     }
     glfwMakeContextCurrent(window);
-    br.Init();
+    const char* load = "default";
+    br.Init(load);
     glewExperimental=true;                              // инициализация GLEW, Флаг необходим в Core-режиме OpenGL
     if (glewInit() != GLEW_OK) {
         std::cout << "no glew init";
@@ -116,31 +117,59 @@ void CubeDlg::processInput() {
         angleHor+=0.01;
         std::cout << angleHor << '\n';
     }
-    if (glfwGetKey(window, GLFW_KEY_F)) {
-        if (!glfwGetKey(window, GLFW_KEY_F)) {
-            turnHor(2,1);
+    if (glfwGetKey(window, GLFW_KEY_Z)) {
+        if (!glfwGetKey(window, GLFW_KEY_Z)) {
+            load("../input.txt");
         }
     }
-    if (glfwGetKey(window, GLFW_KEY_V)) {
-        if (!glfwGetKey(window, GLFW_KEY_V)) {
+    if (glfwGetKey(window, GLFW_KEY_7)) {
+        if (!glfwGetKey(window, GLFW_KEY_7)) {
+            turnHor(0,-1);
+        }
+    }
+    if (glfwGetKey(window, GLFW_KEY_8)) {
+        if (!glfwGetKey(window, GLFW_KEY_8)) {
             turnHor(1,-1);
         }
     }
-    if (glfwGetKey(window, GLFW_KEY_B)) {
-        if (!glfwGetKey(window, GLFW_KEY_B)) {
-            turnVer(2,1);
+    if (glfwGetKey(window, GLFW_KEY_9)) {
+        if (!glfwGetKey(window, GLFW_KEY_9)) {
+            turnHor(2,-1);
         }
     }
-    if (glfwGetKey(window, GLFW_KEY_N)) {
-        if (!glfwGetKey(window, GLFW_KEY_N)) {
-            turnThrough(1,1);
+    if (glfwGetKey(window, GLFW_KEY_4)) {
+        if (!glfwGetKey(window, GLFW_KEY_4)) {
+            turnVer(0,-1);
         }
     }
-
+    if (glfwGetKey(window, GLFW_KEY_5)) {
+        if (!glfwGetKey(window, GLFW_KEY_5)) {
+            turnVer(1,-1);
+        }
+    }
+    if (glfwGetKey(window, GLFW_KEY_6)) {
+        if (!glfwGetKey(window, GLFW_KEY_6)) {
+            turnVer(2,-1);
+        }
+    }
+    if (glfwGetKey(window, GLFW_KEY_1)) {
+        if (!glfwGetKey(window, GLFW_KEY_1)) {
+            turnThrough(0,-1);
+        }
+    }
+    if (glfwGetKey(window, GLFW_KEY_2)) {
+        if (!glfwGetKey(window, GLFW_KEY_2)) {
+            turnThrough(1,-1);
+        }
+    }
+    if (glfwGetKey(window, GLFW_KEY_3)) {
+        if (!glfwGetKey(window, GLFW_KEY_3)) {
+            turnThrough(2,-1);
+        }
+    }
 }
 
 void CubeDlg::shuffle(int countOperations) {
-    //FILE* save = fopen("../input.txt", "w");
     char way, id, mode;
     for (int i = 0; i < countOperations; i++) {
         way = rand()%3;
@@ -155,11 +184,7 @@ void CubeDlg::shuffle(int countOperations) {
         else if (way == 2 && id != 1) {
             br.turnThrough(id, mode);
         }
-        //std::putc(way+97,save);
-        //std::putc(id+97,save);
-        //std::putc(mode+98,save);
     }
-    //std::fclose(save);
 }
 
 
@@ -504,7 +529,6 @@ void CubeDlg::CRUP() {
     for (int k = 0; k < 16; k++) {
         Sleep(1000);
         //front left back right bottom up
-        //wrong!!
         if (br.bricks[0][2][1].Side(4) == br.bricks[1][2][1].Side(4)
         && br.bricks[2][2][1].Side(4) == br.bricks[1][2][1].Side(4)
         && br.bricks[1][2][2].Side(4) != br.bricks[1][2][1].Side(4)
@@ -693,10 +717,6 @@ bool CubeDlg::check_vertexlvl3() {
     return false;
 }
 
-bool CubeDlg::check_solved() {
-    return false;
-}
-
 void CubeDlg::edgelvl3() {
     while (!check_edgeslvl3()) {
         for (int k = 0; k < 4; k++) {
@@ -765,6 +785,25 @@ bool CubeDlg::check_edgeslvl3() {
         return true;
     }
     return false;
+}
+
+void CubeDlg::load(const char *file) {
+    br.Init(file);
+}
+
+void CubeDlg::save(const char *file) {
+    FILE* saving_file = fopen(file, "w");
+    for (int x = 0; x < 3; x++) {
+        for (int y = 0; y < 3; y++) {
+            for (int z = 0; z < 3; z++) {
+                for (int side = 0; side < 6; side++) {
+                    int curSide = br.bricks[x][y][z].Side(side);
+                    putc(curSide+48, saving_file);
+                }
+            }
+        }
+    }
+    fclose(saving_file);
 }
 
 

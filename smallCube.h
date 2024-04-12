@@ -18,10 +18,10 @@ private:
     float X;
     float Y;
     float Z;
+    char sides[6] = {0,1,2,3,4,5}; //front left back right bottom up
 
 public:
     char Side(int id);
-    char sides[6] = {0,1,2,3,4,5}; //front left back right bottom up
     float faceLeftBottom[3];
     float faceRightBottom[3];
     float faceLeftUp[3];

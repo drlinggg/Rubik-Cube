@@ -165,7 +165,6 @@ void smallCube::Init(float size) {
     backRightBottom[0] =  GetX()+(a * size), backRightBottom[1] = GetY()-(a * size), backRightBottom[2] = GetZ()+(a * size);
     backLeftUp[0] = GetX()-(a * size), backLeftUp[1] = GetY()+(a * size), backLeftUp[2] = GetZ()+(a * size);
     backRightUp[0] = GetX() + (a * size), backRightUp[1] = GetY()+(a * size), backRightUp[2] = GetZ()+(a * size);
-
 }
 
 void smallCube::turnleft(){
