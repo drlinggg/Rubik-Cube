@@ -795,5 +795,3 @@ void CubeDlg::save(const char *file) {
     }
     fclose(saving_file);
 }
-
-
