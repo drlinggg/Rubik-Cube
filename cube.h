@@ -13,14 +13,11 @@ private:
     float Y;
     float size;
 public:
-    bool is_correct();
-
     void turnVer(int ver, int mode);
     void turnThrough(int ver, int mode);
     void Draw(std::vector<Shader*> shaders, glm::mat4 MVP);
     void Init(const char *load);
     smallCube bricks[3][3][3];
-
     void turnHor(int hor, int mode);
 };
 
