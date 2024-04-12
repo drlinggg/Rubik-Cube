@@ -1,2 +1,3 @@
-![image](https://github.com/drlinggg/Rubik-Cube/assets/124909828/9e725358-2e73-4f91-979c-436b626148b0)
-крутится вертится и вообще пиздат
+https://github.com/drlinggg/Rubik-Cube/assets/124909828/4022cfbe-92bd-4b06-a86e-5d78242f6b96
+
+крутится вертится и вообще пиздат!
