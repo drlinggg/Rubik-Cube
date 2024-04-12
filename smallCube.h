@@ -21,6 +21,7 @@ private:
     char sides[6] = {0,1,2,3,4,5}; //front left back right bottom up
 
 public:
+    glm::mat4 model = glm::mat4(1.0f);
     char Side(int id);
     float faceLeftBottom[3];
     float faceRightBottom[3];

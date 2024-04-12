@@ -16,6 +16,7 @@ private:
     GLfloat radius = 2;
     GLFWwindow* window;
     std::vector<Shader*> shaders;
+    float turnSpeed = 3;
     Cube br; //экземпляр куба
     void reCalc();
     bool check_nn_cross();
