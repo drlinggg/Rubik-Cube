@@ -14,7 +14,7 @@ private:
     GLfloat angleHor = 0;
     GLfloat angleVer = 0;
     GLfloat radius = 2;
-    GLfloat turnSpeed = 3.0f;
+    GLfloat turnSpeed = 2.0f;
     GLFWwindow* window;
     std::vector<Shader*> shaders;
     Cube br; //экземпляр куба

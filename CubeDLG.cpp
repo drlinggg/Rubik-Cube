@@ -170,15 +170,16 @@ void CubeDlg::shuffle(int countOperations) {
     for (int i = 0; i < countOperations; i++) {
         way = rand()%3;
         id = rand()%3;
-        mode = rand()%2-1;
-        if (way == 0 && id != 1) {
-            br.turnHor(id, mode);
+        mode = 1;
+        drawScene();
+        if (way == 0) {
+            turnHor(id, mode*-1);
         }
-        else if (way == 1 && id != 1){
-            br.turnVer(id, mode);
+        else if (way == 1){
+            turnVer(id, mode);
         }
-        else if (way == 2 && id != 1) {
-            br.turnThrough(id, mode);
+        else if (way == 2) {
+            turnThrough(id, mode*-1);
         }
     }
 }
@@ -318,6 +319,7 @@ void CubeDlg::turnHor(int hor, int mode) {
     }
     br.turnHor(hor, mode);
     drawScene();
+    Sleep(10);
 }
 
 void CubeDlg::turnVer(int ver, int mode) {
@@ -338,6 +340,7 @@ void CubeDlg::turnVer(int ver, int mode) {
     }
     br.turnVer(ver, mode);
     drawScene();
+    Sleep(10);
 }
 
 void CubeDlg::turnThrough(int ver, int mode) {
@@ -358,6 +361,7 @@ void CubeDlg::turnThrough(int ver, int mode) {
     }
     br.turnThrough(ver, mode);
     drawScene();
+    Sleep(10);
 }
 
 void CubeDlg::changeSide() {
