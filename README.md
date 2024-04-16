@@ -2,8 +2,6 @@
 
 https://youtu.be/6bWaojql_bY?si=bxfw6jH2gpzUFyPI
 
-крутится вертится и вообще пиздат!
-
 wasd-camera
 1-8 moves
 9 shuffle
