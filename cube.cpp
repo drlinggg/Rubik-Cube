@@ -15,7 +15,6 @@ void Cube::Draw(std::vector<Shader*> shaders, glm::mat4 MVP) { //рисуем к
 }
 
 void Cube::Init(const char *load = "default") { //устанавливаем центры кубиков относительно нашего
-    X = Y = Z = 0;
     size = 1.0f;
     for (int x = -1; x < 2; x++) {
         for (int y = -1; y < 2; y++) {
@@ -202,4 +201,8 @@ void Cube::turnThrough(int ver, int mode) {
             bricks[0][1][ver].SetSide(i,fouth.Side(i));
         }
     }
+}
+
+glm::vec3 Cube::getCoords(){
+    return coords;
 }

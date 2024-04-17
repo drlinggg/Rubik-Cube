@@ -17,7 +17,7 @@ int CubeDlg::init() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // Мы не хотим старый OpenGL
-    window = glfwCreateWindow( 1000, 1000, "Rubic Cube", NULL, NULL);  //создать окно
+    window = glfwCreateWindow( screenSize[0], screenSize[1], "Rubic Cube", NULL, NULL);  //создать окно
     if( window == NULL ){
         std::cout << "error window create";
         glfwTerminate();
@@ -49,10 +49,10 @@ void CubeDlg::drawScene() {
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     //получаем матрицу для преображения точек относительно камеры
-    glm::mat4 Projection = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 100.0f);
+    glm::mat4 Projection = glm::perspective(glm::radians(90.0f), (float) screenSize[0]/ (float)screenSize[1], 0.1f, 100.0f);
     glm::mat4 View = glm::lookAt(
-            glm::vec3(x,y,z), // Камера находится в мировых координатах
-            glm::vec3(0,0,0), // И направлена в начало координат
+            cam, // Камера находится в мировых координатах
+            br.getCoords(), // И направлена в начало координат
             glm::vec3(0,1,0)  // "Голова" находится сверху
     );
     glm::mat4 MVP = Projection * View;
@@ -65,13 +65,11 @@ void CubeDlg::drawScene() {
 
 void CubeDlg::reCalc() {
     glm::vec3 direction;
-    direction.x = radius * sin(angleHor);
-    direction.y = radius * cos(angleVer);
-    direction.z = radius * cos(angleHor);
+    direction.x = radius * sin(angles[0]);
+    direction.y = radius * cos(angles[1]);
+    direction.z = radius * cos(angles[0]);
     glm::normalize(direction);
-    x = direction[0];
-    y = direction[1];
-    z = direction[2];
+    cam = direction;
 }
 
 void CubeDlg::processInput() {
@@ -90,28 +88,28 @@ void CubeDlg::processInput() {
 
     if (glfwGetKey(window, GLFW_KEY_W)) {
         reCalc();
-        if (angleVer < 0) {
-            angleVer += 0.01;
+        if (angles[1] < 0) {
+            angles[1] += 0.01;
         }
-        std::cout << angleVer << '\n';
+        std::cout << angles[1] << '\n';
     }
     if (glfwGetKey(window, GLFW_KEY_S)) {
         reCalc();
-        if (angleVer > -2.99) {
-            angleVer -= 0.01;
+        if (angles[1] > -2.99) {
+            angles[1] -= 0.01;
         }
-        std::cout << angleVer << '\n';
+        std::cout << angles[1] << '\n';
     }
 
     if (glfwGetKey(window, GLFW_KEY_A)) {
         reCalc();
-        angleHor-=0.01;
-        std::cout << angleHor << '\n';
+        angles[0]-=0.01;
+        std::cout << angles[0] << '\n';
     }
     if (glfwGetKey(window, GLFW_KEY_D)) {
         reCalc();
-        angleHor+=0.01;
-        std::cout << angleHor << '\n';
+        angles[0]+=0.01;
+        std::cout << angles[0] << '\n';
     }
     if (glfwGetKey(window, GLFW_KEY_Z)) {
         if (!glfwGetKey(window, GLFW_KEY_Z)) {
@@ -163,6 +161,10 @@ void CubeDlg::processInput() {
             turnThrough(1,-1);
         }
     }
+        ////todo fix scaling
+//    glfwGetWindowSize(window, &screenSize[0], &screenSize[1]);
+//    br.size = 0.5f * (float)screenSize[0]/(float)screenSize[1];
+//    br.Init("default");
 }
 
 void CubeDlg::shuffle(int countOperations) {
@@ -172,13 +174,13 @@ void CubeDlg::shuffle(int countOperations) {
         id = rand()%3;
         mode = 1;
         drawScene();
-        if (way == 0) {
+        if (way == 0 && id != 1) {
             turnHor(id, mode*-1);
         }
-        else if (way == 1){
+        else if (way == 1 && id != 1){
             turnVer(id, mode);
         }
-        else if (way == 2) {
+        else if (way == 2 && id != 1) {
             turnThrough(id, mode*-1);
         }
     }

@@ -8,19 +8,17 @@
 
 class CubeDlg {
 private:
-    GLfloat x = 1;
-    GLfloat y = 1;
-    GLfloat z = 1;
-    GLfloat angleHor = 0;
-    GLfloat angleVer = 0;
+    glm::vec3 cam = glm::vec3(1,1,1);
+    glm::vec2 angles = glm::vec2(0,0);
+    int screenSize[2] = {1000,1000};
     GLfloat radius = 2;
-    GLfloat turnSpeed = 2.0f;
-    GLFWwindow* window;
+    GLfloat turnSpeed = 45.0f;
+    GLFWwindow* window; //экземпляр окна
     std::vector<Shader*> shaders;
     Cube br; //экземпляр куба
-    void reCalc();
+    void reCalc(); //пересчет координат камеры
     bool check_nn_cross();
-    void assembling_cross();//Сборка неправильного креста
+    void assembling_cross();//Сборка креста
     bool check_cross();
     bool check_level1();
     bool check_level2();
