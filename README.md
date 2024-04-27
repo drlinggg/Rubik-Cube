@@ -1,4 +1,5 @@
-![image](https://github.com/drlinggg/Rubik-Cube/assets/124909828/2e302146-29f8-4784-8e12-5d8cce122315)
+![image](https://github.com/drlinggg/Rubik-Cube/assets/124909828/5d15f6e1-5070-4e47-b2bf-a4cabe7dd286)
+![image](https://github.com/drlinggg/Rubik-Cube/assets/124909828/6ce94050-d397-4738-a55a-7d11ed234139)
 
 3x3 rotatable model of rubik's cube that can be shuffled and solved by 6 step algorithm
   
