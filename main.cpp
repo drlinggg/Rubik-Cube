@@ -1,4 +1,5 @@
 #include "cubeDLG.h"
+//hi
 
 int main() {
     CubeDlg Screen;
