@@ -1,3 +1,0 @@
-"C:\Program Files (x86)\mingw327\bin\cmake.exe" -E rm -f CMakeFiles\libglew_shared.dir/objects.a
-C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\ar.exe qc CMakeFiles\libglew_shared.dir/objects.a @CMakeFiles\libglew_shared.dir\objects1.rsp
-C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe -g -nostdlib -Wl,--dependency-file,CMakeFiles\libglew_shared.dir\link.d -shared -o bin\libglew-sharedd.dll -Wl,--out-implib,lib\libglew-sharedd.dll.a -Wl,--major-image-version,2,--minor-image-version,2 -Wl,--whole-archive CMakeFiles\libglew_shared.dir/objects.a -Wl,--no-whole-archive @CMakeFiles\libglew_shared.dir\linkLibs.rsp

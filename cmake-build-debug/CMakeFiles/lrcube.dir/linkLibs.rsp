@@ -1,1 +1,0 @@
- lib/glfw/src/libglfw3.a -lglu32 "lib/glew-cmake/lib/libglewd.a" lib/glm/glm/libglm.a -lopengl32 -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 
