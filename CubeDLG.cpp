@@ -163,6 +163,14 @@ void CubeDlg::processInput() {
             turnThrough(1,-1);
         }
     }
+    if (glfwGetKey(window, GLFW_KEY_P) && turnSpeed < 89.5) {
+        turnSpeed+=turnSpeed/100;
+        std::cout << turnSpeed << '\n';
+    }
+    if (glfwGetKey(window, GLFW_KEY_M) && turnSpeed > 0.2) {
+        turnSpeed-=turnSpeed/100;
+        std::cout << turnSpeed << '\n';
+    }
         ////todo fix scaling
 //    glfwGetWindowSize(window, &screenSize[0], &screenSize[1]);
 //    br.size = 0.5f * (float)screenSize[0]/(float)screenSize[1];
