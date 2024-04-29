@@ -1,5 +1,5 @@
-![image](https://github.com/drlinggg/Rubik-Cube/assets/124909828/5d15f6e1-5070-4e47-b2bf-a4cabe7dd286)
-![image](https://github.com/drlinggg/Rubik-Cube/assets/124909828/6ce94050-d397-4738-a55a-7d11ed234139)
+![image](https://github.com/drlinggg/Rubik-Cube/assets/124909828/2e5a5a47-29b4-499b-9337-baa86efbc899)
+![image](https://github.com/drlinggg/Rubik-Cube/assets/124909828/b8364b06-5b7a-4031-a515-46c75a266fe8)
 
 3x3 rotatable model of rubik's cube that can be shuffled and solved by 6 step algorithm
   
@@ -16,3 +16,5 @@ A short example/tutorial:
   - 1-8 moves
   - 9 shuffle
   - 0 solve
+  - P increase turnSpeed
+  - M decrease turnSpeed
