@@ -12,7 +12,7 @@ private:
     glm::vec2 angles = glm::vec2(0,0);
     int screenSize[2] = {1000,1000};
     GLfloat radius = 2;
-    GLfloat turnSpeed = 45.0f;
+    GLfloat turnSpeed = 30.0f;
     GLFWwindow* window; //экземпляр окна
     std::vector<Shader*> shaders;
     Cube br; //экземпляр куба

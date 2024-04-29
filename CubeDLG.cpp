@@ -32,13 +32,15 @@ int CubeDlg::init() {
         return -1;
     }
     glEnable(GL_DEPTH_TEST);
-    shaders.resize(6); //грузим шейдеры сторон
-    shaders[0] = load_shader("../main.glslv", "../main.glslf");
-    shaders[1] = load_shader("../main.glslv", "../left.glslf");
-    shaders[2] = load_shader("../main.glslv", "../back.glslf");
-    shaders[3] = load_shader("../main.glslv", "../right.glslf");
-    shaders[4] = load_shader("../main.glslv", "../bottom.glslf");
-    shaders[5] = load_shader("../main.glslv", "../up.glslf");
+    shaders.resize(7); //грузим шейдеры сторон
+    shaders[0] = load_shader("../shaders/main.glslv", "../shaders/main.glslf");
+    shaders[1] = load_shader("../shaders/main.glslv", "../shaders/left.glslf");
+    shaders[2] = load_shader("../shaders/main.glslv", "../shaders/back.glslf");
+    shaders[3] = load_shader("../shaders/main.glslv", "../shaders/right.glslf");
+    shaders[4] = load_shader("../shaders/main.glslv", "../shaders/bottom.glslf");
+    shaders[5] = load_shader("../shaders/main.glslv", "../shaders/up.glslf");
+    shaders[6] = load_shader("../shaders/main.glslv", "../shaders/inside.glslf");
+
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
     return 0;
 }
@@ -113,12 +115,12 @@ void CubeDlg::processInput() {
     }
     if (glfwGetKey(window, GLFW_KEY_Z)) {
         if (!glfwGetKey(window, GLFW_KEY_Z)) {
-            load("../input.txt");
+            load("../save/input.txt");
         }
     }
     if (glfwGetKey(window, GLFW_KEY_X)) {
         if (!glfwGetKey(window, GLFW_KEY_X)) {
-            save("../input.txt");
+            save("../save/input.txt");
         }
     }
     if (glfwGetKey(window, GLFW_KEY_1)) {
@@ -476,27 +478,27 @@ void CubeDlg::CRUP() {
     for (int k = 0; k < 16; k++) {
         Sleep(1000);
         //front left back right bottom up
-        if (br.bricks[0][2][1].Side(4) == br.bricks[1][2][1].Side(4)
-            && br.bricks[2][2][1].Side(4) == br.bricks[1][2][1].Side(4)
-            && br.bricks[1][2][2].Side(4) != br.bricks[1][2][1].Side(4)
-            && br.bricks[1][2][0].Side(4) != br.bricks[1][2][1].Side(4)) {
+        if (br.bricks[0][2][1].Side(5) == br.bricks[1][2][1].Side(5)
+            && br.bricks[2][2][1].Side(5) == br.bricks[1][2][1].Side(5)
+            && br.bricks[1][2][2].Side(5) != br.bricks[1][2][1].Side(5)
+            && br.bricks[1][2][0].Side(5) != br.bricks[1][2][1].Side(5)) {
             turnThrough(0,1);
             pifpaf1();
             turnThrough(0,-1);
         }
-        else if (br.bricks[0][2][1].Side(4) == br.bricks[1][2][1].Side(4)
-                 && br.bricks[2][2][1].Side(4) != br.bricks[1][2][1].Side(4)
-                 && br.bricks[1][2][2].Side(4) == br.bricks[1][2][1].Side(4)
-                 && br.bricks[1][2][0].Side(4) != br.bricks[1][2][1].Side(4)) {
+        else if (br.bricks[0][2][1].Side(5) == br.bricks[1][2][1].Side(5)
+                 && br.bricks[2][2][1].Side(5) != br.bricks[1][2][1].Side(5)
+                 && br.bricks[1][2][2].Side(5) == br.bricks[1][2][1].Side(5)
+                 && br.bricks[1][2][0].Side(5) != br.bricks[1][2][1].Side(5)) {
             turnThrough(0,1);
             pifpaf1();
             pifpaf1();
             turnThrough(0,-1);
         }
-        else if (br.bricks[0][2][1].Side(4) != br.bricks[1][2][1].Side(4)
-                 && br.bricks[2][2][1].Side(4) != br.bricks[1][2][1].Side(4)
-                 && br.bricks[1][2][2].Side(4) != br.bricks[1][2][1].Side(4)
-                 && br.bricks[1][2][0].Side(4) != br.bricks[1][2][1].Side(4)) {
+        else if (br.bricks[0][2][1].Side(5) != br.bricks[1][2][1].Side(5)
+                 && br.bricks[2][2][1].Side(5) != br.bricks[1][2][1].Side(5)
+                 && br.bricks[1][2][2].Side(5) != br.bricks[1][2][1].Side(5)
+                 && br.bricks[1][2][0].Side(5) != br.bricks[1][2][1].Side(5)) {
             turnThrough(0,1);
             pifpaf1();
             turnThrough(0,-1);

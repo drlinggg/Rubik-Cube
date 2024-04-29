@@ -1,0 +1,2 @@
+C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\ar.exe qc libglm.a CMakeFiles/glm.dir/detail/glm.cpp.obj
+C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\ranlib.exe libglm.a

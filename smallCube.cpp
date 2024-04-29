@@ -160,6 +160,24 @@ void smallCube::Draw(std::vector<Shader*>shaders, glm::mat4 MVP) {
 void smallCube::Init(float size) {
     const float a = 0.15f;
     //test 0.05 game (a * size)
+    if (GetX() != size/3) {
+        SetSide(3, 6);
+    }
+    if (GetX() != -size/3) {
+        SetSide(1, 6);
+    }
+    if (GetY() != -size/3) {
+        SetSide(4, 6);
+    }
+    if (GetY() != size/3) {
+        SetSide(5, 6);
+    }
+    if (GetZ() != size/3) {
+        SetSide(2, 6);
+    }
+    if (GetZ() != -size/3) {
+        SetSide(0, 6);
+    }
     faceLeftBottom[0] = GetX()-(a * size); faceLeftBottom[1] = GetY()-(a * size), faceLeftBottom[2] = GetZ()-(a * size); //прорезы между кубами
     faceRightBottom[0] = GetX()+(a * size), faceRightBottom[1] = GetY()-(a * size), faceRightBottom[2] = GetZ()-(a * size);
     faceRightUp[0] = GetX() + (a * size), faceRightUp[1] = GetY()+(a * size), faceRightUp[2] = GetZ()-(a * size);
