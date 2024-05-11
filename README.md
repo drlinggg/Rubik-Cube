@@ -1,8 +1,19 @@
-![image](https://github.com/drlinggg/Rubik-Cube/assets/124909828/899d5bc1-1e3d-46ae-a5fd-6e0fe9a25964)
+![image](https://github.com/drlinggg/Rubik-Cube/assets/124909828/b8364b06-5b7a-4031-a515-46c75a266fe8)
 
-https://youtu.be/6bWaojql_bY?si=bxfw6jH2gpzUFyPI
+3x3 rotatable model of rubik's cube that can be shuffled and solved by 6 step algorithm
 
-wasd-camera
-1-8 moves
-9 shuffle
-0 solve
+Installation instructions:
+
+  - Download zip
+  - Install from off pages GLFW & GLM, create subdirs of them in dir "lib" with glew-cmake, connect with project CMakeLists. Change project name. 
+  - Make sure ur CMake is atleast 3.27
+
+A short example:
+
+  https://youtu.be/6bWaojql_bY?si=bxfw6jH2gpzUFyPI
+  - wasd-camera
+  - 1-8 moves
+  - 9 shuffle
+  - 0 solve
+  - P increase turnSpeed
+  - M decrease turnSpeed
