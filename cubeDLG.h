@@ -8,11 +8,11 @@
 
 class CubeDlg {
 private:
-    glm::vec3 cam = glm::vec3(1,1,1);
     glm::vec2 angles = glm::vec2(0,0);
     int screenSize[2] = {1000,1000};
     GLfloat radius = 2;
     GLfloat turnSpeed = 30.0f;
+    glm::vec3 cam = glm::vec3(1,1,1) * radius;
     GLFWwindow* window; //экземпляр окна
     std::vector<Shader*> shaders;
     Cube br; //экземпляр куба

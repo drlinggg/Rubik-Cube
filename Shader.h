@@ -8,7 +8,6 @@
 #include <string>
 #include <vector>
 
-
 class Shader{
 public:
     int id;

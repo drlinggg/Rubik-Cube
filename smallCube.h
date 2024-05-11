@@ -15,18 +15,9 @@
 
 class smallCube{                               //кубик 1x1
 private:
-    float X;
-    float Y;
-    float Z;
+    glm::vec3 xyz;
     char sides[6] = {0,1,2,3,4,5}; //front left back right bottom up
-    float faceLeftBottom[3];
-    float faceRightBottom[3];
-    float faceLeftUp[3];
-    float faceRightUp[3];
-    float backLeftBottom[3];
-    float backRightBottom[3];
-    float backLeftUp[3];
-    float backRightUp[3];
+    float vertices[8][3]; // faceLeftBottom faceRightBottom faceRightUp faceLeftUp backLeftBottom backRightBottom backLeftUp backRightUp
 public:
     glm::mat4 model = glm::mat4(1.0f);
     char Side(int id);

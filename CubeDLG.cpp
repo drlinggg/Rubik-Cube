@@ -32,6 +32,7 @@ int CubeDlg::init() {
         return -1;
     }
     glEnable(GL_DEPTH_TEST);
+    reCalc();
     shaders.resize(7); //грузим шейдеры сторон
     shaders[0] = load_shader("../shaders/main.glslv", "../shaders/main.glslf");
     shaders[1] = load_shader("../shaders/main.glslv", "../shaders/left.glslf");
@@ -40,7 +41,6 @@ int CubeDlg::init() {
     shaders[4] = load_shader("../shaders/main.glslv", "../shaders/bottom.glslf");
     shaders[5] = load_shader("../shaders/main.glslv", "../shaders/up.glslf");
     shaders[6] = load_shader("../shaders/main.glslv", "../shaders/inside.glslf");
-
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
     return 0;
 }

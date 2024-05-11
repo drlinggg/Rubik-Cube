@@ -8,123 +8,123 @@ void smallCube::Draw(std::vector<Shader*>shaders, glm::mat4 MVP) {
     std::vector<float> grani;
     //front
     for (int i = 0; i < 3; i++) {
-        grani.push_back(faceLeftUp[i]);
+        grani.push_back(vertices[3][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(faceLeftBottom[i]);
+        grani.push_back(vertices[0][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(faceRightBottom[i]);
+        grani.push_back(vertices[1][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(faceLeftUp[i]);
+        grani.push_back(vertices[3][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(faceRightBottom[i]);
+        grani.push_back(vertices[1][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(faceRightUp[i]);
+        grani.push_back(vertices[2][i]);
     }
     //left
     for (int i = 0; i < 3; i++) {
-        grani.push_back(faceLeftBottom[i]);
+        grani.push_back(vertices[0][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(backLeftUp[i]);
+        grani.push_back(vertices[6][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(backLeftBottom[i]);
+        grani.push_back(vertices[4][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(faceLeftBottom[i]);
+        grani.push_back(vertices[0][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(backLeftUp[i]);
+        grani.push_back(vertices[6][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(faceLeftUp[i]);
+        grani.push_back(vertices[3][i]);
     }
     //back
     for (int i = 0; i < 3; i++) {
-        grani.push_back(backLeftUp[i]);
+        grani.push_back(vertices[6][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(backLeftBottom[i]);
+        grani.push_back(vertices[4][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(backRightBottom[i]);
+        grani.push_back(vertices[5][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(backLeftUp[i]);
+        grani.push_back(vertices[6][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(backRightBottom[i]);
+        grani.push_back(vertices[5][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(backRightUp[i]);
+        grani.push_back(vertices[7][i]);
     }
     //right
     for (int i = 0; i < 3; i++) {
-        grani.push_back(faceRightBottom[i]);
+        grani.push_back(vertices[1][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(backRightUp[i]);
+        grani.push_back(vertices[7][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(backRightBottom[i]);
+        grani.push_back(vertices[5][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(faceRightBottom[i]);
+        grani.push_back(vertices[1][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(backRightUp[i]);
+        grani.push_back(vertices[7][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(faceRightUp[i]);
+        grani.push_back(vertices[2][i]);
     }
     //bottom
     for (int i = 0; i < 3; i++) {
-        grani.push_back(faceLeftBottom[i]);
+        grani.push_back(vertices[0][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(faceRightBottom[i]);
+        grani.push_back(vertices[1][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(backRightBottom[i]);
+        grani.push_back(vertices[5][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(faceLeftBottom[i]);
+        grani.push_back(vertices[0][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(backLeftBottom[i]);
+        grani.push_back(vertices[4][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(backRightBottom[i]);
+        grani.push_back(vertices[5][i]);
     }
     //up
     for (int i = 0; i < 3; i++) {
-        grani.push_back(faceLeftUp[i]);
+        grani.push_back(vertices[3][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(faceRightUp[i]);
+        grani.push_back(vertices[2][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(backLeftUp[i]);
+        grani.push_back(vertices[6][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(backRightUp[i]);
+        grani.push_back(vertices[7][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(faceRightUp[i]);
+        grani.push_back(vertices[2][i]);
     }
     for (int i = 0; i < 3; i++) {
-        grani.push_back(backLeftUp[i]);
+        grani.push_back(vertices[6][i]);
     }
 
     GLuint VertexArrayID;
     glGenVertexArrays(1, &VertexArrayID);
     glBindVertexArray(VertexArrayID);
-    GLfloat g_vertex_buffer_data[grani.size()];
+    GLfloat g_vertex_buffer_data[6*3*6];
     for (int gran = 0; gran < grani.size(); gran++) {
         g_vertex_buffer_data[gran] = grani[gran];
     }
@@ -178,14 +178,14 @@ void smallCube::Init(float size) {
     if (GetZ() != -size/3) {
         SetSide(0, 6);
     }
-    faceLeftBottom[0] = GetX()-(a * size); faceLeftBottom[1] = GetY()-(a * size), faceLeftBottom[2] = GetZ()-(a * size); //прорезы между кубами
-    faceRightBottom[0] = GetX()+(a * size), faceRightBottom[1] = GetY()-(a * size), faceRightBottom[2] = GetZ()-(a * size);
-    faceRightUp[0] = GetX() + (a * size), faceRightUp[1] = GetY()+(a * size), faceRightUp[2] = GetZ()-(a * size);
-    faceLeftUp[0] = GetX() - (a * size), faceLeftUp[1] = GetY()+(a * size), faceLeftUp[2] = GetZ()-(a * size);
-    backLeftBottom[0] = GetX()-(a * size), backLeftBottom[1] = GetY()-(a * size), backLeftBottom[2] = GetZ()+(a * size);
-    backRightBottom[0] =  GetX()+(a * size), backRightBottom[1] = GetY()-(a * size), backRightBottom[2] = GetZ()+(a * size);
-    backLeftUp[0] = GetX()-(a * size), backLeftUp[1] = GetY()+(a * size), backLeftUp[2] = GetZ()+(a * size);
-    backRightUp[0] = GetX() + (a * size), backRightUp[1] = GetY()+(a * size), backRightUp[2] = GetZ()+(a * size);
+    vertices[0][0] = GetX() - (a * size); vertices[0][1] = GetY() - (a * size); vertices[0][2] = GetZ() - (a * size); // faceLeftBottom
+    vertices[1][0] = GetX() + (a * size); vertices[1][1] = GetY() - (a * size); vertices[1][2] = GetZ() - (a * size); // faceRightBottom
+    vertices[2][0] = GetX() + (a * size); vertices[2][1] = GetY() + (a * size); vertices[2][2] = GetZ() - (a * size); // faceRightUp
+    vertices[3][0] = GetX() - (a * size); vertices[3][1] = GetY() + (a * size); vertices[3][2] = GetZ() - (a * size); // faceLeftUp
+    vertices[4][0] = GetX() - (a * size); vertices[4][1] = GetY() - (a * size); vertices[4][2] = GetZ() + (a * size); // backLeftBottom
+    vertices[5][0] = GetX() + (a * size); vertices[5][1] = GetY() - (a * size); vertices[5][2] = GetZ() + (a * size); // backRightBottom
+    vertices[6][0] = GetX() - (a * size); vertices[6][1] = GetY() + (a * size); vertices[6][2] = GetZ() + (a * size); // backLeftUp
+    vertices[7][0] = GetX() + (a * size); vertices[7][1] = GetY() + (a * size); vertices[7][2] = GetZ() + (a * size); // backRightUp
 }
 
 void smallCube::turnleft(){
@@ -238,26 +238,26 @@ void smallCube::turndown(){
 }
 
 float smallCube::GetX() {
-    return X;
+    return xyz.x;
 }
 float smallCube::GetY() {
-    return Y;
+    return xyz.y;
 }
 
 float smallCube::GetZ() {
-    return Z;
+    return xyz.z;
 }
 
 void smallCube::SetX(float x) {
-    X = x;
+    xyz.x = x;
 }
 
 void smallCube::SetY(float y) {
-    Y = y;
+    xyz.y = y;
 }
 
 void smallCube::SetZ(float z) {
-    Z = z;
+    xyz.z = z;
 }
 
 char smallCube::Side(int id) {
