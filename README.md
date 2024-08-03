@@ -14,6 +14,7 @@
 
 ## Linux
   - delete anything except source files & please fix paths in cubeDLG.cpp 35-41 lines to correct ones (там под смейк написано ../ и тупой линукс не шарит)
+  - (алсо там под винду Sleep поэтому надо поменять либу под линуксовую)
   - g++ -std=c++17 main.cpp -lglfw -lGL -lglut -lGLEW
 
 # A short example:
