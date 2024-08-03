@@ -2,13 +2,19 @@
 
 3x3 rotatable model of rubik's cube that can be shuffled and solved by 6 step algorithm
 
-# Installation instructions:
+# Installation/Build instructions:
 
 ## Windows
 
   - Download zip https://disk.yandex.ru/d/yRQBSVIuqJSFfQ
   - unzip in lib dir
-  - build via cmake
+  - mkdir build
+  - cmake .
+  - cmale --build there
+
+## Linux
+  - delete anything except source files & please fix paths in cubeDLG.cpp 35-41 lines to correct ones
+  - g++ -std=c++17 main.cpp -lglfw -lGL -lglut -lGLEW
 
 # A short example:
 
