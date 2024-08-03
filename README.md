@@ -4,8 +4,8 @@
 
 Installation instructions:
 
-  - Download zip
-  - Install from off pages GLFW & GLM, create subdirs of them in dir "lib" with glew-cmake, connect with project CMakeLists. Change project name. 
+  - Download zip https://disk.yandex.ru/d/yRQBSVIuqJSFfQ
+  - unzip in lib dir
   - Make sure ur CMake is atleast 3.27
 
 A short example:
