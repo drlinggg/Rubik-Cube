@@ -10,7 +10,7 @@
   - unzip in lib dir
   - mkdir build
   - cmake .
-  - cmale --build there
+  - cmale --build (ну че я вас хуйне учить буду сами будто не знаете)
 
 ## Linux
   - delete anything except source files & please fix paths in cubeDLG.cpp 35-41 lines to correct ones (там под смейк написано ../ и тупой линукс не шарит)
