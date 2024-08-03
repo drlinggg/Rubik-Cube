@@ -2,13 +2,15 @@
 
 3x3 rotatable model of rubik's cube that can be shuffled and solved by 6 step algorithm
 
-Installation instructions:
+# Installation instructions:
+
+## Windows
 
   - Download zip https://disk.yandex.ru/d/yRQBSVIuqJSFfQ
   - unzip in lib dir
-  - Make sure ur CMake is atleast 3.27
+  - build via cmake
 
-A short example:
+# A short example:
 
   https://youtu.be/6bWaojql_bY?si=bxfw6jH2gpzUFyPI
   - wasd-camera
