@@ -7,7 +7,7 @@
 ## Windows
 
   - Download zip https://disk.yandex.ru/d/yRQBSVIuqJSFfQ
-  - change lib dir 
+  - change lib dir (keep all cmake files the same)
   - build via cmake
 
 ## Linux
