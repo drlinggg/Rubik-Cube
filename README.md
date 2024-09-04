@@ -7,10 +7,8 @@
 ## Windows
 
   - Download zip https://disk.yandex.ru/d/yRQBSVIuqJSFfQ
-  - unzip in lib dir
-  - mkdir build
-  - cmake .
-  - cmale --build (ну че я вас учить буду сами будто не знаете)
+  - change lib dir 
+  - build via cmake
 
 ## Linux
   - delete anything except source files & please fix paths in cubeDLG.cpp 35-41 lines to correct ones (там под смейк написано ../ и тупой компилятор не шарит)
