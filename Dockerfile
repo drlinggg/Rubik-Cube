@@ -6,8 +6,7 @@ RUN pacman -S glut --noconfirm
 RUN pacman -S glew --noconfirm
 RUN pacman -S glm --noconfirm
 RUN pacman -S libgl --noconfirm
-
-FROM frolvlad/alpine-gxx
+RUN pacman -S gcc --noconfirm
 
 COPY . .
 WORKDIR .
