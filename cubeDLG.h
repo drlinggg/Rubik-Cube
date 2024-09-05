@@ -1,7 +1,7 @@
 //
 // Created by Andrei Banakh on 04.04.2024.
 //
-#include "Cube.h"
+#include "cube.h"
 
 #ifndef LRCUBE_CUBEDLG_H
 #define LRCUBE_CUBEDLG_H

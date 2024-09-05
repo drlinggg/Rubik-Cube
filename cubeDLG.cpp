@@ -3,7 +3,7 @@
 //
 
 #include "cubeDLG.h"
-#include "Windows.h"
+#include <unistd.h>
 using namespace glm;
 
 int CubeDlg::init() {
@@ -34,13 +34,13 @@ int CubeDlg::init() {
     glEnable(GL_DEPTH_TEST);
     reCalc();
     shaders.resize(7); //грузим шейдеры сторон
-    shaders[0] = load_shader("../shaders/main.glslv", "../shaders/main.glslf");
-    shaders[1] = load_shader("../shaders/main.glslv", "../shaders/left.glslf");
-    shaders[2] = load_shader("../shaders/main.glslv", "../shaders/back.glslf");
-    shaders[3] = load_shader("../shaders/main.glslv", "../shaders/right.glslf");
-    shaders[4] = load_shader("../shaders/main.glslv", "../shaders/bottom.glslf");
-    shaders[5] = load_shader("../shaders/main.glslv", "../shaders/up.glslf");
-    shaders[6] = load_shader("../shaders/main.glslv", "../shaders/inside.glslf");
+    shaders[0] = load_shader("shaders/main.glslv", "shaders/main.glslf");
+    shaders[1] = load_shader("shaders/main.glslv", "shaders/left.glslf");
+    shaders[2] = load_shader("shaders/main.glslv", "shaders/back.glslf");
+    shaders[3] = load_shader("shaders/main.glslv", "shaders/right.glslf");
+    shaders[4] = load_shader("shaders/main.glslv", "shaders/bottom.glslf");
+    shaders[5] = load_shader("shaders/main.glslv", "shaders/up.glslf");
+    shaders[6] = load_shader("shaders/main.glslv", "shaders/inside.glslf");
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
     return 0;
 }
@@ -48,7 +48,7 @@ int CubeDlg::init() {
 void CubeDlg::drawScene() {
     glLoadIdentity();
     glFinish();
-    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+    glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     //получаем матрицу для преображения точек относительно камеры
     glm::mat4 Projection = glm::perspective(glm::radians(90.0f), (float) screenSize[0]/ (float)screenSize[1], 0.1f, 100.0f);
@@ -115,12 +115,12 @@ void CubeDlg::processInput() {
     }
     if (glfwGetKey(window, GLFW_KEY_Z)) {
         if (!glfwGetKey(window, GLFW_KEY_Z)) {
-            load("../save/input.txt");
+            load("save/input.txt");
         }
     }
     if (glfwGetKey(window, GLFW_KEY_X)) {
         if (!glfwGetKey(window, GLFW_KEY_X)) {
-            save("../save/input.txt");
+            save("save/input.txt");
         }
     }
     if (glfwGetKey(window, GLFW_KEY_1)) {
@@ -331,7 +331,7 @@ void CubeDlg::turnHor(int hor, int mode) {
     }
     br.turnHor(hor, mode);
     drawScene();
-    Sleep(10);
+    sleep(0.1);
 }
 
 void CubeDlg::turnVer(int ver, int mode) {
@@ -352,7 +352,7 @@ void CubeDlg::turnVer(int ver, int mode) {
     }
     br.turnVer(ver, mode);
     drawScene();
-    Sleep(10);
+    sleep(0.1);
 }
 
 void CubeDlg::turnThrough(int ver, int mode) {
@@ -373,7 +373,7 @@ void CubeDlg::turnThrough(int ver, int mode) {
     }
     br.turnThrough(ver, mode);
     drawScene();
-    Sleep(10);
+    sleep(0.1);
 }
 
 void CubeDlg::changeSide() {
@@ -484,7 +484,7 @@ void CubeDlg::SF() {
 
 void CubeDlg::CRUP() {
     for (int k = 0; k < 16; k++) {
-        Sleep(1000);
+        sleep(1000);
         //front left back right bottom up
         if (br.bricks[0][2][1].Side(5) == br.bricks[1][2][1].Side(5)
             && br.bricks[2][2][1].Side(5) == br.bricks[1][2][1].Side(5)
