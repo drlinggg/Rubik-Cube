@@ -16,7 +16,7 @@
 - Dockerfile:
     ```Docker
     docker build . -t rubik
-    docker run -v './:/opt/app/out' rubik
+    docker run -v './out:/opt/app/out' rubik
     ```
     
 
