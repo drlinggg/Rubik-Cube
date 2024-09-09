@@ -7,16 +7,16 @@ ENV XDG_RUNTIME_DIR=/run/user/0
 
 WORKDIR /opt/app
 
-RUN pacman -Sy --noconfirm && 
-    pacman -S glfw --noconfirm && 
-    pacman -S glut --noconfirm && 
-    pacman -S glew --noconfirm && 
-    pacman -S glm --noconfirm && 
-    pacman -S libgl --noconfirm && 
+RUN pacman -Sy --noconfirm &&
+    pacman -S glfw --noconfirm &&
+    pacman -S glut --noconfirm &&
+    pacman -S glew --noconfirm &&
+    pacman -S glm --noconfirm &&
+    pacman -S libgl --noconfirm &&
     pacman -S gcc --noconfirm
 
 COPY . .
 
 VOLUME /opt/app
 
-CMD ["g++", "main.cpp", "cubeDLG.cpp", "cube.cpp", "smallCube.cpp", "Shader.cpp", "-o", "./a.out", "-lglfw", "-lGL", "-lglut", "-lGLEW"]
+CMD ["g++", "main.cpp", "cubeDLG.cpp", "cube.cpp", "smallCube.cpp", "Shader.cpp", "-o", "./out/main", "-lglfw", "-lGL", "-lglut", "-lGLEW"]
